@@ -48,20 +48,26 @@
             android:layout_height="80dp"
             android:padding="10dp"
             android:src="@drawable/ic_bicycle"
-            android:onClick="change"
+            android:onClick="onClick"
             tools:ignore="OnClick" />
 
         <ImageView
+            android:id="@+id/moto"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:padding="10dp"
-            android:src="@drawable/ic_motocycle"/>
+            android:src="@drawable/ic_motocycle"
+            android:onClick="onClick"
+            tools:ignore="OnClick" />
 
         <ImageView
+            android:id="@+id/car"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:padding="10dp"
-            android:src="@drawable/ic_car"/>
+            android:src="@drawable/ic_car"
+            android:onClick="onClick"
+            tools:ignore="OnClick" />
 
     </LinearLayout>
 
@@ -77,7 +83,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.891"
         app:layout_constraintStart_toStartOf="parent"
-        android:onClick="next"
+        android:onClick="onClick"
         tools:ignore="OnClick" />
 
 

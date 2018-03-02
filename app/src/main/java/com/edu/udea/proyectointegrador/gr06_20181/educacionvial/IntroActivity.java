@@ -12,24 +12,28 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 import static com.edu.udea.proyectointegrador.gr06_20181.educacionvial.R.drawable.ic_bicycle_;
 
-public class IntroActivity extends AppCompatActivity {
+public class IntroActivity extends AppCompatActivity  {
     final long Delay = 1000;
+    boolean motoisChecked;
+    boolean bikeisChecked;
+    boolean carisChecked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbarPreferences);
         setSupportActionBar(myToolbar);
         getSupportActionBar().setIcon(R.drawable.ic_launcherico);
         getSupportActionBar().hide();
-
 
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -53,8 +57,9 @@ public class IntroActivity extends AppCompatActivity {
         RunSplash.schedule(ShowSplash, Delay);
 
 
-
-
+        motoisChecked = false;
+        bikeisChecked = false;
+        carisChecked = false;
 
     }
 
@@ -72,14 +77,53 @@ public class IntroActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void change(View view) {
-        ImageView imageView = view.findViewById(R.id.bike);
-        imageView.setImageResource(R.drawable.ic_bicycle_);
+    public void onClick(View view) {
+        ImageView imageView;
+        switch(view.getId()){
+            case R.id.nextButton:
+                if(!carisChecked&&!bikeisChecked&&!motoisChecked){
+                    Toast.makeText(this,"Debe seleccionar al menos una opcion",Toast.LENGTH_SHORT).show();
+                    break;
+                }
+                Intent intent = new Intent(this,MainActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+            case R.id.bike:
+                if(bikeisChecked){
+                    imageView = view.findViewById(R.id.bike);
+                    imageView.setImageResource(R.drawable.ic_bicycle);
+                    bikeisChecked  = false;
+                }else{
+                    imageView = view.findViewById(R.id.bike);
+                    imageView.setImageResource(R.drawable.ic_bicycle_);
+                    bikeisChecked = true;
+                }
+                break;
+            case R.id.moto:
+                if(motoisChecked){
+                    imageView = view.findViewById(R.id.moto);
+                    imageView.setImageResource(R.drawable.ic_motocycle);
+                    motoisChecked = false;
+                }else{
+                    imageView = view.findViewById(R.id.moto);
+                    imageView.setImageResource(R.drawable.ic_motocycle_);
+                    motoisChecked = true;
+                }
+
+                break;
+            case R.id.car:
+                if(carisChecked){
+                    imageView = view.findViewById(R.id.car);
+                    imageView.setImageResource(R.drawable.ic_car);
+                    carisChecked = false;
+                }else{
+                    imageView = view.findViewById(R.id.car);
+                    imageView.setImageResource(R.drawable.ic_car_);
+                    carisChecked = true;
+                }
+                break;
+        }
     }
 
-    public void next(View view) {
-        Intent intent = new Intent(this,MainActivity.class);
-        startActivity(intent);
-        finish();
-    }
 }

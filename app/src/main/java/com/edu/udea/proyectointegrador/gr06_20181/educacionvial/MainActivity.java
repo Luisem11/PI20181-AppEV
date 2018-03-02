@@ -1,9 +1,7 @@
 package com.edu.udea.proyectointegrador.gr06_20181.educacionvial;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -12,15 +10,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
+
+import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.MenuPrincipal.GamesActivity;
+import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.MenuPrincipal.HelpActivity;
+import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.MenuPrincipal.NotificationsActivity;
+import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.MenuPrincipal.RoadCultureActivity;
+import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.MenuPrincipal.RulesActivity;
+import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.MenuPrincipal.SignsActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener{
 
-    private ArrayList<Integer> flowersList = new ArrayList<>(
+    private ArrayList<Integer> menuList = new ArrayList<>(
             Arrays.asList(R.drawable.ic_wheel, R.drawable.ic_doc,
                     R.drawable.ic_accident, R.drawable.ic_signals,
                     R.drawable.ic_notification, R.drawable.ic_games));
@@ -46,11 +53,45 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         GridView gridview = (GridView) findViewById(R.id.gridView);
+        gridview.setAdapter(new ImageAdapter(this, menuList));
+        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v,
+                                    int position, long id) {
 
-        // Se crea un nuevo ImageAdapter y se usa como Adapter para esta GridView
-        gridview.setAdapter(new ImageAdapter(this, flowersList));
+                Intent intent = null;
+                switch (position){
+                    case 0:
+                        intent = new Intent(MainActivity.this, RoadCultureActivity.class);
+                        break;
+                    case 1:
+                        intent = new Intent(MainActivity.this, RulesActivity.class);
+                        break;
+                    case 2:
+                        intent = new Intent(MainActivity.this, HelpActivity.class);
+                        break;
+                    case 3:
+                        intent = new Intent(MainActivity.this, SignsActivity.class);
+                        break;
+                    case 4:
+                        intent = new Intent(MainActivity.this, NotificationsActivity.class);
+                        break;
+                    case 5:
+                        intent = new Intent(MainActivity.this, GamesActivity.class);
+                        break;
 
+                }
+                if(intent!=null){
+
+                    // Agregar el ID de la imagen seleccionada como Intent Extra
+                    //intent.putExtra(EXTRA_RES_ID, (int) id);
+
+                    // Iniciar la ImageViewActivity
+                    startActivity(intent);
+                }
+            }
+        });
     }
+
 
 
     @Override
@@ -76,11 +117,11 @@ public class MainActivity extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
 
         return super.onOptionsItemSelected(item);
     }

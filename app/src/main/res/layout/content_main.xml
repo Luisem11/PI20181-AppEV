@@ -27,7 +27,7 @@
             android:horizontalSpacing="10dp"
             android:numColumns="2"
             android:stretchMode="spacingWidthUniform"
-            android:verticalSpacing="10dp" />
+            android:verticalSpacing="10dp"/>
 
 
 </LinearLayout>

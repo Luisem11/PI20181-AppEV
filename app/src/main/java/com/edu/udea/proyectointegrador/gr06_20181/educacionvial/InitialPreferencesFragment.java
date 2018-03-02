@@ -30,6 +30,7 @@ public class InitialPreferencesFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_initial_preferences, container, false);
         ((AppCompatActivity)getActivity()).getSupportActionBar().show();
+
         return view;
     }
 
