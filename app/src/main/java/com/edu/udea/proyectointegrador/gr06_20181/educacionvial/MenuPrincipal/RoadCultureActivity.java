@@ -13,7 +13,7 @@ public class RoadCultureActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_road_culture);
 
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbarPreferences);
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbarpreferences);
         setSupportActionBar(myToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);

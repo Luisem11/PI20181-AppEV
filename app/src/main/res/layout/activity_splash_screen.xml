@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbarPreferences"
+            android:id="@+id/toolbarpreferences"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
@@ -26,5 +26,6 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarPreferences"></FrameLayout>
+        app:layout_constraintTop_toBottomOf="@id/toolbarpreferences"
+        tools:ignore="NotSibling" />
 </android.support.constraint.ConstraintLayout>
