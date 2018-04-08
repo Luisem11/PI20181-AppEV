@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Educación Vial</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="road_education">Educación Vial</string>
+    <string name="helpActivityName">Ayuda</string>
+    <string name="gamesActivityName">Juegos</string>
+    <string name="rulesActivityName">Normas</string>
+    <string name="roadCultureActivityName">Cultura Vial</string>
+    <string name="signsActivityName">Señales</string>
+    <string name="notificationActivityName">Notificaciones</string>
+    <string name="menu">Menú Principal</string>
+    <string name="user_preference">Preferencias de Usuario</string>
+    <string name="profile">Perfil</string>
+    <string name="preference_menu">Ajustes</string>
+    <string name="preference">Preferencias</string>
+    <string name="notifications">Notificaciones</string>
+    <string name="help">Ayuda</string>
+    <string name="directories">Directorios</string>
+    <string name="accidents">Accidentes</string>
+    <string name="multas">Multas</string>
+    <string name="msg1">Debe seleccionar al menos una opcion</string>
+</resources>

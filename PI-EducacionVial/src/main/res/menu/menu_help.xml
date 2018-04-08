@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_accident"
+        android:enabled="true"
+        android:icon="@drawable/ic_help_1"
+        android:title="@string/help"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_directories"
+        android:enabled="true"
+        android:icon="@drawable/ic_help_2"
+        android:title="@string/accidents"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_"
+        android:enabled="true"
+        android:icon="@drawable/ic_help_3"
+        android:title="@string/multas"
+        app:showAsAction="ifRoom" />
+</menu>
