@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/PI-EducacionVial/PI-EducacionVial.iml" filepath="$PROJECT_DIR$/PI-EducacionVial/PI-EducacionVial.iml" />
       <module fileurl="file://$PROJECT_DIR$/PI20181-AppEV.iml" filepath="$PROJECT_DIR$/PI20181-AppEV.iml" />
-      <module fileurl="file://$PROJECT_DIR$/PI-EducacionVial/app.iml" filepath="$PROJECT_DIR$/PI-EducacionVial/app.iml" />
     </modules>
   </component>
 </project>

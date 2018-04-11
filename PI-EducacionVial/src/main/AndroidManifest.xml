@@ -12,11 +12,6 @@
         android:logo="@drawable/ic_launcherico">
 
         <activity android:name=".View.IntroActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".View.MainActivity.MainActivity"
@@ -50,6 +45,11 @@
         <activity android:name=".View.MainActivity.RoadCultureActivity"
             android:label="@string/roadCultureActivityName" android:parentActivityName=".View.MainActivity.MainActivity">
 
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
             <!-- The meta-data tag is required if you support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
