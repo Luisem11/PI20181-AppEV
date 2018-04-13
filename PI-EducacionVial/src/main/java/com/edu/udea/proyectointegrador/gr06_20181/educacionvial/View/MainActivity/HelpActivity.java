@@ -1,15 +1,17 @@
 package com.edu.udea.proyectointegrador.gr06_20181.educacionvial.View.MainActivity;
 
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.R;
+import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.View.AccidentsFragment;
+import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.View.HelpFragment;
+import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.View.TrafficFineFragment;
 
 public class HelpActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -31,7 +33,28 @@ public class HelpActivity extends AppCompatActivity implements BottomNavigationV
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        return false;
+        FragmentTransaction ft;
+
+        switch (item.getItemId()) {
+            case R.id.action_accidents:
+                ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.help_container, new AccidentsFragment());
+                ft.commit();
+                break;
+
+            case R.id.action_traffic_fines:
+                ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.help_container, new TrafficFineFragment());
+                ft.commit();
+                break;
+
+            case R.id.action_help:
+                ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.help_container, new HelpFragment());
+                ft.commit();
+                break;
+        }
+        return true;
     }
 
 

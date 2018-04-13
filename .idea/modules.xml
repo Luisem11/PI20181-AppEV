@@ -3,8 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/PI-EducacionVial/PI-EducacionVial.iml" filepath="$PROJECT_DIR$/PI-EducacionVial/PI-EducacionVial.iml" />
+      <module fileurl="file://E:\UdeA\Semestre 2018-1\Computacion Movil\PI20181-AppEV\PI-EducacionVial\PI-EducacionVial.iml" filepath="E:\UdeA\Semestre 2018-1\Computacion Movil\PI20181-AppEV\PI-EducacionVial\PI-EducacionVial.iml" />
       <module fileurl="file://$PROJECT_DIR$/PI20181-AppEV.iml" filepath="$PROJECT_DIR$/PI20181-AppEV.iml" />
-      <module fileurl="file://$PROJECT_DIR$/PI-EducacionVial/app.iml" filepath="$PROJECT_DIR$/PI-EducacionVial/app.iml" />
+      <module fileurl="file://E:\UdeA\Semestre 2018-1\Computacion Movil\PI20181-AppEV\PI20181-AppEV.iml" filepath="E:\UdeA\Semestre 2018-1\Computacion Movil\PI20181-AppEV\PI20181-AppEV.iml" />
+      <module fileurl="file://E:\UdeA\Semestre 2018-1\Computacion Movil\PI20181-AppEV\PI-EducacionVial\app.iml" filepath="E:\UdeA\Semestre 2018-1\Computacion Movil\PI20181-AppEV\PI-EducacionVial\app.iml" />
     </modules>
   </component>
 </project>

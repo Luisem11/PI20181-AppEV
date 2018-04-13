@@ -23,4 +23,7 @@
     <string name="accidents">Accidentes</string>
     <string name="multas">Multas</string>
     <string name="msg1">Debe seleccionar al menos una opcion</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
