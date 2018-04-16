@@ -1,25 +1,38 @@
 package com.edu.udea.proyectointegrador.gr06_20181.educacionvial.View.MainActivity;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.NotificationCompat;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.Controller.TipsAdapter;
 import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.Model.DB.DbHelper;
+import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.Model.DB.Tip;
 import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.R;
 
-public class RoadCultureActivity extends AppCompatActivity implements View.OnClickListener {
+public class RoadCultureActivity extends AppCompatActivity implements View.OnClickListener, TipsAdapter.OnItemClickListener {
 
     public TipsAdapter tipsAdapter;
     private DbHelper tipsDbHelper;
     private RecyclerView tipsList;
     private FloatingActionButton mAddButton;
+    boolean typeOn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +44,8 @@ public class RoadCultureActivity extends AppCompatActivity implements View.OnCli
         tipsList = (RecyclerView) findViewById(R.id.rv_content);
         mAddButton = (FloatingActionButton) findViewById(R.id.fab);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
+        typeOn = false;
+
 
         setSupportActionBar(myToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -38,7 +53,7 @@ public class RoadCultureActivity extends AppCompatActivity implements View.OnCli
 
 
         mAddButton.setOnClickListener(this);
-        tipsAdapter = new TipsAdapter(null);
+        tipsAdapter = new TipsAdapter(null, this);
         tipsDbHelper = new DbHelper(this);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -52,13 +67,94 @@ public class RoadCultureActivity extends AppCompatActivity implements View.OnCli
 
     }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.type:
+                CardView cardView1 = (CardView) view.findViewById(R.id.card1);
+                CardView cardView2 = (CardView) view.findViewById(R.id.card2);
+                TextView textView1 = (TextView) view.findViewById(R.id.textv1);
+                TextView textView2 = (TextView) view.findViewById(R.id.textv2);
+                if(!typeOn){
+                    cardView1.setLayoutParams(new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                    textView1.setVisibility(View.VISIBLE);
+                    cardView2.setLayoutParams(new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                    textView2.setVisibility(View.VISIBLE);
+                    typeOn = true;
+                }else{
+                    textView1.setVisibility(View.GONE);
+                    final float scale = getResources().getDisplayMetrics().density;
+                    LinearLayout.LayoutParams cardLayoutParams = new LinearLayout.LayoutParams((int)(30 * scale + 0.5f),(int)(10 * scale + 0.5f));
+                    cardView1.setLayoutParams(cardLayoutParams);
+
+                    textView2.setVisibility(View.GONE);
+                    cardView2.setLayoutParams(cardLayoutParams);
+                    typeOn = false;
+                }
+                break;
+
+            case R.id.fab:
+                new NotificationLoadTask().execute();
+                break;
+        }
+
+    }
+
     private void loadTips() {
         new TipsLoadTask().execute();
     }
 
     @Override
-    public void onClick(View view) {
+    public void onClick(TipsAdapter.TipsViewHolder holder, int idTip) {
+        Intent intent = new Intent(this, RCDetailsActivity.class);
+        intent.putExtra("ID", idTip);
+        startActivity(intent);
 
+    }
+
+    private class NotificationLoadTask extends AsyncTask<Void, Void, Cursor> {
+
+        @Override
+        protected Cursor doInBackground(Void... voids) {
+            return tipsDbHelper.getAllTips();
+        }
+
+        @Override
+        protected void onPostExecute(Cursor cursor) {
+            if (cursor != null && cursor.getCount() > 0) {
+                cursor.moveToFirst();
+                Tip tip = new Tip(cursor);
+                presentHeadsUpNotification(Notification.VISIBILITY_PUBLIC, R.drawable.ic_launcherico, tip.getTitle(), tip.getSubtitle(), tip.getSubtitle(), tip.getId());
+
+            } else {
+                // Mostrar empty state
+            }
+        }
+    }
+
+    private void presentHeadsUpNotification(int visibility, int icon, String title, String text, String bigtext, int id) {
+        Intent notificationIntent = new Intent(this, RCDetailsActivity.class);
+        notificationIntent.putExtra("ID", id);
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
+
+        Notification notification = new NotificationCompat.Builder(this)
+                .setCategory(Notification.CATEGORY_PROMO)
+                .setContentTitle(title)
+                .setContentText(text)
+                .setSmallIcon(icon)
+                .setAutoCancel(true)
+                .setVisibility(visibility)
+                .addAction(android.R.drawable.ic_menu_view, getString(R.string.road_education), contentIntent)
+                .setContentIntent(contentIntent)
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText(bigtext))
+                .setPriority(Notification.PRIORITY_HIGH)
+                .setVibrate(new long[]{1000, 1000, 1000, 1000, 1000}).build();
+        NotificationManager notificationManager =
+                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        notificationManager.notify(2, notification);
     }
 
     private class TipsLoadTask extends AsyncTask<Void, Void, Cursor> {
@@ -71,7 +167,7 @@ public class RoadCultureActivity extends AppCompatActivity implements View.OnCli
         @Override
         protected void onPostExecute(Cursor cursor) {
             if (cursor != null && cursor.getCount() > 0) {
-                tipsAdapter.swapCursor(cursor);
+                tipsAdapter.swapCursor(cursor, tipsDbHelper);
             } else {
                 // Mostrar empty state
             }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 
 public class DbHelper extends SQLiteOpenHelper {
@@ -28,8 +29,13 @@ public class DbHelper extends SQLiteOpenHelper {
                 + StatusContract.Column_Tip.BODY2 + " TEXT,"
                 + StatusContract.Column_Tip.TYPE + " TEXT NOT NULL)");
 
+        db.execSQL("CREATE TABLE " + StatusContract.TABLE_TYPE + " ("
+                + StatusContract.Column_Type.NAME + " TEXT NOT NULL, "
+                + StatusContract.Column_Type.IDTIP + " INTEGER NOT NULL," +
+                " CONSTRAINT PK PRIMARY KEY ( " + StatusContract.Column_Type.NAME +
+                " , " + StatusContract.Column_Type.IDTIP +" ))" );
 
-        //private id, title, title2, subtitle, body, body2, type;
+
         insertData(db);
 
 
@@ -45,7 +51,28 @@ public class DbHelper extends SQLiteOpenHelper {
                 "Lo ideal es que siempre estemos preparados para cuando la lluvia aparezca. Llevar constantemente el impermeable puede ser en algunas ocasiones engorroso, así como ponérselo cuando las primeras gotas caen, pero si vamos secos y confortables a pesar del aguacero, es una garantía de que nuestra atención estará puesta al 100% en la conducción, por el contrario, ir completamente mojados, con frío, con los pies sobre el tanque de gasolina para no mojarnos las pantorrillas y además renegando por todo esto, hará que le prestemos menor atención a la calle o carretera incrementando el riesgo de tener sorpresas desagradables y disminuyendo nuestro tiempo de reacción ante cualquier eventualidad. ",
                 "TM");
 
-        db.insert(StatusContract.TABLE_TIP, null, tip.toContentValues());
+        long id =  db.insert(StatusContract.TABLE_TIP, null, tip.toContentValues());
+        int int_id = (int) id;
+        Type type = new Type(int_id,"TM");
+        db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
+        type = new Type(int_id,"IM");
+        db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
+        type = new Type(int_id,"IF");
+        db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
+        type = new Type(int_id,"N");
+        db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
+
+        tip.setTitle("2");
+        id =  db.insert(StatusContract.TABLE_TIP, null, tip.toContentValues());
+        int_id = (int) id;
+        type = new Type(int_id,"TM");
+        db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
+        type = new Type(int_id,"IM");
+        db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
+
+
+
+
     }
 
     public Cursor getAllTips(){
@@ -61,10 +88,48 @@ public class DbHelper extends SQLiteOpenHelper {
                         null);
     }
 
+    public Cursor getTipById(int tipId) {
+        Cursor c = getReadableDatabase().query(
+                StatusContract.TABLE_TIP,
+                null,
+                StatusContract.Column_Tip.ID + " = ?",
+                new String[]{""+tipId},
+                null,
+                null,
+                null);
+        return c;
+    }
+
+    public Cursor getAllTypes(){
+
+        return getReadableDatabase()
+                .query(
+                        StatusContract.TABLE_TYPE,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null);
+    }
+
+    public Cursor getTypeById(int typeId) {
+        Cursor c = getReadableDatabase().query(
+                StatusContract.TABLE_TYPE,
+                null,
+                StatusContract.Column_Type.IDTIP + " = ?",
+                new String[]{""+typeId},
+                null,
+                null,
+                null);
+        return c;
+    }
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
         db.execSQL("DROP TABLE IF EXISTS " + StatusContract.TABLE_TIP);
+        db.execSQL("DROP TABLE IF EXISTS " + StatusContract.TABLE_TYPE);
         onCreate(db);
 
     }

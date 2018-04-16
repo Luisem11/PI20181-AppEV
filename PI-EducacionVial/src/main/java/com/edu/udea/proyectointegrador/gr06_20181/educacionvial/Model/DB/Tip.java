@@ -4,7 +4,8 @@ import android.content.ContentValues;
 import android.database.Cursor;
 
 public class Tip {
-    private String id, title, title2, subtitle, body, body2, type;
+    int id;
+    private String  title, title2, subtitle, body, body2, type;
 
     public Tip(String title, String title2, String subtitle, String body, String body2, String type) {
         this.title = title;
@@ -16,7 +17,7 @@ public class Tip {
     }
 
     public Tip(Cursor cursor) {
-        id = cursor.getString(cursor.getColumnIndex(StatusContract.Column_Tip.ID));
+        id = cursor.getInt(cursor.getColumnIndex(StatusContract.Column_Tip.ID));
         title = cursor.getString(cursor.getColumnIndex(StatusContract.Column_Tip.TITLE));
         title2 = cursor.getString(cursor.getColumnIndex(StatusContract.Column_Tip.TITLE2));
         subtitle = cursor.getString(cursor.getColumnIndex(StatusContract.Column_Tip.SUBTITLE));
@@ -27,7 +28,6 @@ public class Tip {
 
     public ContentValues toContentValues() {
         ContentValues values = new ContentValues();
-        values.put(StatusContract.Column_Tip.ID, id);
         values.put(StatusContract.Column_Tip.TITLE, title);
         values.put(StatusContract.Column_Tip.TITLE2, title2);
         values.put(StatusContract.Column_Tip.SUBTITLE, subtitle);
@@ -38,11 +38,11 @@ public class Tip {
     }
 
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

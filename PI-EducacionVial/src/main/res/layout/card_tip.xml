@@ -37,6 +37,76 @@
             android:inputType="textMultiLine"
             style="@style/TextAppearance.AppCompat.Body2"/>
 
+        <LinearLayout
+            android:layout_below="@+id/subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:paddingTop="5dp"
+            android:id="@+id/type"
+            android:onClick="onClick">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card1"
+                android:layout_width="30dp"
+                android:layout_height="10dp"
+                android:backgroundTint="#8BC34A"
+                android:elevation="@dimen/cardview_default_elevation"
+                card_view:cardElevation="4dp"
+                android:paddingRight="10dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/textv1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="18dp"
+                    android:text="Técnicas de manejo"
+                    android:gravity="center_horizontal"
+                    android:textSize="10sp"
+                    android:padding="2dp"
+                    android:visibility="gone"/>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card2"
+                android:layout_width="30dp"
+                android:layout_height="10dp"
+                android:backgroundTint="#FFEB3B"
+                android:elevation="@dimen/cardview_default_elevation"
+                card_view:cardElevation="4dp"
+                android:paddingRight="10dp"
+                android:visibility="gone">
+                <TextView
+                    android:id="@+id/textv2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="18dp"
+                    android:text="Normatividad"
+                    android:gravity="center_horizontal"
+                    android:textSize="10sp"
+                    android:padding="2dp"
+                    android:visibility="gone"/>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="30dp"
+                android:layout_height="10dp"
+                android:backgroundTint="#F44336"
+                android:elevation="@dimen/cardview_default_elevation"
+                card_view:cardElevation="4dp"
+                android:paddingRight="10dp"
+                android:visibility="gone"/>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="30dp"
+                android:layout_height="10dp"
+                android:backgroundTint="#9C27B0"
+                android:elevation="@dimen/cardview_default_elevation"
+                card_view:cardElevation="4dp"
+                android:paddingRight="10dp"
+                android:visibility="gone"/>
+
+
+        </LinearLayout>
+
     </RelativeLayout>
 
 </android.support.v7.widget.CardView>
