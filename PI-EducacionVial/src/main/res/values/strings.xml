@@ -26,4 +26,11 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="descriptionTrafficFine">Descripción</string>
+    <string name="codeTrafficFine">Codigo de Multa</string>
+    <string name="priceTrafficFine">Precio</string>
+
+
+
+
 </resources>
