@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/notifications">
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="session"
+            android:summary="Activar notificaciones de Pico y Placa"
+            android:title="Pico y Placa" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="notificationsEnable"
+            android:summary="Activar notificaciones del clima"
+            android:title="Clima" />
+
+    </PreferenceCategory>
+
+
+    <android.support.v7.preference.PreferenceCategory
+        android:title="Not">
+
+        <com.edu.udea.proyectointegrador.gr06_20181.educacionvial.View.Preferences.LocationPreference
+            style="@style/AppPreference.DialogPreference"
+            android:defaultValue="90"
+            android:key="pref4"
+            android:summary="Cambiar ubicación"
+            android:title="Cambiar Ubicación"/>
+
+    </android.support.v7.preference.PreferenceCategory>
+</android.support.v7.preference.PreferenceScreen>

@@ -4,6 +4,11 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/main"
+            android:icon="@drawable/ic_launcherico"
+            android:title="Menu Principal" />
         <item
             android:id="@+id/profile_menu"
             android:icon="@drawable/ic_profile"
@@ -14,7 +19,7 @@
     <item android:title="@string/preference_menu">
         <menu>
             <item
-                android:id="@+id/nav_share"
+                android:id="@+id/preferences"
                 android:icon="@drawable/ic_preference_conf"
                 android:title="@string/preference" />
             <item

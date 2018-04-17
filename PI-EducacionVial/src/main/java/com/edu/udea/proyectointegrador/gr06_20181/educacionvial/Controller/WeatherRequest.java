@@ -11,11 +11,11 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-/**
- * Created by jaiber on 20/04/16.
- */
+
 public class WeatherRequest {
 
+    public static String API_KEY = "6da9d4a06292f5506cfa67f8e9b6a7b3";
+    public static String API_LINK = "http://api.openweathermap.org/data/2.5/weather";
     private final String TAG = "WeatherRequest";
     private String host;
     private String request;
@@ -26,14 +26,22 @@ public class WeatherRequest {
     //private final String USER_NAME = "aporter";
     //private final String URL = "http://api.geonames.org/earthquakesJSON?north=20&south=-20&east=-60&west=-80&username=" + USER_NAME;
 
-    WeatherRequest(String host, String request, String params){
+    public WeatherRequest(String host, String request, String params){
         this.host = host;
         this.request = request;
         this.params = params;
         this.url = host + request + params;
     }
 
-    WeatherRequest(String url){
+    public WeatherRequest(String lat, String lng){
+        StringBuilder sb = new StringBuilder(API_LINK);
+        sb.append(String.format("?lat=%s&lon=%s&APPID=%s&units=metric",lat,lng,API_KEY));
+        this.url = sb.toString();
+    }
+
+
+
+    public WeatherRequest(String url){
         this.url = url;
     }
 

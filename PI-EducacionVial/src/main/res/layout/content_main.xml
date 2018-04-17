@@ -8,15 +8,21 @@
     tools:context="com.edu.udea.proyectointegrador.gr06_20181.educacionvial.View.MainActivity.MainActivity"
     tools:showIn="@layout/app_bar_main"
     android:orientation="vertical">
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/menu"
-        android:textStyle="bold"
-        android:textSize="30sp"
-        android:gravity="center"
-        android:paddingTop="20dp"
-        android:paddingBottom="40dp"/>
+        android:orientation="vertical"
+        android:id="@+id/linear_content">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/menu"
+            android:textStyle="bold"
+            android:textSize="30sp"
+            android:gravity="center"
+            android:paddingTop="20dp"
+            android:paddingBottom="40dp"/>
 
         <GridView
             android:id="@+id/gridView"
@@ -28,6 +34,14 @@
             android:numColumns="2"
             android:stretchMode="spacingWidthUniform"
             android:verticalSpacing="10dp"/>
+    </LinearLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/contain_set">
+
+    </FrameLayout>
+
 
 
 </LinearLayout>

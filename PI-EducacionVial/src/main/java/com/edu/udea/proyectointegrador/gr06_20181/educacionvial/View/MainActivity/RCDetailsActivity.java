@@ -105,6 +105,7 @@ public class RCDetailsActivity extends AppCompatActivity implements AppBarLayout
             }
         }
 
+
     }
 
     @Override

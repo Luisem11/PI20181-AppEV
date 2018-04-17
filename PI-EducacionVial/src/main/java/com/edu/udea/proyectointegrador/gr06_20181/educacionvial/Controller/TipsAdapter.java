@@ -58,6 +58,12 @@ public class TipsAdapter extends RecyclerView.Adapter<TipsAdapter.TipsViewHolder
                 if (cursor.getString(0).equals("N")) {
                     holder.cardView2.setVisibility(View.VISIBLE);
                 }
+                if (cursor.getString(0).equals("IM")) {
+                    holder.cardView3.setVisibility(View.VISIBLE);
+                }
+                if (cursor.getString(0).equals("If")) {
+                    holder.cardView4.setVisibility(View.VISIBLE);
+                }
             } while (cursor.moveToNext());
         }
 
@@ -85,7 +91,7 @@ public class TipsAdapter extends RecyclerView.Adapter<TipsAdapter.TipsViewHolder
         public TextView personName;
         public TextView personAge;
         public LinearLayout typeLinearLayout;
-        CardView cardView1, cardView2;
+        CardView cardView1, cardView2, cardView3, cardView4;
 
         public TipsViewHolder(View itemView) {
             super(itemView);
@@ -95,6 +101,8 @@ public class TipsAdapter extends RecyclerView.Adapter<TipsAdapter.TipsViewHolder
             typeLinearLayout = (LinearLayout) itemView.findViewById(R.id.type);
             cardView1 = (CardView) itemView.findViewById(R.id.card1);
             cardView2 = (CardView) itemView.findViewById(R.id.card2);
+            cardView3 = (CardView) itemView.findViewById(R.id.card3);
+            cardView4 = (CardView) itemView.findViewById(R.id.card4);
 
         }
 

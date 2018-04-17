@@ -73,8 +73,12 @@ public class RoadCultureActivity extends AppCompatActivity implements View.OnCli
             case R.id.type:
                 CardView cardView1 = (CardView) view.findViewById(R.id.card1);
                 CardView cardView2 = (CardView) view.findViewById(R.id.card2);
+                CardView cardView3 = (CardView) view.findViewById(R.id.card3);
+                CardView cardView4 = (CardView) view.findViewById(R.id.card4);
                 TextView textView1 = (TextView) view.findViewById(R.id.textv1);
                 TextView textView2 = (TextView) view.findViewById(R.id.textv2);
+                TextView textView3 = (TextView) view.findViewById(R.id.textv3);
+                TextView textView4 = (TextView) view.findViewById(R.id.textv4);
                 if(!typeOn){
                     cardView1.setLayoutParams(new LinearLayout.LayoutParams(
                             LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
@@ -82,15 +86,24 @@ public class RoadCultureActivity extends AppCompatActivity implements View.OnCli
                     cardView2.setLayoutParams(new LinearLayout.LayoutParams(
                             LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
                     textView2.setVisibility(View.VISIBLE);
+                    cardView3.setLayoutParams(new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                    textView3.setVisibility(View.VISIBLE);
+                    cardView4.setLayoutParams(new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                    textView4.setVisibility(View.VISIBLE);
                     typeOn = true;
                 }else{
-                    textView1.setVisibility(View.GONE);
                     final float scale = getResources().getDisplayMetrics().density;
                     LinearLayout.LayoutParams cardLayoutParams = new LinearLayout.LayoutParams((int)(30 * scale + 0.5f),(int)(10 * scale + 0.5f));
+                    textView1.setVisibility(View.GONE);
                     cardView1.setLayoutParams(cardLayoutParams);
-
                     textView2.setVisibility(View.GONE);
                     cardView2.setLayoutParams(cardLayoutParams);
+                    textView3.setVisibility(View.GONE);
+                    cardView3.setLayoutParams(cardLayoutParams);
+                    textView4.setVisibility(View.GONE);
+                    cardView4.setLayoutParams(cardLayoutParams);
                     typeOn = false;
                 }
                 break;

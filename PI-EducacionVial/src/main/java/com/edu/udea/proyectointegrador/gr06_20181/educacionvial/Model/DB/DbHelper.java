@@ -62,14 +62,53 @@ public class DbHelper extends SQLiteOpenHelper {
         type = new Type(int_id,"N");
         db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
 
-        tip.setTitle("2");
+        tip = new Tip("Ante la señal de PARE, ¡pare!",
+                "Sabes cuanto vale una multa por pasarte una señal de pare?",
+                "Deténgase totalmente antes de la línea y/o señal de pare. Hágalo con precaución porque pueden venir vehículos detrás de usted. Advierta si hay peatones sobre la cebra. Recuerda que la prudencia puede salvar vidas.",
+                "Deténgase totalmente antes de la línea y/o señal de pare. Hágalo con precaución porque pueden venir vehículos detrás de usted. Advierta si hay peatones sobre la cebra. Recuerda que la prudencia puede salvar vidas.",
+                "#",
+                "TM");
+
         id =  db.insert(StatusContract.TABLE_TIP, null, tip.toContentValues());
         int_id = (int) id;
-        type = new Type(int_id,"TM");
+        type = new Type(int_id,"IF");
         db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
-        type = new Type(int_id,"IM");
+        type = new Type(int_id,"N");
         db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
 
+        tip = new Tip("Atento al Pico y Placa",
+                "¿Quieres que te lo recordemos?",
+                "Esta es una de las fallas más comunes, e implica inmovilización del vehículo",
+                "Esta es una de las fallas más comunes, e implica inmovilización del vehículo",
+                "Programar recordatorio",
+                "T");
+
+        id =  db.insert(StatusContract.TABLE_TIP, null, tip.toContentValues());
+        int_id = (int) id;
+        type = new Type(int_id,"IM");
+        db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
+        type = new Type(int_id,"N");
+        db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
+
+
+
+        //        tip = new Tip("",
+//                "",
+//                "",
+//                "",
+//                "",
+//                "");
+//
+//        id =  db.insert(StatusContract.TABLE_TIP, null, tip.toContentValues());
+//        int_id = (int) id;
+//        type = new Type(int_id,"TM");
+//        db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
+//        type = new Type(int_id,"IM");
+//        db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
+//        type = new Type(int_id,"IF");
+//        db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
+//        type = new Type(int_id,"N");
+//        db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
 
 
 
