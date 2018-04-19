@@ -61,7 +61,7 @@ public class TipsAdapter extends RecyclerView.Adapter<TipsAdapter.TipsViewHolder
                 if (cursor.getString(0).equals("IM")) {
                     holder.cardView3.setVisibility(View.VISIBLE);
                 }
-                if (cursor.getString(0).equals("If")) {
+                if (cursor.getString(0).equals("IF")) {
                     holder.cardView4.setVisibility(View.VISIBLE);
                 }
             } while (cursor.moveToNext());

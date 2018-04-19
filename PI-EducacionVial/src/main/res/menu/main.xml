@@ -8,4 +8,10 @@
         android:title="@string/weather"
         app:showAsAction="ifRoom" />
 
+    <item
+        android:id="@+id/settings"
+        android:enabled="true"
+        android:title="@string/preference"
+        app:showAsAction="never" />
+
 </menu>

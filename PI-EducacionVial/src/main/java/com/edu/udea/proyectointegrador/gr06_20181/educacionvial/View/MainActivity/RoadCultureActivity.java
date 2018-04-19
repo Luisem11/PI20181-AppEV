@@ -139,7 +139,7 @@ public class RoadCultureActivity extends AppCompatActivity implements View.OnCli
             if (cursor != null && cursor.getCount() > 0) {
                 cursor.moveToFirst();
                 Tip tip = new Tip(cursor);
-                presentHeadsUpNotification(Notification.VISIBILITY_PUBLIC, R.drawable.ic_launcherico, tip.getTitle(), tip.getSubtitle(), tip.getSubtitle(), tip.getId());
+                presentHeadsUpNotification(Notification.VISIBILITY_PUBLIC, R.drawable.ic_not, tip.getTitle(), tip.getSubtitle(), tip.getSubtitle(), tip.getId());
 
             } else {
                 // Mostrar empty state

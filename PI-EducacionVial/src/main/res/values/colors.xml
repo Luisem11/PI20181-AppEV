@@ -5,4 +5,8 @@
     <color name="colorPrimaryDark">#005b9f</color>
     <color name="primaryTextColor">#000000</color>
     <color name="white">#E3F2FD</color>
+    <color name="startblue">#005b9f</color>
+    <color name="endblue">#5eb8ff</color>
+    <color name="graylight">#FAFAFA</color>
+    <color name="lightgray">#ededed</color>
 </resources>

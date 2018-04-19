@@ -7,7 +7,6 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,9 +31,9 @@ public class RCDetailsActivity extends AppCompatActivity implements AppBarLayout
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rcdetails);
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
+//
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
         titleTextView = (TextView) findViewById(R.id.title1);
         mLawyersDbHelper = new DbHelper(this);
         title = "";
@@ -45,8 +44,8 @@ public class RCDetailsActivity extends AppCompatActivity implements AppBarLayout
         if (getIntent().getExtras() != null) {
             TipId = getIntent().getExtras().getInt("ID");
         }
-        appBarLayout = (AppBarLayout) findViewById(R.id.app_bar);
-        appBarLayout.addOnOffsetChangedListener(this);
+//        appBarLayout = (AppBarLayout) findViewById(R.id.app_bar);
+//        appBarLayout.addOnOffsetChangedListener(this);
 
         loadTip();
     }
@@ -60,7 +59,7 @@ public class RCDetailsActivity extends AppCompatActivity implements AppBarLayout
         titleTextView.setText(tip.getTitle());
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.lawyer_detail_container, new Details1Fragment(tip));
+        ft.replace(R.id.detail_container, new Details1Fragment(tip));
         ft.commit();
 
     }
