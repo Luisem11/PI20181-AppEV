@@ -44,7 +44,7 @@ public class HelpActivity extends AppCompatActivity implements BottomNavigationV
 
             case R.id.action_traffic_fines:
                 ft = getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.help_container, new TrafficFineFragment());
+                ft.replace(R.id.help_container, new TrafficFineFragment()).addToBackStack(null);
                 ft.commit();
                 break;
 

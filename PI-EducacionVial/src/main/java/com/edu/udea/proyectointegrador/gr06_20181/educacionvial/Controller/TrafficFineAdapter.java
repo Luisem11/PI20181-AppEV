@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +26,6 @@ public class TrafficFineAdapter extends RecyclerView.Adapter<TrafficFineAdapter.
 
     public List<TrafficFine> trafficFine;
 
-    // Provide a suitable constructor (depends on the kind of dataset)
     public TrafficFineAdapter(List<TrafficFine> trafficFine) {
         this.trafficFine = trafficFine;
     }
@@ -35,18 +35,14 @@ public class TrafficFineAdapter extends RecyclerView.Adapter<TrafficFineAdapter.
     public TrafficFineAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
                                                    int viewType) {
         // create a new view
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_traffic_fine, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.trafficfine_card, parent, false);
 
-        // set the view's size, margins, paddings and layout parameters
         ViewHolder vh = new ViewHolder(v,trafficFine);
         return vh;
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        // - get element from your dataset at this position
-        // - replace the contents of the view with that element
         holder.trafficFineCode.setText(trafficFine.get(position).getCode());
         holder.trafficFinePrice.setText(trafficFine.get(position).getPrice());
 
@@ -70,12 +66,13 @@ public class TrafficFineAdapter extends RecyclerView.Adapter<TrafficFineAdapter.
 
 
         // each data item is just a string in this case
-        public ViewHolder(View itemView, List<TrafficFine> trafficfines) {
+        public ViewHolder(View itemView, List<TrafficFine> trafficFine) {
             super(itemView);
             itemView.setOnClickListener(this);
             cardView =  itemView.findViewById(R.id.card_view_trafficfine);
-            trafficFineCode = itemView.findViewById(R.id.traffic_fine_code);
-            trafficFinePrice = itemView.findViewById(R.id.traffic_fine_price);
+            trafficFineCode = itemView.findViewById(R.id.traffic_fine_code_card);
+            trafficFinePrice = itemView.findViewById(R.id.traffic_fine_price_card);
+            this.trafficFine = trafficFine;
         }
 
         @Override
@@ -98,7 +95,7 @@ public class TrafficFineAdapter extends RecyclerView.Adapter<TrafficFineAdapter.
             priceLoad = v.findViewById(R.id.traffic_fine_price_dialog);
             priceLoad.setText(String.valueOf(trafficFine.get(pos).getPrice()));
             descriptionLoad = v.findViewById(R.id.traffic_fine_description_dialog);
-            descriptionLoad.setText(String.valueOf(trafficFine.get(pos).getPrice()));
+            descriptionLoad.setText(String.valueOf(trafficFine.get(pos).getDescription()));
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
             alertDialogBuilder.setTitle(trafficFine.get(pos).getCode());
             alertDialogBuilder.setView(layout);

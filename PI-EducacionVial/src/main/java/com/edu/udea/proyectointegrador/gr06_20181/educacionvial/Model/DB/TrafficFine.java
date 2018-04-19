@@ -46,4 +46,6 @@ public class TrafficFine {
     public void setCategory(String category) {
         this.category = category;
     }
+
+
 }
