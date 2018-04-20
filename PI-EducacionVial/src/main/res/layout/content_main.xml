@@ -68,7 +68,7 @@
                 android:layout_width="160dp"
                 android:layout_height="190dp"
                 android:layout_margin="10dp"
-                android:id="@+id/rulescardId"
+                android:id="@+id/helpcardId"
                 android:onClick="onClick">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -78,14 +78,15 @@
                     <ImageView
                         android:layout_width="64dp"
                         android:layout_height="64dp"
-                        android:background="@drawable/ic_doc"
+                        android:background="@drawable/circleshape"
+                        android:src="@drawable/ic_help_1"
                         android:padding="10dp"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
                         android:layout_marginTop="10dp"
-                        android:text="@string/rulesActivityName"/>
+                        android:text="@string/helpActivityName"/>
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
@@ -116,7 +117,7 @@
                 android:layout_width="160dp"
                 android:layout_height="190dp"
                 android:layout_margin="10dp"
-                android:id="@+id/helpcardId"
+                android:id="@+id/rulescardId"
                 android:onClick="onClick">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -126,15 +127,14 @@
                     <ImageView
                         android:layout_width="64dp"
                         android:layout_height="64dp"
-                        android:background="@drawable/circleshape"
-                        android:src="@drawable/ic_help_1"
+                        android:background="@drawable/ic_doc"
                         android:padding="10dp"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
                         android:layout_marginTop="10dp"
-                        android:text="@string/helpActivityName"/>
+                        android:text="@string/rulesActivityName"/>
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"

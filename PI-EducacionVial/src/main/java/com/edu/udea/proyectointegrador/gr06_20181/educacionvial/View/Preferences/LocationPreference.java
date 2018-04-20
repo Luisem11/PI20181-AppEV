@@ -17,7 +17,7 @@ public class LocationPreference extends DialogPreference {
     /**
      * In Minutes after midnight
      */
-    private int mTime;
+    private String mCity;
 
     /**
      * Resource of the dialog layout
@@ -53,8 +53,8 @@ public class LocationPreference extends DialogPreference {
      *
      * @return The current preference value
      */
-    public int getTime() {
-        return mTime;
+    public String getCity() {
+        return mCity;
     }
 
     /**
@@ -62,11 +62,11 @@ public class LocationPreference extends DialogPreference {
      *
      * @param time The time to save
      */
-    public void setTime(int time) {
-        mTime = time;
+    public void setTime(String time) {
+        mCity = time;
 
         // Save to SharedPreference
-        persistInt(time);
+        persistString(time);
     }
 
     //
@@ -78,7 +78,7 @@ public class LocationPreference extends DialogPreference {
     protected Object onGetDefaultValue(TypedArray a, int index) {
         // The type of this preference is Int, so we read the default value from the attributes
         // as Int. Fallback value is set to 0.
-        return a.getInt(index, 0);
+        return a.getString(index);
     }
 
     //
@@ -101,7 +101,7 @@ public class LocationPreference extends DialogPreference {
     protected void onSetInitialValue(boolean restorePersistedValue, Object defaultValue) {
         // If the value can be restored, do it. If not, use the default value.
         setTime(restorePersistedValue ?
-                getPersistedInt(mTime) : (int) defaultValue);
+                getPersistedString(mCity) : (String) defaultValue);
     }
 
 }

@@ -15,6 +15,7 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -30,6 +31,7 @@ import android.widget.Toast;
 import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.Controller.ImageAdapter;
 import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.Controller.WeatherRequest;
 import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.R;
+import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.View.Preferences.PreferenceActivity;
 import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.View.Preferences.PreferenceFragmentCustom;
 
 import org.json.JSONException;
@@ -74,14 +76,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        int id = item.getItemId();
         switch (item.getItemId()){
             case R.id.weather:
 
                 new HttpGetTask().execute();
                 break;
             case R.id.settings:
-
+                Intent intent = new Intent(MainActivity.this, PreferenceActivity.class);
+                startActivity(intent);
                 break;
 
         }
@@ -167,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
             result = getMessage(dataList);
             // Close progress dialog
             Dialog.dismiss();
-            presentHeadsUpNotification(Notification.VISIBILITY_PUBLIC, R.drawable.ic_launcherico,result[0],result[1],result[2]);
+            presentHeadsUpNotification(Notification.VISIBILITY_PUBLIC, R.drawable.ic_notification_icon,result[0],result[1],result[2]);
 
 
 
@@ -182,20 +184,42 @@ public class MainActivity extends AppCompatActivity {
                     result[2] = "Recuerda llevar el equipo adecuado y ser prudente en la via, así podemos evitar accidentes";
                     break;
                 case '3': //llovizna
-                    result[0] = "Hay probabilidades de lluvia";
-                    result[1] = "Recuerda llevar el equipo adecuado y ser prudente en la via, así podemos evitar accidentes";
-                    result[2] = "Recuerda llevar el equipo adecuado y ser prudente en la via, así podemos evitar accidentes";
+                    result[0] = "Hay Probabilidades de Lluvia";
+                    result[1] = "Ten precaución!";
+                    result[2] = "Ten precaución! Con el suelo mojado manejar se hace mas difícil";
                     break;
                 case '5': //Lluvia
                     result[0] = "Cuidado con la LLuvia!";
-                    result[1] = "Recuerda llevar el equipo adecuado y ser prudente en la via, así podemos evitar accidentes";
+                    result[1] = "Recuerda llevar el equipo adecuado";
                     result[2] = "Recuerda llevar el equipo adecuado y ser prudente en la via, así podemos evitar accidentes";
                     break;
                 case '8': //Despejado
-                    result[0] = "Cielo despejado";
-                    result[1] = "Recuerda";
-                    result[2] = "Recuerda";
+                    switch (dataList.charAt(2)){
+                        case 0://Cielo despejado
+                            result[0] = "Cielo despejado";
+                            result[1] = "Tal vez hoy sea un buen día, pero es bueno estar preparado";
+                            result[2] = "Tal vez hoy sea un buen día, pero es bueno estar preparado";
+                            return result;
+                        case 1:
+                            result[0] = "Hay pocas nubes!";
+                            break;
+                        case 2:
+                            result[0] = "Está un poco nubado!";
+                            break;
+                        default:
+                            result[0] = "Esta bastante nubado!";
+                            break;
+
+                    }
+                    result[1] = "Recuerda estar preparado";
+                    result[2] = "Recuerda estar preparado, no vaya a ser que comience a llover y no tengas el equipo adecuado";
                     break;
+                default:
+                    result[0] = "El Clima esta loco!";
+                    result[1] = "Recuerda estar preparado";
+                    result[2] = "Recuerda estar preparado, no vaya a ser que comience a llover y no tengas el equipo adecuado";
+                    break;
+
             }
             return result;
         }
@@ -212,6 +236,7 @@ public class MainActivity extends AppCompatActivity {
                 .setContentTitle(title)
                 .setSmallIcon(icon)
                 .setContentText(text)
+                .setColor(ContextCompat.getColor(this, R.color.colorPrimary))
                 .setAutoCancel(true)
                 .setVisibility(visibility)
                 .addAction(android.R.drawable.ic_menu_view, getString(R.string.road_education), contentIntent)

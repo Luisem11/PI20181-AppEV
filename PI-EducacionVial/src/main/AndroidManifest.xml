@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
+    <uses-permission android:name="com.android.permission.SET_ALARM" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -67,7 +68,23 @@
                 android:value=".View.MainActivity.MainActivity" />
         </activity>
         <activity android:name=".View.MainActivity.RCDetailsActivity" />
-        <activity android:name=".View.Preferences.PreferenceActivity"></activity>
+        <activity
+            android:name=".View.Preferences.PreferenceActivity"
+            android:parentActivityName=".View.MainActivity.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".View.MainActivity.MainActivity" />
+        </activity>
+
+        <service
+            android:name=".WeatherService"
+            android:enabled="true"
+            android:exported="true"></service>
+
+
+
+        <receiver android:name=".WeatherReciver"/>
+
     </application>
 
 </manifest>

@@ -1,12 +1,13 @@
 package com.edu.udea.proyectointegrador.gr06_20181.educacionvial.View.Preferences;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.preference.DialogPreference;
 import android.support.v7.preference.PreferenceDialogFragmentCompat;
-import android.text.format.DateFormat;
 import android.view.View;
-import android.widget.TimePicker;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.R;
 
@@ -20,7 +21,8 @@ public class LocationPreferenceDialogFragmentCompat extends PreferenceDialogFrag
     /**
      * The TimePicker widget
      */
-    private TimePicker mTimePicker;
+    private TextView mTimePicker;
+    private Spinner spinner;
 
     /**
      * Creates a new Instance of the TimePreferenceDialogFragment and stores the key of the
@@ -46,7 +48,18 @@ public class LocationPreferenceDialogFragmentCompat extends PreferenceDialogFrag
     protected void onBindDialogView(View view) {
         super.onBindDialogView(view);
 
-        mTimePicker = (TimePicker) view.findViewById(R.id.edit);
+        spinner = (Spinner) view.findViewById(R.id.spinner2);
+        mTimePicker = (TextView) view.findViewById(R.id.edit);
+
+
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(view.getContext(),
+                R.array.location_array, R.layout.spinner_item);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);   //Set a default layout for items
+        spinner.setAdapter(adapter);
+
+        mTimePicker = (TextView) view.findViewById(R.id.edit);
 
         // Exception: There is no TimePicker with the id 'edit' in the dialog.
         if (mTimePicker == null) {
@@ -54,49 +67,47 @@ public class LocationPreferenceDialogFragmentCompat extends PreferenceDialogFrag
         }
 
         // Get the time from the related Preference
-        Integer minutesAfterMidnight = null;
+        String minutesAfterMidnight = null;
         DialogPreference preference = getPreference();
         if (preference instanceof LocationPreference) {
-            minutesAfterMidnight = ((LocationPreference) preference).getTime();
+            minutesAfterMidnight = ((LocationPreference) preference).getCity();
         }
 
         // Set the time to the TimePicker
         if (minutesAfterMidnight != null) {
-            int hours = minutesAfterMidnight / 60;
-            int minutes = minutesAfterMidnight % 60;
-            boolean is24hour = DateFormat.is24HourFormat(getContext());
 
-            mTimePicker.setIs24HourView(is24hour);
-            mTimePicker.setCurrentHour(hours);
-            mTimePicker.setCurrentMinute(minutes);
+            mTimePicker.setText(minutesAfterMidnight);
         }
+        final String finalMinutesAfterMidnight = minutesAfterMidnight;
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(spinner.getSelectedItemId()!=0){
+                    mTimePicker.setText(spinner.getSelectedItem().toString());
+                }else
+                {
+                    mTimePicker.setText(finalMinutesAfterMidnight);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
     }
 
-    /**
-     * Called when the Dialog is closed.
-     *
-     * @param positiveResult Whether the Dialog was accepted or canceled.
-     */
     @Override
     public void onDialogClosed(boolean positiveResult) {
         if (positiveResult) {
-            // Get the current values from the TimePicker
-            int hours;
-            int minutes;
-            if (Build.VERSION.SDK_INT >= 23) {
-                hours = mTimePicker.getHour();
-                minutes = mTimePicker.getMinute();
-            } else {
-                hours = mTimePicker.getCurrentHour();
-                minutes = mTimePicker.getCurrentMinute();
-            }
 
             // Generate value to save
-            int minutesAfterMidnight = (hours * 60) + minutes;
+            String minutesAfterMidnight =  spinner.getSelectedItem().toString();
 
             // Save the value
             DialogPreference preference = getPreference();
-            if (preference instanceof LocationPreference) {
+            if (preference instanceof LocationPreference && !minutesAfterMidnight.equals("")) {
                 LocationPreference locationPreference = ((LocationPreference) preference);
                 // This allows the client to ignore the user value.
                 if (locationPreference.callChangeListener(minutesAfterMidnight)) {
