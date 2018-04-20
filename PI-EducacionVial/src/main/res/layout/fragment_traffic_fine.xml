@@ -23,7 +23,8 @@
             app:cardCornerRadius="8dp"
             app:cardElevation="4dp"
             app:cardUseCompatPadding="true"
-            app:layout_constraintBottom_toTopOf="@+id/traffic_fine_gotten"
+            app:cardBackgroundColor="@color/colorPrimary"
+            app:layout_constraintBottom_toTopOf="@+id/traffic_fine_frequent_card_detail"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -39,6 +40,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
+                    android:textColor="@color/white"
                     android:text="Multas Frecuentes"
                     android:textSize="30sp" />
 
@@ -47,7 +49,7 @@
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
-            android:id="@+id/traffic_fine_gotten"
+            android:id="@+id/traffic_fine_frequent_card_detail"
             android:layout_width="0dp"
             android:layout_height="88dp"
             android:layout_alignParentTop="true"
@@ -95,20 +97,13 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/traffic_fine_gotten">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            app:layout_constraintTop_toBottomOf="@+id/traffic_fine_frequent_card_detail">
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_content_traffic_fine"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal" />
-
-            </RelativeLayout>
-
 
         </ScrollView>
 
