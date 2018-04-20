@@ -5,9 +5,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,6 @@ import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.Controller.Traff
 import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.Model.DB.TrafficFine;
 import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.R;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,14 +44,14 @@ public class TrafficFineFragment extends Fragment implements View.OnClickListene
         trafficFines = showTrafficFine((ArrayList) trafficFines);
 
         frecuentTrafficFine = view.findViewById(R.id.card_view_frecuent_trafficfine);
-        trafficFineGotten = view.findViewById(R.id.traffic_fine_gotten);
+        trafficFineGotten = view.findViewById(R.id.traffic_fine_frequent_card_detail);
         frecuentTrafficFine.setOnClickListener(this);
         trafficFineGotten.setOnClickListener(this);
 
 
         mRecyclerView = view.findViewById(R.id.rv_content_traffic_fine);
         mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(getContext());
+        mLayoutManager = new GridLayoutManager(getContext(),4);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         // specify an adapter (see also next example)
@@ -74,23 +72,16 @@ public class TrafficFineFragment extends Fragment implements View.OnClickListene
         switch (view.getId()){
             case R.id.card_view_frecuent_trafficfine:
                 ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.help_container, new FrecuentTrafficFineFragment());
+                ft.replace(R.id.help_container, new FrecuentTrafficFineFragment()).addToBackStack(null);
                 ft.commit();
                 break;
-            case R.id.traffic_fine_gotten:
-                Log.d("tarjeta tengo una multa","Fue presionado la tarjeta de tengo una multa");
+            case R.id.traffic_fine_frequent_card_detail:
+                ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.help_container, new GottenTrafficFineFragment()).addToBackStack(null);
+                ft.commit();
                 break;
         }
     }
-
-    /*@Override
-    public void onBackPressed() {
-        if (getFragmentManager().getBackStackEntryCount() > 0) {
-            getFragmentManager().popBackStack();
-        } else {
-            super.onBackPressed();
-        }
-    }*/
 
 
 

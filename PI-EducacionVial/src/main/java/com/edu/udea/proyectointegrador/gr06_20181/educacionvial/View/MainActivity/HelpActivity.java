@@ -38,7 +38,7 @@ public class HelpActivity extends AppCompatActivity implements BottomNavigationV
         switch (item.getItemId()) {
             case R.id.action_accidents:
                 ft = getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.help_container, new AccidentsFragment());
+                ft.replace(R.id.help_container, new AccidentsFragment()).addToBackStack(null);
                 ft.commit();
                 break;
 
@@ -50,7 +50,7 @@ public class HelpActivity extends AppCompatActivity implements BottomNavigationV
 
             case R.id.action_help:
                 ft = getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.help_container, new HelpFragment());
+                ft.replace(R.id.help_container, new HelpFragment()).addToBackStack(null);
                 ft.commit();
                 break;
         }

@@ -26,16 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:text="Code"
-                android:textSize="30sp" />
-
-            <TextView
-                android:id="@+id/traffic_fine_price_card"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="17dp"
-                android:layout_toEndOf="@+id/traffic_fine_code_card"
-                android:text="Price" />
+                android:textSize="25sp" />
 
         </RelativeLayout>
 
