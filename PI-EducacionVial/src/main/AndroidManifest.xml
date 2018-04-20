@@ -67,6 +67,7 @@
                 android:value=".View.MainActivity.MainActivity" />
         </activity>
         <activity android:name=".View.MainActivity.RCDetailsActivity" />
+        <activity android:name=".View.Preferences.PreferenceActivity"></activity>
     </application>
 
 </manifest>
