@@ -20,7 +20,7 @@ public class RCDetailsActivity extends AppCompatActivity implements AppBarLayout
     private CollapsingToolbarLayout collapsingToolbarLayout;
     private DbHelper mLawyersDbHelper;
     private AppBarLayout appBarLayout;
-    private TextView titleTextView;
+    private TextView titleTextView, body1TextView;
 
     private String title;
     boolean isShow = false;
@@ -35,6 +35,7 @@ public class RCDetailsActivity extends AppCompatActivity implements AppBarLayout
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
         titleTextView = (TextView) findViewById(R.id.title1);
+        body1TextView = (TextView) findViewById(R.id.body1);
         mLawyersDbHelper = new DbHelper(this);
         title = "";
 
@@ -57,6 +58,7 @@ public class RCDetailsActivity extends AppCompatActivity implements AppBarLayout
     private void showTip(Tip tip) {
         title = tip.getTitle();
         titleTextView.setText(tip.getTitle());
+        body1TextView.setText(tip.getBody());
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.detail_container, new Details1Fragment(tip));

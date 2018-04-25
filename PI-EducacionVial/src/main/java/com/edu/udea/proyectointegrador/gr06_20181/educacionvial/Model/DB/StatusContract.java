@@ -4,7 +4,7 @@ import android.provider.BaseColumns;
 
 public class StatusContract {
     public static final String DB_NAME = "educacionvial.db";
-    public static final int DB_VERSION = 1;
+    public static final int DB_VERSION = 3;
     public static final String TABLE_TIP = "tip";
     public static final String TABLE_TYPE = "type";
 
@@ -17,6 +17,7 @@ public class StatusContract {
         public static final String BODY2 = "body2";
         public static final String SUBTITLE = "subtitle";
         public static final String TYPE = "type";
+        public static final String LINK = "link";
     }
 
     public class Column_Type {

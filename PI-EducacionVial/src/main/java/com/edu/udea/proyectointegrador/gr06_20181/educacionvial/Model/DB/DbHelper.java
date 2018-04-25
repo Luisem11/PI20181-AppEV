@@ -4,7 +4,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.Toast;
 
 
 public class DbHelper extends SQLiteOpenHelper {
@@ -27,7 +26,8 @@ public class DbHelper extends SQLiteOpenHelper {
                 + StatusContract.Column_Tip.SUBTITLE + " TEXT NOT NULL,"
                 + StatusContract.Column_Tip.BODY + " TEXT NOT NULL,"
                 + StatusContract.Column_Tip.BODY2 + " TEXT,"
-                + StatusContract.Column_Tip.TYPE + " TEXT NOT NULL)");
+                + StatusContract.Column_Tip.TYPE + " TEXT NOT NULL,"
+                + StatusContract.Column_Tip.LINK + " TEXT )");
 
         db.execSQL("CREATE TABLE " + StatusContract.TABLE_TYPE + " ("
                 + StatusContract.Column_Type.NAME + " TEXT NOT NULL, "
@@ -45,11 +45,19 @@ public class DbHelper extends SQLiteOpenHelper {
 
 
         Tip tip = new Tip("Cuidado con el Suelo Mojado!",
-                "Indumentaria",
                 "Con el suelo mojado el riesgo de sufrir una caída aumenta bastante, por eso es importante mermar el ritmo y hacer todas las maniobras con gran delicadeza.",
-                "Con el suelo mojado las condiciones cambian completamente y nuestro manejo debe adaptarse a ellas o de lo contrario tendremos sorpresas desagradables. Recuerda tener precaución y el equipo adecuado",
-                "Lo ideal es que siempre estemos preparados para cuando la lluvia aparezca. Llevar constantemente el impermeable puede ser en algunas ocasiones engorroso, así como ponérselo cuando las primeras gotas caen, pero si vamos secos y confortables a pesar del aguacero, es una garantía de que nuestra atención estará puesta al 100% en la conducción, por el contrario, ir completamente mojados, con frío, con los pies sobre el tanque de gasolina para no mojarnos las pantorrillas y además renegando por todo esto, hará que le prestemos menor atención a la calle o carretera incrementando el riesgo de tener sorpresas desagradables y disminuyendo nuestro tiempo de reacción ante cualquier eventualidad. ",
-                "TM");
+                "Con el suelo mojado las condiciones cambian completamente y nuestro manejo debe adaptarse a ellas o de lo contrario tendremos sorpresas desagradables.",
+                "Indumentaria",
+                "Lo ideal es que siempre estemos preparados para cuando la lluvia aparezca. \n" +
+                        "Llevar constantemente el equipo adecuado hace parte de la seguridad en la vía, si vamos secos y confortables a pesar del aguacero, es una garantía de que nuestra atención estará puesta al 100% en la conducción. Asegurate de tener el equipo adecuado:\n" +
+                        "\n" +
+                        "Botas\n" +
+                        "Chaqueta\n" +
+                        "Pantalones \n" +
+                        "Guantes\n" +
+                        "Casco Adecuado",
+                "Lista",
+                "¿Quieres saber más de Tecnicas de manejo en la lluvia?:https://www.pasionbiker.com/10-tips-de-manejo-en-lluvia/");
 
         long id =  db.insert(StatusContract.TABLE_TIP, null, tip.toContentValues());
         int int_id = (int) id;
@@ -57,17 +65,36 @@ public class DbHelper extends SQLiteOpenHelper {
         db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
         type = new Type(int_id,"IM");
         db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
+
+        tip = new Tip("Ante la señal de pare, ¡PARE!",
+                "¿Sabes de cuanto es la multa por pasarse un semáforo en rojo?",
+                "No importa que debas llegar rápido, lo importante es llegar bien.",
+                "¿Sabes de cuanto es la multa por pasarse un semáforo en rojo?",
+                "Pasarse un semáforo en rojo es de las infracciones más comunes en Colombia, y de las que más causan accidentes.\n" +
+                        "\n" +
+                        "Estacionar en sitios prohibidos, transitar en Pico Placa o no parar ante un semáforo en rojo tendrá una multa de $781.200, además de esto, te retienen el vehículo hasta que pagues la multa!. \n" +
+                        "\n" +
+                        "Cuida tu bolsillo, cuida tu vida.",
+                "Normal",
+                "¿Quieres saber más acerca de las infracciones?:1Multas");
+
+        id =  db.insert(StatusContract.TABLE_TIP, null, tip.toContentValues());
+        int_id = (int) id;
         type = new Type(int_id,"IF");
         db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
         type = new Type(int_id,"N");
         db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
 
-        tip = new Tip("Ante la señal de PARE, ¡pare!",
-                "Sabes cuanto vale una multa por pasarte una señal de pare?",
-                "Deténgase totalmente antes de la línea y/o señal de pare. Hágalo con precaución porque pueden venir vehículos detrás de usted. Advierta si hay peatones sobre la cebra. Recuerda que la prudencia puede salvar vidas.",
-                "Deténgase totalmente antes de la línea y/o señal de pare. Hágalo con precaución porque pueden venir vehículos detrás de usted. Advierta si hay peatones sobre la cebra. Recuerda que la prudencia puede salvar vidas.",
-                "#",
-                "TM");
+
+        tip = new Tip("No olvides el PICO Y PLACA",
+                "El PICO y PLACA  es un compromiso con la movilidad y el medio ambiente de la ciudad. Acá todo lo que debes saber...",
+                "El PICO y PLACA es un compromiso con la movilidad y el medio ambiente de la ciudad. Se rota cada seis (6) meses aproximadamente.",
+                "¿Como se que dias tengo PICO y PLACA?",
+                "Puedes consultar la página de la secretaria de movilidad de la ciudad\n" +
+                        "\n" +
+                        "Recuerda que aplica de 7:00 a.m a 8:30 a.m. y de 5:30 p.m. a 7:00 p.m.",
+                "Normal",
+                "¿Quieres saber más?:https://www.medellin.gov.co/movilidad/de-interes/pico-placa");
 
         id =  db.insert(StatusContract.TABLE_TIP, null, tip.toContentValues());
         int_id = (int) id;
@@ -76,23 +103,73 @@ public class DbHelper extends SQLiteOpenHelper {
         type = new Type(int_id,"N");
         db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
 
-        tip = new Tip("Atento al Pico y Placa",
-                "¿Quieres que te lo recordemos?",
-                "Esta es una de las fallas más comunes, e implica inmovilización del vehículo",
-                "Esta es una de las fallas más comunes, e implica inmovilización del vehículo",
-                "Programar recordatorio",
-                "T");
+        tip = new Tip("¿Sabes que pasa luego de que te multan?",
+                "Conoce cómo pueden sancionar y qué hacer si te multan",
+                "¿Alguna vez has pensado todo lo que conlleva infringir una norma de tránsito?\n" +
+                        "Además de la multa te pueden retener el vehículo o suspender e incluso cancelar tu licencia de conducción\"",
+                "Si haces el curso para infractores tienes un descuento en las multas",
+                "Para obtener el descuento, deberá realizar el curso dentro de los siguientes términos:\n" +
+                        "\n" +
+                        "Comparendos notificados en vía: 50% de descuento en el valor de la sanción, si realiza el curso y el pago dentro de los cinco (5) días hábiles siguientes a la imposición o el 25% de descuento, si realiza el curso y el pago entre los días 6 y 20 hábiles siguientes. \n" +
+                        "\n" +
+                        "Comparendos electrónicos notificados por correspondencia: 50% de descuento en el valor de la sanción, si realiza el curso y el pago entre el día 1 a 11 hábil siguiente a la fecha de notificación de la infracción o el 25% de descuento si realiza el curso y el pago entre el día 12 a 26 hábil siguiente a la fecha de notificación de la infracción.",
+                "Lista",
+                "¿Quieres saber más?:https://www.condutramitesclub.com.co/servicios/cursos-para-infractores/");
 
         id =  db.insert(StatusContract.TABLE_TIP, null, tip.toContentValues());
         int_id = (int) id;
-        type = new Type(int_id,"IM");
+        type = new Type(int_id,"IF");
+        db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
+
+        tip = new Tip("Fotomultas, ¿Que deberías saber al respecto?",
+                "Este tipo de multas se volvieron muy comunes, aquí todo lo que necesitas saber",
+                "No detenerse ante una luz roja de semáforo, conducir un vehículo con exceso de velocidad y no respetar el paso de peatones que cruzan una vía, son solo algunas de las infracciones que se sancionan con las fotodetecciones.",
+                "¿Como sé que fui multado?",
+                "Después de realizar la revisión de las imágenes captadas por las cámaras de Fotodetección, se hace conexión con el RUNT para confirmar las características del vehículo y los datos personales del propietario. Al día siguiente de la elaboración del comparendo es entregado a la empresa de correo y enviado a la dirección registrada del último propietario del vehículo. Después de recibida la Fotodetección, el ciudadano puede efectuar el pago dentro de los once (11) días hábiles siguientes y podrá obtener un descuento del cincuenta por ciento (50%) o podrá cancelar el setenta y cinco (75%) del valor de la multa, si paga dentro de los veinte seis días (26) siguientes al recibo de esta citación. En estos casos deberá asistir obligatoriamente a un curso sobre normas de tránsito.",
+                "Normal",
+                "¿Quieres saber más?:https://www.medellin.gov.co/simm/preguntas-frecuentes-fotodeteccion");
+
+        id =  db.insert(StatusContract.TABLE_TIP, null, tip.toContentValues());
+        int_id = (int) id;
+        type = new Type(int_id,"IF");
         db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
         type = new Type(int_id,"N");
         db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
 
-
-
-        //        tip = new Tip("",
+//        tip = new Tip("¿Sabes cuánto debes esperar al tránsito?",
+//                "",
+//                "",
+//                "",
+//                "",
+//                "",
+//                "¿Quieres saber más?:https://www.medellin.gov.co/simm/preguntas-frecuentes-fotodeteccion");
+//
+//        id =  db.insert(StatusContract.TABLE_TIP, null, tip.toContentValues());
+//        int_id = (int) id;
+//        type = new Type(int_id,"N");
+//        db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
+//
+//        tip = new Tip("",
+//                "",
+//                "",
+//                "",
+//                "",
+//                "",
+//                "");
+//
+//        id =  db.insert(StatusContract.TABLE_TIP, null, tip.toContentValues());
+//        int_id = (int) id;
+//        type = new Type(int_id,"TM");
+//        db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
+//        type = new Type(int_id,"IM");
+//        db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
+//        type = new Type(int_id,"IF");
+//        db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
+//        type = new Type(int_id,"N");
+//        db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
+//
+//        tip = new Tip("",
+//                "",
 //                "",
 //                "",
 //                "",

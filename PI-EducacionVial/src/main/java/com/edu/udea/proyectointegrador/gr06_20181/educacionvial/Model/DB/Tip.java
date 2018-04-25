@@ -5,15 +5,23 @@ import android.database.Cursor;
 
 public class Tip {
     int id;
-    private String  title, title2, subtitle, body, body2, type;
+    private String  title;
+    private String title2;
+    private String subtitle;
+    private String body;
+    private String body2;
+    private String type;
 
-    public Tip(String title, String title2, String subtitle, String body, String body2, String type) {
+    private String link;
+
+    public Tip(String title, String subtitle, String body, String title2, String body2, String type, String link) {
         this.title = title;
         this.title2 = title2;
         this.subtitle = subtitle;
         this.body = body;
         this.body2 = body2;
         this.type = type;
+        this.link = link;
     }
 
     public Tip(Cursor cursor) {
@@ -24,6 +32,7 @@ public class Tip {
         body = cursor.getString(cursor.getColumnIndex(StatusContract.Column_Tip.BODY));
         body2 = cursor.getString(cursor.getColumnIndex(StatusContract.Column_Tip.BODY2));
         type = cursor.getString(cursor.getColumnIndex(StatusContract.Column_Tip.TYPE));
+        link = cursor.getString(cursor.getColumnIndex(StatusContract.Column_Tip.LINK));
     }
 
     public ContentValues toContentValues() {
@@ -34,6 +43,7 @@ public class Tip {
         values.put(StatusContract.Column_Tip.BODY, body);
         values.put(StatusContract.Column_Tip.BODY2, body2);
         values.put(StatusContract.Column_Tip.TYPE, type);
+        values.put(StatusContract.Column_Tip.LINK, link);
         return values;
     }
 
@@ -93,4 +103,13 @@ public class Tip {
     public void setType(String type) {
         this.type = type;
     }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
 }

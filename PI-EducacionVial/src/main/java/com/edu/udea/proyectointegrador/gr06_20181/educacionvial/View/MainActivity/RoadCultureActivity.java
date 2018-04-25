@@ -5,22 +5,23 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.FrameLayout;
+import android.view.animation.LayoutAnimationController;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.Controller.AnimationUtils;
 import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.Controller.TipsAdapter;
 import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.Model.DB.DbHelper;
 import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.Model.DB.Tip;
@@ -32,7 +33,9 @@ public class RoadCultureActivity extends AppCompatActivity implements View.OnCli
     private DbHelper tipsDbHelper;
     private RecyclerView tipsList;
     private FloatingActionButton mAddButton;
-    boolean typeOn;
+    private boolean typeOn;
+    private Spinner spinner;
+    private LinearLayout filterRelativeLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +43,11 @@ public class RoadCultureActivity extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_road_culture);
 
 
-
         tipsList = (RecyclerView) findViewById(R.id.rv_content);
         mAddButton = (FloatingActionButton) findViewById(R.id.fab);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
+        filterRelativeLayout = (LinearLayout) findViewById(R.id.filter);
+        spinner = (Spinner) findViewById(R.id.type_spinner);
         typeOn = false;
 
 
@@ -55,21 +59,25 @@ public class RoadCultureActivity extends AppCompatActivity implements View.OnCli
         mAddButton.setOnClickListener(this);
         tipsAdapter = new TipsAdapter(null, this);
         tipsDbHelper = new DbHelper(this);
-
+        LayoutAnimationController controller = android.view.animation.AnimationUtils.loadLayoutAnimation(this, R.anim.layout_fall_down);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         tipsList.setLayoutManager(linearLayoutManager);
-
         tipsList.setAdapter(tipsAdapter);
+        tipsList.setLayoutAnimation(controller);
         tipsList.setHasFixedSize(true);
         loadTips();
+        tipsList.scheduleLayoutAnimation();
 
-
-
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.types_array, R.layout.spinner_text);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
     }
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.type:
                 CardView cardView1 = (CardView) view.findViewById(R.id.card1);
                 CardView cardView2 = (CardView) view.findViewById(R.id.card2);
@@ -79,7 +87,7 @@ public class RoadCultureActivity extends AppCompatActivity implements View.OnCli
                 TextView textView2 = (TextView) view.findViewById(R.id.textv2);
                 TextView textView3 = (TextView) view.findViewById(R.id.textv3);
                 TextView textView4 = (TextView) view.findViewById(R.id.textv4);
-                if(!typeOn){
+                if (!typeOn) {
                     cardView1.setLayoutParams(new LinearLayout.LayoutParams(
                             LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
                     textView1.setVisibility(View.VISIBLE);
@@ -93,9 +101,9 @@ public class RoadCultureActivity extends AppCompatActivity implements View.OnCli
                             LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
                     textView4.setVisibility(View.VISIBLE);
                     typeOn = true;
-                }else{
+                } else {
                     final float scale = getResources().getDisplayMetrics().density;
-                    LinearLayout.LayoutParams cardLayoutParams = new LinearLayout.LayoutParams((int)(30 * scale + 0.5f),(int)(10 * scale + 0.5f));
+                    LinearLayout.LayoutParams cardLayoutParams = new LinearLayout.LayoutParams((int) (30 * scale + 0.5f), (int) (10 * scale + 0.5f));
                     textView1.setVisibility(View.GONE);
                     cardView1.setLayoutParams(cardLayoutParams);
                     textView2.setVisibility(View.GONE);
@@ -109,7 +117,22 @@ public class RoadCultureActivity extends AppCompatActivity implements View.OnCli
                 break;
 
             case R.id.fab:
-                new NotificationLoadTask().execute();
+                //new NotificationLoadTask().execute();
+                AnimationUtils.slideLeftOpen(filterRelativeLayout);
+                mAddButton.hide();
+                spinner.setSelection(0);
+
+
+                break;
+
+            case R.id.back:
+
+                AnimationUtils.slideLeftClose(filterRelativeLayout);
+                mAddButton.show();
+                break;
+
+            case R.id.type_image:
+                spinner.performClick();
                 break;
         }
 

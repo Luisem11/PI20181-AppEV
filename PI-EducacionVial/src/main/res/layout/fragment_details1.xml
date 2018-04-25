@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:layout_marginLeft="50dp"
     android:layout_marginRight="50dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_marginTop="@dimen/activity_vertical_margin">
 
     <!--
             <TextView
@@ -17,14 +18,6 @@
                 android:textColor="?colorPrimary" />
     -->
 
-    <TextView
-        android:id="@+id/body1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        tools:text="300 20 1111" />
 
     <TextView
         android:id="@+id/title2"
@@ -41,5 +34,14 @@
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         tools:text="Abogado penalista" />
+
+    <Button
+        android:id="@+id/action"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_gravity="center"
+        android:background="@drawable/buttonshape"/>
 
 </LinearLayout>

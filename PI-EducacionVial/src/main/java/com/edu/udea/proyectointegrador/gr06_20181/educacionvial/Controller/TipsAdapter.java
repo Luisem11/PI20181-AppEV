@@ -83,6 +83,7 @@ public class TipsAdapter extends RecyclerView.Adapter<TipsAdapter.TipsViewHolder
             dbHelper = db;
 
             notifyDataSetChanged();
+
         }
     }
 
