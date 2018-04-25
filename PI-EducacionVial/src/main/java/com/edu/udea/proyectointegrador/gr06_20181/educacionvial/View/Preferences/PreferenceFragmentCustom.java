@@ -51,7 +51,6 @@ public class PreferenceFragmentCustom extends PreferenceFragmentCompat {
 
                 boolean b = preference.getSharedPreferences().getBoolean("weather", true);
                 notificateWeather(preference.getContext(), b);
-                Toast.makeText(preference.getContext(),"Clima ",Toast.LENGTH_SHORT).show();
                 break;
         }
         return super.onPreferenceTreeClick(preference);
@@ -87,20 +86,35 @@ public class PreferenceFragmentCustom extends PreferenceFragmentCompat {
 
     @SuppressLint("ServiceCast")
     public void notificateWeather(Context c, Boolean active){
-        Calendar calendar = Calendar.getInstance();
-
-        calendar.set(Calendar.HOUR_OF_DAY, 6);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
 
         Intent intent = new Intent(c, WeatherReciver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(c.getApplicationContext(),100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(c.getApplicationContext(),
+                100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) c.getSystemService(ALARM_SERVICE);
 
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),alarmManager.INTERVAL_DAY,pendingIntent);
 
-        Toast.makeText(c,"Programado",Toast.LENGTH_SHORT).show();
+        if (active){
+            Calendar calendar = Calendar.getInstance();
+
+            calendar.setTimeInMillis(System.currentTimeMillis());
+            calendar.set(Calendar.HOUR_OF_DAY, 6);
+            calendar.set(Calendar.MINUTE, 0);
+            calendar.set(Calendar.SECOND, 0);
+
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
+                    calendar.getTimeInMillis(),alarmManager.INTERVAL_DAY,pendingIntent);
+
+            Toast.makeText(c,"Programado",Toast.LENGTH_SHORT).show();
+        }else{
+
+            alarmManager.cancel(pendingIntent);
+
+            Toast.makeText(c,"Cancelado",Toast.LENGTH_SHORT).show();
+
+        }
+
+
+
 
 
     }

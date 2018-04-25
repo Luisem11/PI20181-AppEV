@@ -36,7 +36,7 @@
     <string name="codeTrafficFine">Codigo de Multa</string>
     <string name="priceTrafficFine">Precio</string>
     <string-array name="location_array">
-        <item></item>
+        <item />
         <item>Medellin</item>
         <item>Envigado</item>
         <item>Sabaneta</item>
@@ -44,7 +44,7 @@
         <item>Copacabana</item>
     </string-array>
     <string-array name="types_array">
-        <item></item>
+        <item />
         <item>Técnicas de Manejo</item>
         <item>Indumentaria</item>
         <item>Infracciones</item>
