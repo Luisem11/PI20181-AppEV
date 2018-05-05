@@ -43,6 +43,18 @@
         <item>Bello</item>
         <item>Copacabana</item>
     </string-array>
+    <string-array name="entries_list_preference">
+        <item>No activar notificaciones</item>
+        <item>Ocasionalmente</item>
+        <item>Frecuentemente</item>
+        <item>Muy Frecuentemente</item>
+    </string-array>
+    <string-array name="entryvalues_list_preference">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
     <string-array name="types_array">
         <item />
         <item>Técnicas de Manejo</item>

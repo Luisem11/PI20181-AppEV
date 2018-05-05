@@ -150,48 +150,7 @@ public class RoadCultureActivity extends AppCompatActivity implements View.OnCli
 
     }
 
-    private class NotificationLoadTask extends AsyncTask<Void, Void, Cursor> {
 
-        @Override
-        protected Cursor doInBackground(Void... voids) {
-            return tipsDbHelper.getAllTips();
-        }
-
-        @Override
-        protected void onPostExecute(Cursor cursor) {
-            if (cursor != null && cursor.getCount() > 0) {
-                cursor.moveToFirst();
-                Tip tip = new Tip(cursor);
-                presentHeadsUpNotification(Notification.VISIBILITY_PUBLIC, R.drawable.ic_not, tip.getTitle(), tip.getSubtitle(), tip.getSubtitle(), tip.getId());
-
-            } else {
-                // Mostrar empty state
-            }
-        }
-    }
-
-    private void presentHeadsUpNotification(int visibility, int icon, String title, String text, String bigtext, int id) {
-        Intent notificationIntent = new Intent(this, RCDetailsActivity.class);
-        notificationIntent.putExtra("ID", id);
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
-
-        Notification notification = new NotificationCompat.Builder(this)
-                .setCategory(Notification.CATEGORY_PROMO)
-                .setContentTitle(title)
-                .setContentText(text)
-                .setSmallIcon(icon)
-                .setAutoCancel(true)
-                .setVisibility(visibility)
-                .addAction(android.R.drawable.ic_menu_view, getString(R.string.road_education), contentIntent)
-                .setContentIntent(contentIntent)
-                .setStyle(new NotificationCompat.BigTextStyle()
-                        .bigText(bigtext))
-                .setPriority(Notification.PRIORITY_HIGH)
-                .setVibrate(new long[]{1000, 1000, 1000, 1000, 1000}).build();
-        NotificationManager notificationManager =
-                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        notificationManager.notify(2, notification);
-    }
 
     private class TipsLoadTask extends AsyncTask<Void, Void, Cursor> {
 

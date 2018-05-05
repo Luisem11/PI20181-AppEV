@@ -29,8 +29,6 @@ public class WeatherReciver extends BroadcastReceiver {
 
         c = context;
 
-        Toast.makeText(context, "Es la hora", Toast.LENGTH_SHORT).show();
-
         new HttpGetTask().execute();
 
     }
@@ -73,7 +71,7 @@ public class WeatherReciver extends BroadcastReceiver {
         protected void onPostExecute(String dataList) {
 
             result = getMessage(dataList);
-            presentHeadsUpNotification(Notification.VISIBILITY_PUBLIC, R.drawable.ic_launcherico, result[0], result[1], result[2]);
+            presentHeadsUpNotification(Notification.VISIBILITY_PUBLIC, R.drawable.ic_notification_icon, result[0], result[1], result[2]);
 
 
         }

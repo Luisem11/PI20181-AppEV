@@ -17,6 +17,14 @@
             android:title="Clima"
             />
 
+        <ListPreference
+            android:key="list_preference"
+            android:title="Tips Cultura vial"
+            android:summary="Frecuencia de notificaciones a la semana"
+            android:entries="@array/entries_list_preference"
+            android:entryValues="@array/entryvalues_list_preference"
+            android:dialogTitle="¿Que tan seguido quieres que te notifiquemos?"/>
+
     </PreferenceCategory>
 
 

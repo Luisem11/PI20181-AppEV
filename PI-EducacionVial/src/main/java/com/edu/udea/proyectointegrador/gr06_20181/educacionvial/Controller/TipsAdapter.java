@@ -127,4 +127,5 @@ public class TipsAdapter extends RecyclerView.Adapter<TipsAdapter.TipsViewHolder
             return -1;
         }
     }
+
     }

@@ -29,6 +29,12 @@ public class HelpActivity extends AppCompatActivity implements BottomNavigationV
         navigationView.setItemIconTintList(null);
         navigationView.setOnNavigationItemSelectedListener(this);
 
+        FragmentTransaction ft;
+        ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.help_container, new HelpFragment()).addToBackStack(null);
+        ft.commit();
+
+
     }
 
     @Override

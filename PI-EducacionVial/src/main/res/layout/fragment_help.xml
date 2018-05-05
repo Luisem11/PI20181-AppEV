@@ -4,10 +4,9 @@
     android:layout_height="match_parent"
     tools:context="com.edu.udea.proyectointegrador.gr06_20181.educacionvial.View.HelpFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/directory_recyclerview" />
 
 </FrameLayout>

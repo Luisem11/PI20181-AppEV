@@ -3,12 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/weather"
-        android:enabled="true"
-        android:title="@string/weather"
-        app:showAsAction="ifRoom" />
-
-    <item
         android:id="@+id/settings"
         android:enabled="true"
         android:title="@string/preference"

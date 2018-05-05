@@ -31,8 +31,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/appBarLayout"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:context="co.edu.udea.compumovil.gr01_20181.lab2.MainActivity"
-        tools:showIn="@layout/app_bar_main">
+        tools:context="co.edu.udea.compumovil.gr01_20181.lab2.MainActivity">
 
 
     </FrameLayout>
@@ -45,5 +44,5 @@
         app:itemBackground="@color/colorPrimary"
         app:itemIconTint="@color/white"
         app:itemTextColor="@color/white"
-        app:menu="@menu/menu_help" />
+        app:menu="@menu/menu_help"/>
 </RelativeLayout>

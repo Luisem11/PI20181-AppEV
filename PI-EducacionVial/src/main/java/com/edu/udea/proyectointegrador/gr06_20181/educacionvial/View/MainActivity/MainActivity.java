@@ -77,10 +77,10 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()){
-            case R.id.weather:
-
-                new HttpGetTask().execute();
-                break;
+//            case R.id.weather:
+//
+//                new HttpGetTask().execute();
+//                break;
             case R.id.settings:
                 Intent intent = new Intent(MainActivity.this, PreferenceActivity.class);
                 startActivity(intent);
