@@ -1,4 +1,4 @@
-package com.edu.udea.proyectointegrador.gr06_20181.educacionvial.View;
+package com.edu.udea.proyectointegrador.gr06_20181.educacionvial.View.MainActivity.Help;
 
 
 import android.content.Intent;
@@ -52,7 +52,9 @@ public class HelpFragment extends Fragment implements DirectoryAdapter.OnItemCli
 
 
 
-        LayoutAnimationController controller = android.view.animation.AnimationUtils.loadLayoutAnimation(this.getContext(), R.anim.layout_fall_down);
+        LayoutAnimationController controller =
+                android.view.animation.AnimationUtils
+                        .loadLayoutAnimation(this.getContext(), R.anim.layout_side_from_bottom);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getActivity().getApplication().getApplicationContext());
         directoryList.setLayoutManager(linearLayoutManager);
         directoryList.setAdapter(directoryAdapter);
@@ -70,11 +72,9 @@ public class HelpFragment extends Fragment implements DirectoryAdapter.OnItemCli
         List<Dir> listDirections = new ArrayList<>();
         listDirections.add(new Dir("Bomberos","tel:119","Call","Llamar a los bomberos"));
         listDirections.add(new Dir("Tránsito","tel:125","Call","Llamar a el transito"));
-        listDirections.add(new Dir("Policía","tel: 112","Call","Llamar a Policia "));
+        listDirections.add(new Dir("Policía","tel:112","Call","Llamar a Policia "));
         listDirections.add(new Dir("Cruz Roja","tel:(+57) 232 0053","Call","Llamar a la Cruz Roja "));
         //listDirections.add(new Dir("","","","Llamar a  "));
-
-
         directoryAdapter.swapCursor(listDirections);
     }
 

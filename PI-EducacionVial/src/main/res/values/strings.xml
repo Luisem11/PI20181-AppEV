@@ -35,6 +35,9 @@
     <string name="descriptionTrafficFine">Descripción</string>
     <string name="codeTrafficFine">Codigo de Multa</string>
     <string name="priceTrafficFine">Precio</string>
+    <string name="to_do_accident">Que hacer en caso de un accidente</string>
+    <string name="accident_case">Pasos a seguir encaso de Accidente</string>
+    <string name="numbers">Números de Interés</string>
     <string-array name="location_array">
         <item />
         <item>Medellin</item>

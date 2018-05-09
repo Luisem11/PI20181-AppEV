@@ -1,4 +1,4 @@
-package com.edu.udea.proyectointegrador.gr06_20181.educacionvial.View;
+package com.edu.udea.proyectointegrador.gr06_20181.educacionvial.View.MainActivity.Help;
 
 
 import android.os.Bundle;
@@ -12,10 +12,10 @@ import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AccidentsFragment extends Fragment {
+public class GottenTrafficFineFragment extends Fragment {
 
 
-    public AccidentsFragment() {
+    public GottenTrafficFineFragment() {
         // Required empty public constructor
     }
 
@@ -24,7 +24,7 @@ public class AccidentsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_accidents, container, false);
+        return inflater.inflate(R.layout.fragment_gotten_traffic_fine, container, false);
     }
 
 }

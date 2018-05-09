@@ -1,4 +1,4 @@
-package com.edu.udea.proyectointegrador.gr06_20181.educacionvial.View;
+package com.edu.udea.proyectointegrador.gr06_20181.educacionvial.View.MainActivity.Help;
 
 
 import android.os.Bundle;

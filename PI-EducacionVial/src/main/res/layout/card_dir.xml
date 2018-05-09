@@ -1,50 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_view"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="5dp">
 
-    <RelativeLayout
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical">
+        <ImageView
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:src="@drawable/ic_siren"
+            android:id="@+id/logo_dir"
+            android:padding="10dp"
+            android:scaleType="fitCenter"/>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="@dimen/activity_horizontal_margin">
-
+        android:orientation="vertical"
+        android:layout_marginLeft="16dp">
 
         <TextView
             android:id="@+id/title_dir"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
             android:hint="Title"
             android:textStyle="bold"
-            android:textSize="30sp"
-            android:gravity="center"/>
+            android:textSize="20sp"/>
 
         <TextView
             android:id="@+id/description_dir"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/title_dir"
             android:hint="Description"
-            android:longClickable="true"
-            android:inputType="textMultiLine"
             android:textColor="@android:color/darker_gray"/>
 
 
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="end"
+        android:paddingEnd="16dp">
+
 
         <ImageButton
+
             android:id="@+id/action_dir"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true"
-            android:gravity="center"
-            android:elevation="@dimen/cardview_default_elevation"
-            android:src="@drawable/ic_signals" />
+            android:elevation="4dp"
+            android:scaleType="fitCenter"
+            android:padding="5dp"
+            android:src="@drawable/ic_call"
+            android:background="@android:color/transparent"/>
 
 
-    </RelativeLayout>
 
-</android.support.v7.widget.CardView>
+    </LinearLayout>
+
+</LinearLayout>
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="6dp">
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        />
+</LinearLayout>
+
+</LinearLayout>
