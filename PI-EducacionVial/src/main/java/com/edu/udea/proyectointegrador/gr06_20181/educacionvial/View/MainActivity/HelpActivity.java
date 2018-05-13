@@ -28,11 +28,27 @@ public class HelpActivity extends AppCompatActivity implements BottomNavigationV
         BottomNavigationView navigationView =  findViewById(R.id.bottom_navigation);
         navigationView.setItemIconTintList(null);
         navigationView.setOnNavigationItemSelectedListener(this);
+        navigationView.setSelectedItemId(R.id.action_help);
 
-        FragmentTransaction ft;
-        ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.help_container, new HelpFragment()).addToBackStack(null);
-        ft.commit();
+        if (getIntent().getExtras()!= null){
+            switch (getIntent().getExtras().getString("action")){
+                case("3"):
+                    FragmentTransaction ft;
+                    ft = getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.help_container, new TrafficFineFragment());
+                    ft.commit();
+                    navigationView.setSelectedItemId(R.id.action_traffic_fines);
+
+            }
+
+        }else{
+
+            FragmentTransaction ft;
+            ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.help_container, new HelpFragment());
+            ft.commit();
+        }
+
 
 
     }

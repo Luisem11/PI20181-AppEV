@@ -4,19 +4,19 @@
     <item
         android:id="@+id/action_help"
         android:enabled="true"
-        android:icon="@drawable/ic_help_1"
+        android:icon="@drawable/ic_heart_without_b"
         android:title="@string/help"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
     <item
         android:id="@+id/action_accidents"
         android:enabled="true"
-        android:icon="@drawable/ic_help_2"
+        android:icon="@drawable/ic_accident_without_b"
         android:title="@string/accidents"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
     <item
         android:id="@+id/action_traffic_fines"
         android:enabled="true"
-        android:icon="@drawable/ic_help_3"
+        android:icon="@drawable/ic_book"
         android:title="@string/multas"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
 </menu>

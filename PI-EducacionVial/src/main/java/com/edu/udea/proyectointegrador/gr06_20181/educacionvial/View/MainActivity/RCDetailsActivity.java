@@ -18,7 +18,7 @@ public class RCDetailsActivity extends AppCompatActivity implements AppBarLayout
 
     private int TipId;
     private CollapsingToolbarLayout collapsingToolbarLayout;
-    private DbHelper mLawyersDbHelper;
+    private DbHelper mTipsDbHelper;
     private AppBarLayout appBarLayout;
     private TextView titleTextView, body1TextView;
 
@@ -36,7 +36,7 @@ public class RCDetailsActivity extends AppCompatActivity implements AppBarLayout
 //        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
         titleTextView = (TextView) findViewById(R.id.title1);
         body1TextView = (TextView) findViewById(R.id.body1);
-        mLawyersDbHelper = new DbHelper(this);
+        mTipsDbHelper = new DbHelper(this);
         title = "";
 
 
@@ -52,7 +52,7 @@ public class RCDetailsActivity extends AppCompatActivity implements AppBarLayout
     }
 
     private void loadTip() {
-        new GetLawyerByIdTask().execute();
+        new GetTipByIdTask().execute();
     }
 
     private void showTip(Tip tip) {
@@ -90,11 +90,11 @@ public class RCDetailsActivity extends AppCompatActivity implements AppBarLayout
 
     }
 
-    private class GetLawyerByIdTask extends AsyncTask<Void, Void, Cursor> {
+    private class GetTipByIdTask extends AsyncTask<Void, Void, Cursor> {
 
         @Override
         protected Cursor doInBackground(Void... voids) {
-            return mLawyersDbHelper.getTipById(TipId);
+            return mTipsDbHelper.getTipById(TipId);
         }
 
         @Override

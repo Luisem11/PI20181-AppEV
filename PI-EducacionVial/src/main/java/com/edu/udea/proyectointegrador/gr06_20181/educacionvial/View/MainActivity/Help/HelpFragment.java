@@ -72,8 +72,10 @@ public class HelpFragment extends Fragment implements DirectoryAdapter.OnItemCli
         List<Dir> listDirections = new ArrayList<>();
         listDirections.add(new Dir("Bomberos","tel:119","Call","Llamar a los bomberos"));
         listDirections.add(new Dir("Tránsito","tel:125","Call","Llamar a el transito"));
-        listDirections.add(new Dir("Policía","tel:112","Call","Llamar a Policia "));
-        listDirections.add(new Dir("Cruz Roja","tel:(+57) 232 0053","Call","Llamar a la Cruz Roja "));
+        listDirections.add(new Dir("Policía","tel:112","Call","Llamar a Policía"));
+        listDirections.add(new Dir("Cruz Roja","tel:(+57) 232 0053","Call","Llamar a la Cruz Roja"));
+        listDirections.add(new Dir("Policía de Carretera","tel:767","Call","Llamar a Policía de Carretera"));
+        listDirections.add(new Dir("","","","Llamar a  "));
         //listDirections.add(new Dir("","","","Llamar a  "));
         directoryAdapter.swapCursor(listDirections);
     }

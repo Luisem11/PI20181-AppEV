@@ -45,11 +45,15 @@ public class Details1Fragment extends Fragment {
 
         title2TextView = (TextView) view.findViewById(R.id.title2);
         body2TextView = (TextView) view.findViewById(R.id.body2);
-
         Button button = view.findViewById(R.id.action);
+
         StringBuilder buttonText = new StringBuilder();
         final StringBuilder link = new StringBuilder();
         String action = tip.getLink();
+        if (action.equals("null")){
+            button.setVisibility(View.GONE);
+            return  view;
+        }
         Character a;
         Boolean b= true;
         for (int i = 0; i<action.length(); i++){
@@ -74,6 +78,7 @@ public class Details1Fragment extends Fragment {
                 switch (link.charAt(0)){
                     case '1':
                         intent = new Intent(view.getContext(), HelpActivity.class);
+                        intent.putExtra("action", "3");
                         break;
                     case '2':
                         intent = new Intent(view.getContext(), MainActivity.class);

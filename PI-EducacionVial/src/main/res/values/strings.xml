@@ -36,8 +36,12 @@
     <string name="codeTrafficFine">Codigo de Multa</string>
     <string name="priceTrafficFine">Precio</string>
     <string name="to_do_accident">Que hacer en caso de un accidente</string>
-    <string name="accident_case">Pasos a seguir encaso de Accidente</string>
+    <string name="accident_case">Pasos a seguir en caso de Accidente</string>
     <string name="numbers">Números de Interés</string>
+    <string name="game_description">Educación vial interactiva</string>
+    <string name="rules_description">Manual reglas para la seguridad vial</string>
+    <string name="help_description">Información sobre accidentes y multas</string>
+    <string name="road_culture_description">Tips de como comportarse en la vía</string>
     <string-array name="location_array">
         <item />
         <item>Medellin</item>

@@ -56,7 +56,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Check your bank activities"
+                        android:text="@string/road_culture_description"
                         android:padding="5dp"
                         android:textColor="@android:color/darker_gray"/>
 
@@ -78,8 +78,8 @@
                     <ImageView
                         android:layout_width="64dp"
                         android:layout_height="64dp"
-                        android:background="@drawable/circleshape"
-                        android:src="@drawable/ic_help_1"
+                        android:background="@drawable/ic_heart"
+                        android:src="@drawable/ic_line"
                         android:padding="10dp"/>
                     <TextView
                         android:layout_width="wrap_content"
@@ -96,7 +96,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Check your bank activities"
+                        android:text="@string/help_description"
                         android:padding="5dp"
                         android:textColor="@android:color/darker_gray"/>
 
@@ -144,7 +144,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Check your bank activities"
+                        android:text="@string/rules_description"
                         android:padding="5dp"
                         android:textColor="@android:color/darker_gray"/>
 
@@ -189,7 +189,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:padding="5dp"
-                        android:text="Check your bank activities"
+                        android:text="@string/game_description"
                         android:textColor="@android:color/darker_gray" />
 
                 </LinearLayout>

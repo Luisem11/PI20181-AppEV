@@ -149,25 +149,20 @@ public class DbHelper extends SQLiteOpenHelper {
 //        type = new Type(int_id,"N");
 //        db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
 //
-//        tip = new Tip("",
-//                "",
-//                "",
-//                "",
-//                "",
-//                "",
-//                "");
-//
-//        id =  db.insert(StatusContract.TABLE_TIP, null, tip.toContentValues());
-//        int_id = (int) id;
-//        type = new Type(int_id,"TM");
-//        db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
-//        type = new Type(int_id,"IM");
-//        db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
-//        type = new Type(int_id,"IF");
-//        db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
-//        type = new Type(int_id,"N");
-//        db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
-//
+        tip = new Tip("¡Cuidado donde parqueas!",
+                "¿Quieres evitar ser multado por dejar tu vehículo en una zona prohibidas?",
+                "El aparcar en una zona prohibida o que no cumple con los requisitos para esta función, puede no solo acarrear grandes multas, sino también ocasionar accidentes, Ten mucho cuidado donde dejas tu vehículo!",
+                "¿Dónde no me puedo estacionar?",
+                "Está completamente prohibido estacionar vehículos sobe andenes, zonas verdes o sobre espacio público destinado para peatones. Tampoco podrás estacionar tu automóvil en autopistas, zonas de seguridad o en medio de un cruce. Evita estacionar en lugares destinados para el transporte público y tampoco en los carriles destinados especialmente para la circulación de estos. Y para evitar, en caso de una emergencia, retrasar a los organismos de socorro, no dejes tu auto al lado de un hidrante.",
+                "N",
+                "null");
+
+        id =  db.insert(StatusContract.TABLE_TIP, null, tip.toContentValues());
+        int_id = (int) id;
+        db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
+        type = new Type(int_id,"IF");
+        db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
+
 //        tip = new Tip("",
 //                "",
 //                "",
