@@ -54,7 +54,7 @@ public class LocationPreferenceDialogFragmentCompat extends PreferenceDialogFrag
 
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(view.getContext(),
-                R.array.location_array, R.layout.spinner_item);
+                R.array.location_array, R.layout.item_spinner);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);   //Set a default layout for items
         spinner.setAdapter(adapter);

@@ -9,8 +9,7 @@
         android:id="@+id/cv_near_tutors"
         android:layout_width="match_parent"
         android:layout_height="130dp"
-        android:clickable="true"
-        android:foreground="?android:attr/selectableItemBackground">
+        android:background="@android:color/white">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,9 +21,8 @@
                 android:id="@+id/photo_profile"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:background="@drawable/circleshape"
+                android:background="@drawable/ic_call2"
                 android:padding="7dp"
-                android:src="@drawable/ic_fire"
                 android:scaleType="fitXY"/>
 
             <TextView

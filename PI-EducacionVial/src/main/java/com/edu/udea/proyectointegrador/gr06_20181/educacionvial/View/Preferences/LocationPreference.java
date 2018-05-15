@@ -22,7 +22,7 @@ public class LocationPreference extends DialogPreference {
     /**
      * Resource of the dialog layout
      */
-    private int mDialogLayoutResId = R.layout.preference_dialog_config;
+    private int mDialogLayoutResId = R.layout.dialog_location_preference;
 
     public LocationPreference(Context context) {
         // Delegate to other constructor

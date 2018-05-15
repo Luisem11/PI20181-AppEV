@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/preference"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="5dp"
+    >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_marginLeft="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:layout_marginLeft="16dp">
+
+            <TextView
+                android:id="@+id/pref_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Title"
+                android:textSize="17sp"
+                android:textColor="@android:color/black"/>
+
+            <TextView
+                android:layout_marginTop="0dp"
+                android:id="@+id/pref_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Descripcion"
+                android:textColor="@android:color/darker_gray"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:gravity="end|center_vertical"
+            android:paddingEnd="16dp"
+            android:layout_gravity="right">
+
+
+            <ImageButton
+                android:id="@+id/pref_icon"
+                android:visibility="gone"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:elevation="4dp"
+                android:scaleType="fitCenter"
+                android:padding="5dp"
+                android:src="@drawable/ic_call"
+                android:background="@android:color/transparent"/>
+
+
+            <CheckBox
+                android:visibility="gone"
+                android:id="@+id/pref_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

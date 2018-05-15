@@ -42,6 +42,12 @@
     <string name="rules_description">Manual reglas para la seguridad vial</string>
     <string name="help_description">Información sobre accidentes y multas</string>
     <string name="road_culture_description">Tips de como comportarse en la vía</string>
+    <string name="location">Ubicación</string>
+    <string name="notifications_">Notificaciones</string>
+    <string name="m_1">¿Te multaron?</string>
+    <string name="m_2">Conoce las Infracciones</string>
+    <string name="m_3">¿Como sé si fui multado?</string>
+    <string name="traffic_fine_case">¿Que hacer luego de ser multado?</string>
     <string-array name="location_array">
         <item />
         <item>Medellin</item>
