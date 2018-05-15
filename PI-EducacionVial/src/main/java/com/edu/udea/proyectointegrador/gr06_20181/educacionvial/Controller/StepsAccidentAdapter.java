@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,7 +34,7 @@ public class StepsAccidentAdapter extends RecyclerView.Adapter<StepsAccidentAdap
                                          int viewType) {
         // create a new view
 
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.steps_accident_card, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_steps_accident, parent, false);
 
         ViewHolder vh = new ViewHolder(v, stepList);
         return vh;
@@ -66,6 +65,7 @@ public class StepsAccidentAdapter extends RecyclerView.Adapter<StepsAccidentAdap
                     }
                 });
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
                 dialog.show();
             }
         });

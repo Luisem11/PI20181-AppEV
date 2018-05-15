@@ -27,7 +27,7 @@ public class TrafficFineFragment extends Fragment implements View.OnClickListene
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private List<TrafficFine> trafficFines;
-    private CardView frecuentTrafficFine, trafficFineGotten;
+    private CardView stepsTrafficFine, knowTrafficFine, mTrafficFine;
 
     public TrafficFineFragment() {
         // Required empty public constructor
@@ -39,26 +39,28 @@ public class TrafficFineFragment extends Fragment implements View.OnClickListene
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_traffic_fine, container, false);
+//
+//        trafficFines = new ArrayList<>();
+//        trafficFines = showTrafficFine((ArrayList) trafficFines);
 
-        trafficFines = new ArrayList<>();
-        trafficFines = showTrafficFine((ArrayList) trafficFines);
+        stepsTrafficFine = view.findViewById(R.id.action1);
+        knowTrafficFine = view.findViewById(R.id.action2);
+        mTrafficFine = view.findViewById(R.id.action3);
+        stepsTrafficFine.setOnClickListener(this);
+        knowTrafficFine.setOnClickListener(this);
+        mTrafficFine.setOnClickListener(this);
 
-        frecuentTrafficFine = view.findViewById(R.id.card_view_frecuent_trafficfine);
-        trafficFineGotten = view.findViewById(R.id.traffic_fine_frequent_card_detail);
-        frecuentTrafficFine.setOnClickListener(this);
-        trafficFineGotten.setOnClickListener(this);
-
-
-        mRecyclerView = view.findViewById(R.id.rv_content_traffic_fine);
-        mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new GridLayoutManager(getContext(),4);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-
-        // specify an adapter (see also next example)
-
-
-        mAdapter = new TrafficFineAdapter(trafficFines);
-        mRecyclerView.setAdapter(mAdapter);
+//
+//        mRecyclerView = view.findViewById(R.id.rv_content_traffic_fine);
+//        mRecyclerView.setHasFixedSize(true);
+//        mLayoutManager = new GridLayoutManager(getContext(),4);
+//        mRecyclerView.setLayoutManager(mLayoutManager);
+//
+//        // specify an adapter (see also next example)
+//
+//
+//        mAdapter = new TrafficFineAdapter(trafficFines);
+//        mRecyclerView.setAdapter(mAdapter);
 
         return view;
     }
@@ -70,15 +72,18 @@ public class TrafficFineFragment extends Fragment implements View.OnClickListene
         FragmentTransaction ft;
 
         switch (view.getId()){
-            case R.id.card_view_frecuent_trafficfine:
+            case R.id.action1:
+                ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.help_container, new GottenTrafficFineFragment()).addToBackStack(null);
+                ft.commit();
+                break;
+            case R.id.action2:
                 ft = getFragmentManager().beginTransaction();
                 ft.replace(R.id.help_container, new FrecuentTrafficFineFragment()).addToBackStack(null);
                 ft.commit();
                 break;
-            case R.id.traffic_fine_frequent_card_detail:
-                ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.help_container, new GottenTrafficFineFragment()).addToBackStack(null);
-                ft.commit();
+            case R.id.action3:
+
                 break;
         }
     }

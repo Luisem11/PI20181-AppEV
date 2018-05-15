@@ -79,9 +79,5 @@ public class HelpActivity extends AppCompatActivity implements BottomNavigationV
         return true;
     }
 
-    @Override
-    public void onBackPressed() {
-        finish();
-        super.onBackPressed();
-    }
+
 }

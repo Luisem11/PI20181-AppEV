@@ -1,21 +1,17 @@
 package com.edu.udea.proyectointegrador.gr06_20181.educacionvial.Controller;
 
-import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.Model.DB.DbHelper;
 import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.Model.DB.StatusContract;
 import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.R;
-import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.View.MainActivity.RCDetailsActivity;
 
 
 public class TipsAdapter extends RecyclerView.Adapter<TipsAdapter.TipsViewHolder> {
@@ -35,7 +31,7 @@ public class TipsAdapter extends RecyclerView.Adapter<TipsAdapter.TipsViewHolder
 
     @Override
     public TipsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_tip, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_tip, parent, false);
         TipsViewHolder tvh = new TipsViewHolder(view);
         return tvh;
     }

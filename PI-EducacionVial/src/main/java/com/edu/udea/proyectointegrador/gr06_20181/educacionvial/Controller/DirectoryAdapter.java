@@ -41,7 +41,7 @@ public class DirectoryAdapter
 
     @Override
     public DirectoryViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_dir, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_directory, parent, false);
         DirectoryAdapter.DirectoryViewHolder tvh = new DirectoryAdapter.DirectoryViewHolder(view);
         return tvh;
     }
