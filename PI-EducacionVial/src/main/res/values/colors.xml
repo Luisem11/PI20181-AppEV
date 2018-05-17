@@ -10,4 +10,5 @@
     <color name="graylight">#FAFAFA</color>
     <color name="lightgray">#ededed</color>
     <color name="colorWhite">#ffffff</color>
+    <color name="red">#a94442</color>
 </resources>

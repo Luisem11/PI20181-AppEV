@@ -9,8 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.LayoutAnimationController;
+import android.widget.ImageView;
+import android.widget.Toast;
 
-import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.Controller.StepsAccidentAdapter;
+import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.Controller.AnimationUtils;
+import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.Controller.StepsAdapter;
 import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.Model.Step;
 import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.R;
 
@@ -26,6 +29,8 @@ public class GottenTrafficFineFragment extends Fragment {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private List<Step> stepsAccidentList;
+    private ImageView cv;
+    private int count;
 
 
 
@@ -41,23 +46,34 @@ public class GottenTrafficFineFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_gotten_traffic_fine, container, false);
 
+
+        count = 0;
+
         stepsAccidentList = new ArrayList<>();
         stepsAccidentList = showTrafficFine((ArrayList) stepsAccidentList);
 
         mRecyclerView = view.findViewById(R.id.rv_content_steps_traffic_fine);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getContext());
-        LayoutAnimationController controller =
-                android.view.animation.AnimationUtils.
-                        loadLayoutAnimation(this.getContext(), R.anim.layout_fall_down);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setLayoutAnimation(controller);
+        cv = view.findViewById(R.id.cv_);
+        cv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(count==8){
+                    Toast.makeText(view.getContext(),"Hola Lis :B", Toast.LENGTH_LONG).show();
+
+                    count=0;
+                }
+                count++;
+            }
+        });
 
 
         // specify an adapter (see also next example)
 
 
-        mAdapter = new StepsAccidentAdapter(stepsAccidentList);
+        mAdapter = new StepsAdapter(stepsAccidentList, getContext());
         mRecyclerView.setAdapter(mAdapter);
 
         return view;
@@ -65,12 +81,12 @@ public class GottenTrafficFineFragment extends Fragment {
 
     public ArrayList showTrafficFine(ArrayList stpsList){
 
-        stpsList.add(new Step(R.drawable.ic_1, "Llama inmediatamente a las autoridades que pueden ayudarte. Línea de Emergencias, si es del caso, a la Policía de Carreteras y a tu aseguradora. Durante la conversación, describe detalladamente qué pasó en el accidente de tránsito y la ubicación exacta donde sucedió", "Llama siempre a las autoridades de tránsito", "tel:123", "Llama a Emergencias"));
-        stpsList.add(new Step(R.drawable.ic_2, "Es útil para tener evidencia de lo sucedido, para saber quién tuvo la culpa y cuantos vehículos estuvieron involucrados en el accidente", "Toma fotografías de lo ocurrido", "null", "null"));
-        stpsList.add(new Step(R.drawable.ic_3, "Es la única manera que tienen las autoridades de tránsito de saber lo que    realmente ocurrió. Espera a que las autoridades lleguen al sitio del accidente", "No muevas tu vehículo del lugar del accidente", "null", "null"));
-        stpsList.add(new Step(R.drawable.ic_4, "Los testigos son útiles para ayudar a determinar cuál fue la causa real del accidente porque puede que ninguno de los involucrados haya tenido la culpa", "Busca personas que presenciaron el accidente", "null", "null"));
-        stpsList.add(new Step(R.drawable.ic_5, "• Cédula\n• Licencia de conducción\n• Matrícula del auto\n• SOAT\n• Revisión tecnico-mecánica\n", "Ten a la mano tus documentos", "null", "null"));
-        stpsList.add(new Step(R.drawable.ic_6, "Si el presunto infractor no comparece en el término de tres días hábiles, la multa que se impone se incrementa hasta en un 100 por ciento debido a la ausencia de la persona en ese término", "Ten presente la fecha de la audiencia en el Tránsito", "null", "null"));
+        stpsList.add(new Step(R.drawable.ic_1, "Para esto, puedes consultar y pagar a través de una herramienta virtual conocida como SIMIT. Solo necesitas digitar el número de documento o el número de la placa","Verifica si tienes un comparendo","pag:https://consulta.simit.org.co/Simit/verificar/contenido_verificar_pago_linea.jsp","","trafficfine"));
+        stpsList.add(new Step(R.drawable.ic_2, "El comparendo hace referencia a la citación por la formulación de cargos sobre la violación de una norma de tránsito.La multa es la sanción monetaria impuesta a los infractores que se refleja en el pago de salarios mínimos diarios legales vigentes","Diferencia entre Multa y Comparendo","","","trafficfine"));
+        stpsList.add(new Step(R.drawable.ic_3, "Para esto, debes dirigirte ante la autoridad competente dentro de los siguientes 5 días hábiles después de recibir la notificación de la infracción","Objeta si no estás de acuerdo","null","null","trafficfine"));
+        stpsList.add(new Step(R.drawable.ic_4, "Para esto dirígete a una sucursal de los siguientes bancos \n" + "•Banco de Occidente\n" + "•Banco caja social\n" + "Siempre y cuando se presente el recibo de pago y se realice en efectivo, se puede cancelar en los almacenes Éxito, Éxito Express, Carulla, Carulla Express y Surtimax. También te puedes dirigir a  cualquier oficina de AV Villas y Davivienda","Realiza el pago de la multa de tránsito","null","null","trafficfine"));
+        stpsList.add(new Step(R.drawable.ic_5, "Si no realizas el pago a tiempo, la autoridad de tránsito tiene hasta seis meses para notificar al infractor sobre el cobro coactivo, lo cual implica el embargo de algunos de los bienes del infractor, problemas crediticios y perjuicios a su hoja de vida","No olvides pagar a tiempo! ","null","null","trafficfine"));
+
 
         return stpsList;
     }

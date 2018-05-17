@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -6,145 +6,157 @@
     android:orientation="vertical"
     tools:context="com.edu.udea.proyectointegrador.gr06_20181.educacionvial.View.MainActivity.Help.TrafficFineFragment">
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/cv_near_tutors"
+
+    <LinearLayout
+        android:id="@+id/traffic_fine_layout"
         android:layout_width="match_parent"
-        android:layout_height="130dp"
-        android:background="@android:color/white">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <android.support.v7.widget.CardView
+            android:id="@+id/cv_near_tutors"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_height="130dp"
+            android:background="@android:color/white">
 
-            <ImageView
-                android:id="@+id/photo_profile"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:background="@drawable/circleshape"
-                android:padding="7dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/ic_book" />
-
-            <TextView
-                style="@style/Base.TextAppearance.AppCompat.Title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="8dp"
-                android:text="Multas e Infracciones"
-                android:textColor="@android:color/background_dark"
-                android:textSize="18sp" />
-
-            <View
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_margin="5dp"
-                android:background="@color/lightgray" />
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
 
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
+                <ImageView
+                    android:id="@+id/photo_profile"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/circleshape"
+                    android:padding="7dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_book" />
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/action1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
-        android:clickable="true"
-        android:elevation="@dimen/cardview_default_elevation"
-        android:focusable="true"
-        app:cardBackgroundColor="#a94442"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp"
-        app:cardUseCompatPadding="true">
+                <TextView
+                    style="@style/Base.TextAppearance.AppCompat.Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="8dp"
+                    android:text="Multas e Infracciones"
+                    android:textColor="@android:color/background_dark"
+                    android:textSize="18sp" />
 
-        <RelativeLayout
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="5dp"
+                    android:background="@color/lightgray" />
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/action1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/activity_horizontal_margin">
+            android:layout_gravity="center"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:clickable="true"
+            android:elevation="@dimen/cardview_default_elevation"
+            android:focusable="true"
+            app:cardBackgroundColor="#a94442"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            app:cardUseCompatPadding="true">
 
-            <TextView
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:text="@string/m_1"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:padding="@dimen/activity_horizontal_margin">
 
-        </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:text="@string/m_1"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
-    </android.support.v7.widget.CardView>
+            </RelativeLayout>
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/action2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
-        android:clickable="true"
-        android:elevation="@dimen/cardview_default_elevation"
-        app:cardBackgroundColor="#a94442"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp"
-        app:cardUseCompatPadding="true">
+        </android.support.v7.widget.CardView>
 
-        <RelativeLayout
+        <android.support.v7.widget.CardView
+            android:id="@+id/action2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/activity_horizontal_margin">
+            android:layout_gravity="center"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:clickable="true"
+            android:elevation="@dimen/cardview_default_elevation"
+            app:cardBackgroundColor="#a94442"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            app:cardUseCompatPadding="true">
 
-            <TextView
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:text="@string/m_2"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:padding="@dimen/activity_horizontal_margin">
 
-        </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:text="@string/m_2"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
-    </android.support.v7.widget.CardView>
+            </RelativeLayout>
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/action3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
-        android:clickable="true"
-        android:elevation="@dimen/cardview_default_elevation"
-        app:cardBackgroundColor="#a94442"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp"
-        app:cardUseCompatPadding="true">
+        </android.support.v7.widget.CardView>
 
-        <RelativeLayout
+        <android.support.v7.widget.CardView
+            android:id="@+id/action3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/activity_horizontal_margin">
+            android:layout_gravity="center"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:clickable="true"
+            android:elevation="@dimen/cardview_default_elevation"
+            app:cardBackgroundColor="#a94442"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            app:cardUseCompatPadding="true">
 
-            <TextView
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:text="@string/m_3"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:padding="@dimen/activity_horizontal_margin">
 
-        </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:text="@string/m_3"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
-    </android.support.v7.widget.CardView>
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+
+</android.support.v4.widget.NestedScrollView>
 
     <!--<ScrollView-->
     <!--android:id="@+id/scrollView2"-->
@@ -166,5 +178,3 @@
     <!--android:orientation="horizontal" />-->
 
     <!--</ScrollView>-->
-
-</LinearLayout>

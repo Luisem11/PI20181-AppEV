@@ -1,7 +1,15 @@
 package com.edu.udea.proyectointegrador.gr06_20181.educacionvial.Controller;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.animation.ArgbEvaluator;
+import android.animation.ValueAnimator;
+import android.annotation.TargetApi;
+import android.content.Context;
+import android.os.Build;
+import android.os.Parcelable;
+import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 
 /**
  * Created by luisernesto on 24/04/18.
@@ -101,6 +109,24 @@ public final class AnimationUtils {
                         view.setAlpha(1.f);
                     }
                 });
+    }
+
+    public static void circularReveal(View parent, View view, int duration){
+        parent.setVisibility(View.GONE);
+        int x = view.getLeft() +
+                (view.getWidth() / 2);
+        int y = view.getTop() +
+                (view.getHeight() / 2);
+
+        int endRadius = (int) Math.hypot(parent.getWidth(), parent.getHeight());
+
+
+        Animator anim = ViewAnimationUtils.
+                createCircularReveal(parent, x, y, 0, endRadius);
+        anim.setDuration(duration);
+        parent.setVisibility(View.VISIBLE);
+        anim.start();
+
     }
 
 }

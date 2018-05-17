@@ -7,15 +7,16 @@ package com.edu.udea.proyectointegrador.gr06_20181.educacionvial.Model;
 public class Step {
     
     private int number;
-    private String title, description, action, extra;
+    private String title, description, action, extra, type;
 
 
-    public Step(int number, String description, String title, String action, String extra) {
+    public Step(int number, String description, String title, String action, String extra, String type) {
         this.number = number;
         this.title = title;
         this.description = description;
         this.action = action;
         this.extra = extra;
+        this.type = type;
     }
 
     public String getDescription() {
@@ -56,5 +57,13 @@ public class Step {
 
     public void setExtra(String extra) {
         this.extra = extra;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

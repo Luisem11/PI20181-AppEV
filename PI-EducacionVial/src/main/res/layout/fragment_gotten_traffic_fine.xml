@@ -1,25 +1,18 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="com.edu.udea.proyectointegrador.gr06_20181.educacionvial.View.MainActivity.Help.GottenTrafficFineFragment">
 
-    <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <android.support.v7.widget.CardView
-                android:id="@+id/cv_near_tutors"
                 android:layout_width="match_parent"
                 android:layout_height="130dp"
-                android:clickable="true"
                 android:foreground="?android:attr/selectableItemBackground">
 
                 <LinearLayout
@@ -29,7 +22,7 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/photo_profile"
+                        android:id="@+id/cv_"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:background="@drawable/ic_accident"
@@ -67,6 +60,4 @@
         </LinearLayout>
 
 
-    </ScrollView>
-
-</LinearLayout>
+</android.support.v4.widget.NestedScrollView>

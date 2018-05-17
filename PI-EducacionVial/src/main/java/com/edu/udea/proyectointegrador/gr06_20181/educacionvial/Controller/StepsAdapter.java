@@ -1,6 +1,7 @@
 package com.edu.udea.proyectointegrador.gr06_20181.educacionvial.Controller;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.CardView;
@@ -20,12 +21,15 @@ import java.util.List;
  * Created by user on 20/04/2018.
  */
 
-public class StepsAccidentAdapter extends RecyclerView.Adapter<StepsAccidentAdapter.ViewHolder> {
+public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.ViewHolder> {
 
     public List<Step> stepList;
+    private Context context;
 
-    public StepsAccidentAdapter(List<Step> stepList) {
+
+    public StepsAdapter(List<Step> stepList, Context context) {
         this.stepList = stepList;
+        this.context = context;
     }
 
     // Create new views (invoked by the layout manager)
@@ -34,7 +38,7 @@ public class StepsAccidentAdapter extends RecyclerView.Adapter<StepsAccidentAdap
                                          int viewType) {
         // create a new view
 
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_steps_accident, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_steps, parent, false);
 
         ViewHolder vh = new ViewHolder(v, stepList);
         return vh;
@@ -44,15 +48,30 @@ public class StepsAccidentAdapter extends RecyclerView.Adapter<StepsAccidentAdap
     public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.stepsImageView.setImageResource(stepList.get(position).getNumber());
         holder.descriptionTextView.setText(stepList.get(position).getTitle());
+        if (stepList.get(position).getType().equals("trafficfine")) {
+            holder.cardView.setCardBackgroundColor(context.getResources().getColor(R.color.red));
+            holder.stepsImageView.setColorFilter(context.getResources().getColor(R.color.colorWhite));
+            holder.descriptionTextView.setTextColor(context.getResources().getColor(R.color.colorWhite));
+        }
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final Dialog dialog = new Dialog(view.getContext());
                 dialog.setContentView(R.layout.dialog_detail_steps_accident);
+                CardView card = dialog.findViewById(R.id.card_dialog);
                 ImageView icon = dialog.findViewById(R.id.icon_dialog_steps);
                 ImageView close = dialog.findViewById(R.id.close_dialog_steps);
                 TextView title = dialog.findViewById(R.id.title_dialog_steps);
                 TextView body = dialog.findViewById(R.id.body_dialog_steps);
+                if (stepList.get(position).getType().equals("trafficfine")) {
+                    card.setCardBackgroundColor(context.getResources().getColor(R.color.red));
+                    icon.setColorFilter(context.getResources().getColor(R.color.colorWhite));
+                    close.setColorFilter(context.getResources().getColor(R.color.colorWhite));
+                    title.setTextColor(context.getResources().getColor(R.color.colorWhite));
+                    body.setTextColor(context.getResources().getColor(R.color.colorWhite));
+
+                }
+
 
                 icon.setImageResource(stepList.get(position).getNumber());
                 body.setText(stepList.get(position).getDescription());

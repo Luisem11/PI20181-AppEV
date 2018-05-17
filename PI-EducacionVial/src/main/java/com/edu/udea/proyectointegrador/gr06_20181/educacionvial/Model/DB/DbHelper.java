@@ -159,7 +159,6 @@ public class DbHelper extends SQLiteOpenHelper {
 
         id =  db.insert(StatusContract.TABLE_TIP, null, tip.toContentValues());
         int_id = (int) id;
-        db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
         type = new Type(int_id,"IF");
         db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
 
