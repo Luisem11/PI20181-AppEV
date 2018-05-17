@@ -5,6 +5,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -16,6 +17,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.animation.LayoutAnimationController;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -24,8 +26,12 @@ import android.widget.TextView;
 import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.Controller.AnimationUtils;
 import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.Controller.TipsAdapter;
 import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.Model.DB.DbHelper;
+import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.Model.DB.StatusContract;
 import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.Model.DB.Tip;
 import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RoadCultureActivity extends AppCompatActivity implements View.OnClickListener, TipsAdapter.OnItemClickListener {
 
@@ -68,11 +74,56 @@ public class RoadCultureActivity extends AppCompatActivity implements View.OnCli
         loadTips();
         tipsList.scheduleLayoutAnimation();
 
+        SQLiteDatabase db = new DbHelper(this).getReadableDatabase();
+
+        Cursor cursor = db.query(StatusContract.TABLE_TYPE, null, null, null, null, null, null);
+
+        List<String> subjects = new ArrayList<>();
+        subjects.add("");
+        for (boolean b = cursor.moveToFirst(); b; b = cursor.moveToNext()) {
+
+            subjects.add(cursor.getString(cursor.getColumnIndex(StatusContract.Column_Type.NAME)));
+
+        }
         // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.types_array, R.layout.spinner_text);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                R.layout.spinner_text, subjects);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);   //Set a default layout for items
+        spinner.setAdapter(adapter);
+
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+
+                switch ((int) spinner.getSelectedItemId()) {
+                    case 0:
+                        loadTips();
+                        break;
+                    case 1:
+                        new TipsFindTask().execute(1);
+                        break;
+                    case 2:
+                        new TipsFindTask().execute(2);
+                        break;
+                    case 3:
+                        new TipsFindTask().execute(3);
+                        break;
+                    case 4:
+                        new TipsFindTask().execute(4);
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
     }
 
     @Override
@@ -88,22 +139,23 @@ public class RoadCultureActivity extends AppCompatActivity implements View.OnCli
                 TextView textView3 = (TextView) view.findViewById(R.id.textv3);
                 TextView textView4 = (TextView) view.findViewById(R.id.textv4);
                 if (!typeOn) {
-                    cardView1.setLayoutParams(new LinearLayout.LayoutParams(
-                            LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                    final float scale = getResources().getDisplayMetrics().density;
+                    LinearLayout.LayoutParams cardLayoutParams = new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                    cardLayoutParams.setMargins((int) (4 * scale + 0.5f),0,0,0);
+                    cardView1.setLayoutParams(cardLayoutParams);
                     textView1.setVisibility(View.VISIBLE);
-                    cardView2.setLayoutParams(new LinearLayout.LayoutParams(
-                            LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                    cardView2.setLayoutParams(cardLayoutParams);
                     textView2.setVisibility(View.VISIBLE);
-                    cardView3.setLayoutParams(new LinearLayout.LayoutParams(
-                            LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                    cardView3.setLayoutParams(cardLayoutParams);
                     textView3.setVisibility(View.VISIBLE);
-                    cardView4.setLayoutParams(new LinearLayout.LayoutParams(
-                            LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                    cardView4.setLayoutParams(cardLayoutParams);
                     textView4.setVisibility(View.VISIBLE);
                     typeOn = true;
                 } else {
                     final float scale = getResources().getDisplayMetrics().density;
                     LinearLayout.LayoutParams cardLayoutParams = new LinearLayout.LayoutParams((int) (30 * scale + 0.5f), (int) (10 * scale + 0.5f));
+                    cardLayoutParams.setMargins((int) (4 * scale + 0.5f),0,0,0);
                     textView1.setVisibility(View.GONE);
                     cardView1.setLayoutParams(cardLayoutParams);
                     textView2.setVisibility(View.GONE);
@@ -128,6 +180,7 @@ public class RoadCultureActivity extends AppCompatActivity implements View.OnCli
             case R.id.back:
 
                 AnimationUtils.slideLeftClose(filterRelativeLayout);
+                loadTips();
                 mAddButton.show();
                 break;
 
@@ -144,6 +197,7 @@ public class RoadCultureActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onClick(TipsAdapter.TipsViewHolder holder, int idTip) {
+
         Intent intent = new Intent(this, RCDetailsActivity.class);
         intent.putExtra("ID", idTip);
         startActivity(intent);
@@ -168,5 +222,26 @@ public class RoadCultureActivity extends AppCompatActivity implements View.OnCli
             }
         }
     }
+
+    private class TipsFindTask extends AsyncTask<Integer, Void, Cursor> {
+
+
+        @Override
+        protected Cursor doInBackground(Integer... integers) {
+            return tipsDbHelper.getTipByType(integers[0]);
+        }
+
+        @Override
+        protected void onPostExecute(Cursor cursor) {
+            if (cursor != null && cursor.getCount() > 0) {
+                tipsAdapter.swapCursor(cursor, tipsDbHelper);
+            } else {
+                // Mostrar empty state
+            }
+        }
+    }
+
+
+
 
 }

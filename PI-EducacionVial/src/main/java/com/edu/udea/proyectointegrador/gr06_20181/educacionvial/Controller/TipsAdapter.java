@@ -39,25 +39,31 @@ public class TipsAdapter extends RecyclerView.Adapter<TipsAdapter.TipsViewHolder
     @Override
     public void onBindViewHolder(TipsViewHolder holder, int position) {
 
+
+        holder.cardView1.setVisibility(View.GONE);
+        holder.cardView2.setVisibility(View.GONE);
+        holder.cardView3.setVisibility(View.GONE);
+        holder.cardView4.setVisibility(View.GONE);
+
         items.moveToPosition(position);
         String s = items.getString(items.getColumnIndex(StatusContract.Column_Tip.TITLE));
         holder.personName.setText(s);
         s = items.getString(items.getColumnIndex(StatusContract.Column_Tip.SUBTITLE));
         holder.personAge.setText(s);
-        Cursor cursor = dbHelper.getTypeById(getId(position));
+        Cursor cursor = dbHelper.getTypeById(items.getInt(items.getColumnIndex(StatusContract.Column_Tip.ID)));
 
         if(cursor.moveToFirst()) {
             do {
-                if (cursor.getString(0).equals("TM")) {
+                if (cursor.getInt(cursor.getColumnIndex(StatusContract.Column_Type_Tip.ID_TYPE))==1) {
                     holder.cardView1.setVisibility(View.VISIBLE);
                 }
-                if (cursor.getString(0).equals("N")) {
+                if (cursor.getInt(cursor.getColumnIndex(StatusContract.Column_Type_Tip.ID_TYPE))==2) {
                     holder.cardView2.setVisibility(View.VISIBLE);
                 }
-                if (cursor.getString(0).equals("IM")) {
+                if (cursor.getInt(cursor.getColumnIndex(StatusContract.Column_Type_Tip.ID_TYPE))==3) {
                     holder.cardView3.setVisibility(View.VISIBLE);
                 }
-                if (cursor.getString(0).equals("IF")) {
+                if (cursor.getInt(cursor.getColumnIndex(StatusContract.Column_Type_Tip.ID_TYPE))==4) {
                     holder.cardView4.setVisibility(View.VISIBLE);
                 }
             } while (cursor.moveToNext());

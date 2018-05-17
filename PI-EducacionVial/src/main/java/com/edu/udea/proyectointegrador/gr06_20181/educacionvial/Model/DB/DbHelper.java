@@ -1,5 +1,6 @@
 package com.edu.udea.proyectointegrador.gr06_20181.educacionvial.Model.DB;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -31,10 +32,13 @@ public class DbHelper extends SQLiteOpenHelper {
 
         db.execSQL("CREATE TABLE " + StatusContract.TABLE_TYPE + " ("
                 + StatusContract.Column_Type.NAME + " TEXT NOT NULL, "
-                + StatusContract.Column_Type.IDTIP + " INTEGER NOT NULL," +
-                " CONSTRAINT PK PRIMARY KEY ( " + StatusContract.Column_Type.NAME +
-                " , " + StatusContract.Column_Type.IDTIP +" ))" );
+                + StatusContract.Column_Type.ID + " INTEGER PRIMARY KEY NOT NULL)" );
 
+        db.execSQL("CREATE TABLE " + StatusContract.TABLE_TYPE_TIP + " ("
+                + StatusContract.Column_Type_Tip.ID_TIP + " TEXT NOT NULL, "
+                + StatusContract.Column_Type_Tip.ID_TYPE + " INTEGER NOT NULL," +
+                " CONSTRAINT PK_INT_SUB PRIMARY KEY ( " + StatusContract.Column_Type_Tip.ID_TIP +
+                " , " + StatusContract.Column_Type_Tip.ID_TYPE + " ))");
 
         insertData(db);
 
@@ -42,6 +46,16 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     private void insertData(SQLiteDatabase db) {
+
+        Type type = new Type(1,"Técnicas de Manejo");
+        db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
+        type = new Type(2,"Normatividad");
+        db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
+        type = new Type(3,"Indumentaria");
+        db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
+        type = new Type(4,"Infracciones");
+        db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
+
 
 
         Tip tip = new Tip("Cuidado con el Suelo Mojado!",
@@ -61,10 +75,19 @@ public class DbHelper extends SQLiteOpenHelper {
 
         long id =  db.insert(StatusContract.TABLE_TIP, null, tip.toContentValues());
         int int_id = (int) id;
-        Type type = new Type(int_id,"TM");
-        db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
-        type = new Type(int_id,"IM");
-        db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
+
+        ContentValues values = new ContentValues();
+        values.put(StatusContract.Column_Type_Tip.ID_TIP, int_id);
+        values.put(StatusContract.Column_Type_Tip.ID_TYPE, 1);
+        db.insert(StatusContract.TABLE_TYPE_TIP, null, values);
+
+        values = new ContentValues();
+        values.put(StatusContract.Column_Type_Tip.ID_TIP, int_id);
+        values.put(StatusContract.Column_Type_Tip.ID_TYPE, 4);
+        db.insert(StatusContract.TABLE_TYPE_TIP, null, values);
+
+
+
 
         tip = new Tip("Ante la señal de pare, ¡PARE!",
                 "¿Sabes de cuanto es la multa por pasarse un semáforo en rojo?",
@@ -80,10 +103,16 @@ public class DbHelper extends SQLiteOpenHelper {
 
         id =  db.insert(StatusContract.TABLE_TIP, null, tip.toContentValues());
         int_id = (int) id;
-        type = new Type(int_id,"IF");
-        db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
-        type = new Type(int_id,"N");
-        db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
+
+        values = new ContentValues();
+        values.put(StatusContract.Column_Type_Tip.ID_TIP, int_id);
+        values.put(StatusContract.Column_Type_Tip.ID_TYPE, 2);
+        db.insert(StatusContract.TABLE_TYPE_TIP, null, values);
+
+        values = new ContentValues();
+        values.put(StatusContract.Column_Type_Tip.ID_TIP, int_id);
+        values.put(StatusContract.Column_Type_Tip.ID_TYPE, 3);
+        db.insert(StatusContract.TABLE_TYPE_TIP, null, values);
 
 
         tip = new Tip("No olvides el PICO Y PLACA",
@@ -98,10 +127,16 @@ public class DbHelper extends SQLiteOpenHelper {
 
         id =  db.insert(StatusContract.TABLE_TIP, null, tip.toContentValues());
         int_id = (int) id;
-        type = new Type(int_id,"IF");
-        db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
-        type = new Type(int_id,"N");
-        db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
+
+        values = new ContentValues();
+        values.put(StatusContract.Column_Type_Tip.ID_TIP, int_id);
+        values.put(StatusContract.Column_Type_Tip.ID_TYPE, 2);
+        db.insert(StatusContract.TABLE_TYPE_TIP, null, values);
+
+        values = new ContentValues();
+        values.put(StatusContract.Column_Type_Tip.ID_TIP, int_id);
+        values.put(StatusContract.Column_Type_Tip.ID_TYPE, 4);
+        db.insert(StatusContract.TABLE_TYPE_TIP, null, values);
 
         tip = new Tip("¿Sabes que pasa luego de que te multan?",
                 "Conoce cómo pueden sancionar y qué hacer si te multan",
@@ -118,8 +153,11 @@ public class DbHelper extends SQLiteOpenHelper {
 
         id =  db.insert(StatusContract.TABLE_TIP, null, tip.toContentValues());
         int_id = (int) id;
-        type = new Type(int_id,"IF");
-        db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
+
+        values = new ContentValues();
+        values.put(StatusContract.Column_Type_Tip.ID_TIP, int_id);
+        values.put(StatusContract.Column_Type_Tip.ID_TYPE, 4);
+        db.insert(StatusContract.TABLE_TYPE_TIP, null, values);
 
         tip = new Tip("Fotomultas, ¿Que deberías saber al respecto?",
                 "Este tipo de multas se volvieron muy comunes, aquí todo lo que necesitas saber",
@@ -131,10 +169,15 @@ public class DbHelper extends SQLiteOpenHelper {
 
         id =  db.insert(StatusContract.TABLE_TIP, null, tip.toContentValues());
         int_id = (int) id;
-        type = new Type(int_id,"IF");
-        db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
-        type = new Type(int_id,"N");
-        db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
+        values = new ContentValues();
+        values.put(StatusContract.Column_Type_Tip.ID_TIP, int_id);
+        values.put(StatusContract.Column_Type_Tip.ID_TYPE, 2);
+        db.insert(StatusContract.TABLE_TYPE_TIP, null, values);
+
+        values = new ContentValues();
+        values.put(StatusContract.Column_Type_Tip.ID_TIP, int_id);
+        values.put(StatusContract.Column_Type_Tip.ID_TYPE, 4);
+        db.insert(StatusContract.TABLE_TYPE_TIP, null, values);
 
 //        tip = new Tip("¿Sabes cuánto debes esperar al tránsito?",
 //                "",
@@ -154,13 +197,16 @@ public class DbHelper extends SQLiteOpenHelper {
                 "El aparcar en una zona prohibida o que no cumple con los requisitos para esta función, puede no solo acarrear grandes multas, sino también ocasionar accidentes, Ten mucho cuidado donde dejas tu vehículo!",
                 "¿Dónde no me puedo estacionar?",
                 "Está completamente prohibido estacionar vehículos sobe andenes, zonas verdes o sobre espacio público destinado para peatones. Tampoco podrás estacionar tu automóvil en autopistas, zonas de seguridad o en medio de un cruce. Evita estacionar en lugares destinados para el transporte público y tampoco en los carriles destinados especialmente para la circulación de estos. Y para evitar, en caso de una emergencia, retrasar a los organismos de socorro, no dejes tu auto al lado de un hidrante.",
-                "N",
+                "Normal",
                 "null");
 
         id =  db.insert(StatusContract.TABLE_TIP, null, tip.toContentValues());
         int_id = (int) id;
-        type = new Type(int_id,"IF");
-        db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
+
+        values = new ContentValues();
+        values.put(StatusContract.Column_Type_Tip.ID_TIP, int_id);
+        values.put(StatusContract.Column_Type_Tip.ID_TYPE, 4);
+        db.insert(StatusContract.TABLE_TYPE_TIP, null, values);
 
 //        tip = new Tip("",
 //                "",
@@ -210,6 +256,18 @@ public class DbHelper extends SQLiteOpenHelper {
         return c;
     }
 
+    public Cursor getTypeNameById(int tipId) {
+        Cursor c = getReadableDatabase().query(
+                StatusContract.TABLE_TIP,
+                null,
+                StatusContract.Column_Tip.ID + " = ?",
+                new String[]{""+tipId},
+                null,
+                null,
+                null);
+        return c;
+    }
+
     public Cursor getAllTypes(){
 
         return getReadableDatabase()
@@ -225,9 +283,9 @@ public class DbHelper extends SQLiteOpenHelper {
 
     public Cursor getTypeById(int typeId) {
         Cursor c = getReadableDatabase().query(
-                StatusContract.TABLE_TYPE,
+                StatusContract.TABLE_TYPE_TIP,
                 null,
-                StatusContract.Column_Type.IDTIP + " = ?",
+                StatusContract.Column_Type_Tip.ID_TIP + " = ?",
                 new String[]{""+typeId},
                 null,
                 null,
@@ -245,5 +303,20 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
 
+    public Cursor getTipByType(int typeId) {
+        return getReadableDatabase().query(
+                StatusContract.TABLE_TYPE_TIP
+                        + " INNER JOIN " + StatusContract.TABLE_TIP
+                        + " ON " + StatusContract.TABLE_TYPE_TIP + "."
+                        + StatusContract.Column_Type_Tip.ID_TIP + "="
+                        + StatusContract.TABLE_TIP + "."
+                        + StatusContract.Column_Tip.ID,
+                null,
+                StatusContract.Column_Type_Tip.ID_TYPE + " LIKE ?",
+                new String[]{""+typeId},
+                null,
+                null,
+                null);
 
+    }
 }

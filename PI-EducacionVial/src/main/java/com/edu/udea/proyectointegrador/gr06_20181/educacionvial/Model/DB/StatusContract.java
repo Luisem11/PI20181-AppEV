@@ -7,6 +7,7 @@ public class StatusContract {
     public static final int DB_VERSION = 3;
     public static final String TABLE_TIP = "tip";
     public static final String TABLE_TYPE = "type";
+    public static final String TABLE_TYPE_TIP = "tipe_tip";
 
     public class Column_Tip {
 
@@ -23,8 +24,14 @@ public class StatusContract {
     public class Column_Type {
 
         public static final String ID = "id";
-        public static final String IDTIP = "idtip";
         public static final String NAME = "name";
     }
+
+    public class Column_Type_Tip {
+
+        public static final String ID_TYPE = "id_type";
+        public static final String ID_TIP = "id_tip";
+    }
+
 
 }

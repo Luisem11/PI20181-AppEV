@@ -47,55 +47,57 @@ public class Details1Fragment extends Fragment {
         body2TextView = (TextView) view.findViewById(R.id.body2);
         Button button = view.findViewById(R.id.action);
 
+
+        title2TextView.setText(tip.getTitle2());
+        body2TextView.setText(tip.getBody2());
         StringBuilder buttonText = new StringBuilder();
         final StringBuilder link = new StringBuilder();
         String action = tip.getLink();
         if (action.equals("null")){
             button.setVisibility(View.GONE);
             return  view;
-        }
-        Character a;
-        Boolean b= true;
-        for (int i = 0; i<action.length(); i++){
-            a = action.charAt(i);
-            if (a.equals(':')&&b){
-                b = false;
-            }else{
-                if (b){
+        }else{
+            Character a;
+            Boolean b= true;
+            for (int i = 0; i<action.length(); i++){
+                a = action.charAt(i);
+                if (a.equals(':')&&b){
+                    b = false;
+                }else{
+                    if (b){
 
-                    buttonText.append("").append(a);
-                }else {
-                    link.append("").append(a);
-                }
-            }
-
-        }
-        button.setText(buttonText);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent;
-                switch (link.charAt(0)){
-                    case '1':
-                        intent = new Intent(view.getContext(), HelpActivity.class);
-                        intent.putExtra("action", "3");
-                        break;
-                    case '2':
-                        intent = new Intent(view.getContext(), MainActivity.class);
-                        break;
-                    default:
-                        intent = new Intent(Intent.ACTION_VIEW,
-                                Uri.parse(""+link));
-                        break;
-
-
+                        buttonText.append("").append(a);
+                    }else {
+                        link.append("").append(a);
+                    }
                 }
 
-                startActivity(intent);
             }
-        });
-        title2TextView.setText(tip.getTitle2());
-        body2TextView.setText(tip.getBody2());
+            button.setText(buttonText);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent;
+                    switch (link.charAt(0)){
+                        case '1':
+                            intent = new Intent(view.getContext(), HelpActivity.class);
+                            intent.putExtra("action", "3");
+                            break;
+                        case '2':
+                            intent = new Intent(view.getContext(), MainActivity.class);
+                            break;
+                        default:
+                            intent = new Intent(Intent.ACTION_VIEW,
+                                    Uri.parse(""+link));
+                            break;
+
+
+                    }
+
+                    startActivity(intent);
+                }
+            });
+        }
 
         return view;
     }
