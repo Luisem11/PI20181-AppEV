@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="16dp"
+    android:gravity="">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/showcase_close"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="108dp"
+        android:gravity="center"
+        android:text="En Ayuda puedes encontrar información sobre multas y accidentes"
+        android:textColor="@android:color/white"
+        android:textSize="30dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView"
+        android:layout_below="@+id/textView"
+        android:gravity="center"
+        android:paddingTop="140dp"
+        android:textColor="@color/colorAccent"
+        android:text="Lo mejor es estar preparado, y si tienes algún percance esto puede ser muy útil"
+        android:textSize="20dp" />
+    <Button
+        android:id="@+id/showcase_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:textColor="@color/colorAccent"
+        android:text="Omitir"
+        />
+
+
+
+
+
+</RelativeLayout>

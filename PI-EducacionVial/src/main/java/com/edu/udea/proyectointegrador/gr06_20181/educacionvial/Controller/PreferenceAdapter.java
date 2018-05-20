@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
@@ -37,8 +38,8 @@ import static android.content.Context.ALARM_SERVICE;
 
 
 public class PreferenceAdapter extends ArrayAdapter<Preference> {
-    public PreferenceAdapter(Context context, ArrayList<Preference> users) {
-        super(context, 0, users);
+    public PreferenceAdapter(Context context, ArrayList<Preference> preferences) {
+        super(context, 0, preferences);
     }
 
     public LinearLayout preferenceLinearLayout;
@@ -65,32 +66,30 @@ public class PreferenceAdapter extends ArrayAdapter<Preference> {
 
         preferenceTitle.setText(preference.getTitle());
         preferenceDescription.setText(preference.getDescription());
-        if(preference.getType().equals("check")){
+        if (preference.getType().equals("check")) {
             preferenceCheckBox.setVisibility(View.VISIBLE);
         }
 
         preferenceLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                switch (preference.getTitle()){
+                switch (preference.getTitle()) {
                     case "Pico y Placa":
 
-
-                        if(preferenceCheckBox.isChecked()){
+                        if (preferenceCheckBox.isChecked()) {
                             preferenceCheckBox.setChecked(false);
-                        }else {
+                        } else {
                             preferenceCheckBox.setChecked(true);
 
                         }
-
                         openPYPDialog(view.getContext());
                         break;
 
                     case "Clima":
 
-                        if(preferenceCheckBox.isChecked()){
+                        if (preferenceCheckBox.isChecked()) {
                             preferenceCheckBox.setChecked(false);
-                        }else {
+                        } else {
                             preferenceCheckBox.setChecked(true);
 
                         }
@@ -108,11 +107,75 @@ public class PreferenceAdapter extends ArrayAdapter<Preference> {
 
                         openLocationDialog(view.getContext());
                         break;
+                    case "Modo Tutorial":
+                        if (preferenceCheckBox.isChecked()) {
+                            preferenceCheckBox.setChecked(false);
+                        } else {
+                            preferenceCheckBox.setChecked(true);
+
+                        }
+                        SharedPreferences pref = view.getContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor edit = pref.edit();
+                        edit.putBoolean("showcase", true);
+                        edit.commit();
+                        break;
                 }
 
             }
         });
+        preferenceCheckBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switch (preference.getTitle()) {
+                    case "Pico y Placa":
 
+                        if (preferenceCheckBox.isChecked()) {
+                            preferenceCheckBox.setChecked(false);
+                        } else {
+                            preferenceCheckBox.setChecked(true);
+
+                        }
+                        openPYPDialog(view.getContext());
+                        break;
+
+                    case "Clima":
+
+                        if (preferenceCheckBox.isChecked()) {
+                            preferenceCheckBox.setChecked(false);
+                        } else {
+                            preferenceCheckBox.setChecked(true);
+
+                        }
+                        notificateWeather(view.getContext(), preferenceCheckBox.isChecked());
+
+                        break;
+
+                    case "Tips de Cultura Vial":
+
+                        notificateTips(view.getContext(), preferenceCheckBox.isChecked());
+
+                        break;
+
+                    case "Ubicación":
+
+                        openLocationDialog(view.getContext());
+                        break;
+                    case "Modo Tutorial":
+                        if (preferenceCheckBox.isChecked()) {
+                            preferenceCheckBox.setChecked(false);
+                        } else {
+                            preferenceCheckBox.setChecked(true);
+
+                        }
+                        SharedPreferences pref = view.getContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor edit = pref.edit();
+                        edit.putBoolean("showcase", true);
+                        edit.commit();
+                        break;
+                }
+
+            }
+        });
 
 
         /// / Return the completed view to render on screen
@@ -136,7 +199,7 @@ public class PreferenceAdapter extends ArrayAdapter<Preference> {
         option.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if(option.getSelectedItemId()!=0){
+                if (option.getSelectedItemId() != 0) {
                     title.setText(option.getSelectedItem().toString());
                 }
             }

@@ -48,6 +48,7 @@
     <string name="m_2">Conoce las Infracciones</string>
     <string name="m_3">¿Como sé si fui multado?</string>
     <string name="traffic_fine_case">¿Que hacer luego de ser multado?</string>
+    <string name="general">General</string>
     <string-array name="location_array">
         <item />
         <item>Medellin</item>

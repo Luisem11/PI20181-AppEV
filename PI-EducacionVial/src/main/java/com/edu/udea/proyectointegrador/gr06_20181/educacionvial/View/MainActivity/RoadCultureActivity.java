@@ -33,6 +33,12 @@ import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.toptas.fancyshowcase.FancyShowCaseQueue;
+import me.toptas.fancyshowcase.FancyShowCaseView;
+import me.toptas.fancyshowcase.FocusShape;
+import me.toptas.fancyshowcase.OnCompleteListener;
+import me.toptas.fancyshowcase.OnViewInflateListener;
+
 public class RoadCultureActivity extends AppCompatActivity implements View.OnClickListener, TipsAdapter.OnItemClickListener {
 
     public TipsAdapter tipsAdapter;
@@ -42,6 +48,9 @@ public class RoadCultureActivity extends AppCompatActivity implements View.OnCli
     private boolean typeOn;
     private Spinner spinner;
     private LinearLayout filterRelativeLayout;
+    private FancyShowCaseView mFancyView;
+    private FancyShowCaseQueue mQueue;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,6 +133,13 @@ public class RoadCultureActivity extends AppCompatActivity implements View.OnCli
             }
         });
 
+        if (getIntent().getExtras() != null) {
+            if (getIntent().getExtras().getBoolean("SC")){
+                Showcase();
+            }
+
+        }
+
     }
 
     @Override
@@ -204,8 +220,6 @@ public class RoadCultureActivity extends AppCompatActivity implements View.OnCli
 
     }
 
-
-
     private class TipsLoadTask extends AsyncTask<Void, Void, Cursor> {
 
         @Override
@@ -241,6 +255,86 @@ public class RoadCultureActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
+
+    private void Showcase() {
+
+        mQueue = new FancyShowCaseQueue();
+
+        mFancyView = new FancyShowCaseView.Builder(this)
+                .customView(R.layout.showcase_3, new OnViewInflateListener() {
+                    @Override
+                    public void onViewInflated(View view) {
+                        view.findViewById(R.id.showcase_close)
+                                .setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        mQueue.cancel(true);
+                                    }
+                                });
+
+                    }
+                })
+                .delay(1000)
+                .focusRectAtPosition(360, 350, 700, 300)
+                .roundRectRadius(60)
+                .closeOnTouch(true)
+                .build();
+        mQueue.add(mFancyView);
+
+        mFancyView = new FancyShowCaseView.Builder(this)
+                .focusOn(mAddButton)
+                .customView(R.layout.showcase_4, new OnViewInflateListener() {
+                    @Override
+                    public void onViewInflated(View view) {
+                        view.findViewById(R.id.showcase_close)
+                                .setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        mQueue.cancel(true);
+                                    }
+                                });
+
+                    }
+                })
+                .closeOnTouch(true)
+                .build();
+        mQueue.add(mFancyView);
+
+        mFancyView = new FancyShowCaseView.Builder(this)
+                .focusShape(FocusShape.ROUNDED_RECTANGLE)
+                .roundRectRadius(90)
+                .focusRectAtPosition(120, 520, 200, 100)
+                .roundRectRadius(60)
+                .focusBorderSize(5)
+                .focusBorderColor(R.color.colorAccent)
+                .customView(R.layout.showcase_5, new OnViewInflateListener() {
+                    @Override
+                    public void onViewInflated(View view) {
+                        view.findViewById(R.id.showcase_close)
+                                .setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        mQueue.cancel(true);
+                                    }
+                                });
+
+                    }
+                })
+                .closeOnTouch(true)
+                .build();
+        mQueue.add(mFancyView);
+
+        mQueue.show();
+        mQueue.setCompleteListener(new OnCompleteListener() {
+            @Override
+            public void onComplete() {
+                Intent intent = new Intent();
+                intent.putExtra("SC_RCA", true);
+                setResult(1001, intent);
+                finish();
+            }
+        });
+    }
 
 
 

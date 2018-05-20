@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.Model.Dir;
@@ -67,14 +68,13 @@ public class DirectoryAdapter
             implements View.OnClickListener {
 
         public TextView directionTitle, directionDescription;
-        public ImageButton directionAction;
-        public String directionNumber;
+        public LinearLayout directionAction;
 
         public DirectoryViewHolder(View itemView) {
             super(itemView);
 
             directionTitle = (TextView) itemView.findViewById(R.id.title_dir);
-            directionAction = (ImageButton) itemView.findViewById(R.id.action_dir);
+            directionAction = (LinearLayout) itemView.findViewById(R.id.action_dir);
             directionDescription = (TextView) itemView.findViewById(R.id.description_dir);
 
             directionAction.setOnClickListener(this);

@@ -3,6 +3,7 @@ package com.edu.udea.proyectointegrador.gr06_20181.educacionvial.View.Preference
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.ListView;
 
 import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.Controller.PreferenceAdapter;
@@ -61,9 +62,15 @@ public class PreferenceActivity extends AppCompatActivity {
 
         arrayOfUsers = new ArrayList<>();
         arrayOfUsers.add(new Preference("Ubicación","Cambiar la ubicación","null","null"));
+        arrayOfUsers.add(new Preference("Modo Tutorial","Activa el tutorial para la proxima inicies","null","check"));
         adapter = new PreferenceAdapter(this, arrayOfUsers);
         preference2List.setAdapter(adapter);
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        onBackPressed();
+        return super.onOptionsItemSelected(item);
+    }
 }

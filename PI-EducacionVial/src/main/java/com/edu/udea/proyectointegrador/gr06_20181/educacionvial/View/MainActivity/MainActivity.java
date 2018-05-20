@@ -5,40 +5,35 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.GridView;
 import android.widget.Toast;
 
-import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.Controller.ImageAdapter;
 import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.Controller.WeatherRequest;
 import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.R;
 import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.View.Preferences.PreferenceActivity;
-import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.View.Preferences.PreferenceFragmentCustom;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import me.toptas.fancyshowcase.FancyShowCaseQueue;
+import me.toptas.fancyshowcase.FancyShowCaseView;
+import me.toptas.fancyshowcase.FocusShape;
+import me.toptas.fancyshowcase.OnCompleteListener;
+import me.toptas.fancyshowcase.OnViewInflateListener;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,7 +42,8 @@ public class MainActivity extends AppCompatActivity {
     double longitudeGPS, latitudeGPS;
     double longitudeNetwork, latitudeNetwork;
     String[] result;
-
+    private FancyShowCaseView mFancyView, mFancyView2;
+    private FancyShowCaseQueue mQueue;
 
 
     @Override
@@ -57,14 +53,19 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        locationManager = (LocationManager) getSystemService(this.LOCATION_SERVICE);
+
+        SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit = pref.edit();
+
+        if(!pref.contains("showcase")||pref.getBoolean("showcase",false)){
+            edit.putBoolean("showcase", false);
+            edit.commit();
+            Showcase();
+        }
+
 
 
     }
-
-
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -97,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
     public void onPointerCaptureChanged(boolean hasCapture) {
 
     }
+
 
     public void onClick(View view) {
 
@@ -303,5 +305,107 @@ public class MainActivity extends AppCompatActivity {
 
         }
     };
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == 100){
+            if(resultCode == 1001 && data.getBooleanExtra("SC_RCA",false)){
+                Intent intent = new Intent(MainActivity.this, HelpActivity.class);
+                intent.putExtra("SC", true);
+                startActivityForResult(intent, 100);
+            }
+            if(resultCode == 1002 && data.getBooleanExtra("SC_H",false)){
+                ShowcaseEnd();
+
+            }
+
+        }
+    }
+
+    private void Showcase() {
+        mFancyView = new FancyShowCaseView.Builder(this)
+                .customView(R.layout.showcase_1, new OnViewInflateListener() {
+                    @Override
+                    public void onViewInflated(View view) {
+                        view.findViewById(R.id.showcase_close)
+                                .setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        mQueue.cancel(true);
+                                    }
+                                });
+                        view.findViewById(R.id.showcase_next)
+                                .setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        mFancyView.hide();
+                                    }
+                                });
+
+                    }
+                })
+                .closeOnTouch(false)
+                .build();
+
+        mFancyView2 = new FancyShowCaseView.Builder(this)
+                .focusOn(findViewById(R.id.linear_layout_main))
+                .focusShape(FocusShape.ROUNDED_RECTANGLE)
+                .roundRectRadius(90)
+                .disableFocusAnimation()
+                .customView(R.layout.showcase_2, new OnViewInflateListener() {
+                    @Override
+                    public void onViewInflated(View view) {
+                        view.findViewById(R.id.showcase_close)
+                                .setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        mQueue.cancel(true);
+                                    }
+                                });
+
+                    }
+                })
+                .closeOnTouch(true)
+                .build();
+
+
+        mQueue = new FancyShowCaseQueue();
+        mQueue.add(mFancyView);
+        mQueue.add(mFancyView2);
+        mQueue.setCompleteListener(new OnCompleteListener() {
+            @Override
+            public void onComplete() {
+                Intent intent = new Intent(MainActivity.this, RoadCultureActivity.class);
+                intent.putExtra("SC", true);
+                startActivityForResult(intent, 100);
+            }
+        });
+        mQueue.show();
+    }
+
+
+    private void ShowcaseEnd() {
+        mFancyView = new FancyShowCaseView.Builder(this)
+                .customView(R.layout.showcase_10, new OnViewInflateListener() {
+                    @Override
+                    public void onViewInflated(View view) {
+                    }
+                })
+                .focusOn(findViewById(R.id.settings))
+                .closeOnTouch(true)
+                .focusRectAtPosition(675, 105, 80, 80)
+                .roundRectRadius(60)
+                .build();
+
+
+        mQueue = new FancyShowCaseQueue();
+        mQueue.add(mFancyView);
+        mQueue.setCompleteListener(new OnCompleteListener() {
+            @Override
+            public void onComplete() {
+            }
+        });
+        mQueue.show();
+    }
+
 
 }
