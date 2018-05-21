@@ -7,6 +7,9 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
@@ -33,8 +36,6 @@ public class WeatherReciver extends BroadcastReceiver {
 
     }
 
-
-    @SuppressLint("StaticFieldLeak")
     private class HttpGetTask extends AsyncTask<Void, Void, String> {
 
         private String data;
@@ -43,10 +44,13 @@ public class WeatherReciver extends BroadcastReceiver {
         protected void onPreExecute() {
             super.onPreExecute();
 
+
+
         }
 
         @Override
         protected String doInBackground(Void... params) {
+
             String result = null;
             WeatherRequest client = new WeatherRequest("" + 6.24, "-" + 75.57);
             data = client.httpGet();
@@ -71,7 +75,8 @@ public class WeatherReciver extends BroadcastReceiver {
         protected void onPostExecute(String dataList) {
 
             result = getMessage(dataList);
-            presentHeadsUpNotification(Notification.VISIBILITY_PUBLIC, R.drawable.ic_notification_icon, result[0], result[1], result[2]);
+            presentHeadsUpNotification(Notification.VISIBILITY_PUBLIC,
+                    R.drawable.ic_notification_icon, result[0], result[1], result[2]);
 
 
         }
@@ -137,6 +142,7 @@ public class WeatherReciver extends BroadcastReceiver {
                 .setContentTitle(title)
                 .setSmallIcon(icon)
                 .setContentText(text)
+                .setColor(Color.BLUE)
                 .setAutoCancel(true)
                 .setVisibility(visibility)
                 .addAction(android.R.drawable.ic_menu_view, c.getString(R.string.road_education), contentIntent)

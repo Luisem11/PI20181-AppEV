@@ -4,12 +4,13 @@ import android.app.AlarmManager;
 import android.app.Dialog;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,7 +22,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -50,7 +50,6 @@ public class PreferenceActivity extends AppCompatActivity implements AdapterView
     SharedPreferences.Editor edit;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,17 +73,17 @@ public class PreferenceActivity extends AppCompatActivity implements AdapterView
     private void loadPreference() {
 
         arrayOfPreferences = new ArrayList<>();
-        arrayOfPreferences.add(new Preference("Pico y Placa","Configurar notificaciones de pico y placa","null","check"));
-        arrayOfPreferences.add(new Preference("Clima","Recibir notificaciones del clima todas la mañanas","null","check"));
-        arrayOfPreferences.add(new Preference("Tips de Cultura Vial","Frecuencia de notificaciones a la semana","null","null"));
+        arrayOfPreferences.add(new Preference("Pico y Placa", "Configurar notificaciones de pico y placa", "null", "check"));
+        arrayOfPreferences.add(new Preference("Clima", "Recibir notificaciones del clima todas la mañanas", "null", "check"));
+        arrayOfPreferences.add(new Preference("Tips de Cultura Vial", "Frecuencia de notificaciones a la semana", "null", "null"));
         //arrayOfUsers.add(new Preference("","","",""));
         PreferenceAdapter adapter = new PreferenceAdapter(this, arrayOfPreferences);
         preference1List.setAdapter(adapter);
         preference1List.setOnItemClickListener(this);
 
         arrayOfPreferences2 = new ArrayList<>();
-        arrayOfPreferences2.add(new Preference("Ubicación","Cambiar la ubicación","null","null"));
-        arrayOfPreferences2.add(new Preference("Modo Tutorial","Activa el tutorial para la proxima inicies","null","check"));
+        arrayOfPreferences2.add(new Preference("Ubicación", "Cambiar la ubicación", "null", "null"));
+        arrayOfPreferences2.add(new Preference("Modo Tutorial", "Activa el tutorial para la proxima inicies", "null", "check"));
         adapter = new PreferenceAdapter(this, arrayOfPreferences2);
         preference2List.setAdapter(adapter);
         preference2List.setOnItemClickListener(this);
@@ -110,9 +109,9 @@ public class PreferenceActivity extends AppCompatActivity implements AdapterView
         preferenceCheckBox = (CheckBox) itemView.findViewById(R.id.pref_checkbox);
         preferenceLinearLayout = itemView.findViewById(R.id.preference);
 
-        if (adapterView.getId() == R.id.list_preference){
+        if (adapterView.getId() == R.id.list_preference) {
             preference = arrayOfPreferences.get(i);
-        }else{
+        } else {
             preference = arrayOfPreferences2.get(i);
         }
         preferenceCheckBox.setChecked(!preferenceCheckBox.isChecked());
@@ -138,8 +137,7 @@ public class PreferenceActivity extends AppCompatActivity implements AdapterView
 
 
                 showDialogFrecuency();
-                notificateTips(view.getContext(), pref.getBoolean("tips",false) );
-                edit.putBoolean("tips", !pref.getBoolean("tips",false));
+                edit.putBoolean("tips", !pref.getBoolean("tips", false));
                 edit.commit();
 
                 break;
@@ -167,7 +165,7 @@ public class PreferenceActivity extends AppCompatActivity implements AdapterView
         Button save = dialog.findViewById(R.id.action_dialog_tips);
         final RadioGroup group = dialog.findViewById(R.id.group);
 
-        View radioButton = group.getChildAt(pref.getInt("frecuency",0));
+        View radioButton = group.getChildAt(pref.getInt("frecuency", 0));
         group.check(radioButton.getId());
 
         close.setOnClickListener(new View.OnClickListener() {
@@ -183,6 +181,7 @@ public class PreferenceActivity extends AppCompatActivity implements AdapterView
                 edit.putInt("frecuency", group.indexOfChild(radioButton));
                 edit.commit();
                 dialog.dismiss();
+                notificateTips(view.getContext(), group.indexOfChild(radioButton));
             }
         });
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -198,7 +197,7 @@ public class PreferenceActivity extends AppCompatActivity implements AdapterView
         final TextView title = dialog.findViewById(R.id.edit);
         final Spinner option = dialog.findViewById(R.id.spinner2);
 
-        title.setText(pref.getString("location","Medellín"));
+        title.setText(pref.getString("location", "Medellín"));
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(context,
                 R.array.location_array, R.layout.item_spinner);
@@ -222,9 +221,6 @@ public class PreferenceActivity extends AppCompatActivity implements AdapterView
         });
 
 
-
-
-
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -234,12 +230,11 @@ public class PreferenceActivity extends AppCompatActivity implements AdapterView
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                edit.putString("location",title.getText().toString());
+                edit.putString("location", title.getText().toString());
                 edit.commit();
                 dialog.dismiss();
             }
         });
-
 
 
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -260,33 +255,64 @@ public class PreferenceActivity extends AppCompatActivity implements AdapterView
         dialog.show();
     }
 
-    private void notificateTips(Context context, boolean checked) {
+    private void notificateTips(Context context, int frecuency) {
 
 
-         Intent intent = new Intent(context, TipsReceiver.class);
+        Intent intent = new Intent(context, TipsReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context.getApplicationContext(),
                 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
 
-        if (!checked) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
 
-            alarmManager.cancel(pendingIntent);
-            Toast.makeText(context, "Cancelado", Toast.LENGTH_SHORT).show();
+        switch (frecuency){
+            case 0:
+                alarmManager.cancel(pendingIntent);
+                Toast.makeText(context, "Cancelado", Toast.LENGTH_SHORT).show();
 
+                break;
 
-        } else {
+            case 1:
+                calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+                calendar.set(Calendar.HOUR_OF_DAY, 12);
+                calendar.set(Calendar.MINUTE, 0);
+                calendar.set(Calendar.SECOND, 0);
 
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTimeInMillis(System.currentTimeMillis());
-            calendar.set(Calendar.HOUR_OF_DAY, 0);
-            calendar.set(Calendar.MINUTE, 5);
-            calendar.set(Calendar.SECOND, 0);
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
+                        calendar.getTimeInMillis(),
+                        AlarmManager.INTERVAL_DAY*10, pendingIntent);
+                Toast.makeText(context, "Programado", Toast.LENGTH_SHORT).show();
+                break;
 
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-                    calendar.getTimeInMillis(), AlarmManager.INTERVAL_HALF_HOUR, pendingIntent);
+            case 2:
+                calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+                calendar.set(Calendar.HOUR_OF_DAY, 12);
+                calendar.set(Calendar.MINUTE, 0);
+                calendar.set(Calendar.SECOND, 0);
 
-            Toast.makeText(context, "Programado", Toast.LENGTH_SHORT).show();
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
+                        calendar.getTimeInMillis(),
+                        AlarmManager.INTERVAL_DAY*8, pendingIntent);
+
+                Toast.makeText(context, "Programado", Toast.LENGTH_SHORT).show();
+                break;
+
+            case 3:
+                calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+                calendar.set(Calendar.HOUR_OF_DAY, 0);
+                calendar.set(Calendar.MINUTE, 5);
+                calendar.set(Calendar.SECOND, 0);
+
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
+                        calendar.getTimeInMillis(),
+                        AlarmManager.INTERVAL_DAY*3, pendingIntent);
+
+                Toast.makeText(context, "Programado", Toast.LENGTH_SHORT).show();
+                break;
+
         }
+
 
     }
 
