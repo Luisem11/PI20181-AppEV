@@ -37,12 +37,12 @@
 
             <TextView
                 android:id="@+id/title_dialog_steps"
-                android:layout_width="300dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="25dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="50dp"
                 android:text="Selecciona los dias que quieres que te notifiquemos"
                 android:textAlignment="center"
                 android:textSize="20sp"
