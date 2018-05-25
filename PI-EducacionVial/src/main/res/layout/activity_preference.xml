@@ -21,44 +21,64 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <FrameLayout
-        android:visibility="gone"
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/cont_preferences">
+        android:layout_height="match_parent">
 
-    </FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/notifications_"
-        android:textColor="?colorPrimary"
-        android:layout_marginLeft="16dp"
-        android:layout_marginBottom="10dp"/>
-
-
-    <ListView
-        android:id="@+id/list_preference"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:listitem="@layout/item_preference"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/general"
-        android:textColor="?colorPrimary"
-        android:layout_marginLeft="16dp"
-        android:layout_marginBottom="10dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/notifications_"
+                    android:textColor="?colorPrimary"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginBottom="10dp"/>
 
 
-    <ListView
-        android:id="@+id/list_preference_2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:listitem="@layout/item_preference"/>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/list_preference"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:listitem="@layout/item_preference"
+                    android:scrollbars="vertical"
+                    android:nestedScrollingEnabled="false"/>
+
+
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/general"
+                android:textColor="?colorPrimary"
+                android:layout_marginLeft="16dp"
+                android:layout_marginBottom="10dp"/>
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/list_preference_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/item_preference"
+                android:scrollbars="vertical"
+                android:nestedScrollingEnabled="false"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
 
 </LinearLayout>

@@ -9,7 +9,6 @@
     <uses-permission android:name="com.android.permission.SET_ALARM" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -88,6 +87,8 @@
             android:name=".TipsReceiver"
             android:enabled="true"
             android:exported="true" />
+
+        <activity android:name=".AboutActivity"></activity>
     </application>
 
 </manifest>

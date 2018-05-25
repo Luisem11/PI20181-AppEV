@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:elevation="@dimen/cardview_default_elevation"
-    android:paddingTop="@dimen/activity_horizontal_margin"
-    card_view:cardCornerRadius="8dp"
+    card_view:cardCornerRadius="10dp"
     card_view:cardElevation="4dp"
     card_view:cardUseCompatPadding="true">
 
@@ -24,8 +23,13 @@
             android:layout_alignParentTop="true"
             android:hint="Title"
             android:textStyle="bold"
+            android:textColor="#263238"
             android:textSize="30sp"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:shadowColor="@color/colorAccent"
+            android:shadowDx="3"
+            android:shadowDy="-3"
+            android:shadowRadius="1"/>
 
         <TextView
             android:id="@+id/subtitle"

@@ -47,9 +47,9 @@ public class TipsAdapter extends RecyclerView.Adapter<TipsAdapter.TipsViewHolder
 
         items.moveToPosition(position);
         String s = items.getString(items.getColumnIndex(StatusContract.Column_Tip.TITLE));
-        holder.personName.setText(s);
+        holder.titleTextView.setText(s);
         s = items.getString(items.getColumnIndex(StatusContract.Column_Tip.SUBTITLE));
-        holder.personAge.setText(s);
+        holder.subtitleTextView.setText(s);
         Cursor cursor = dbHelper.getTypeById(items.getInt(items.getColumnIndex(StatusContract.Column_Tip.ID)));
 
         if(cursor.moveToFirst()) {
@@ -91,17 +91,18 @@ public class TipsAdapter extends RecyclerView.Adapter<TipsAdapter.TipsViewHolder
 
     public class TipsViewHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener {
-        public TextView personName;
-        public TextView personAge;
+        public TextView titleTextView;
+        public TextView subtitleTextView;
         public LinearLayout typeLinearLayout;
         CardView cardView1, cardView2, cardView3, cardView4;
 
         public TipsViewHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
-            personName = (TextView) itemView.findViewById(R.id.title);
-            personAge = (TextView) itemView.findViewById(R.id.subtitle);
+            titleTextView = (TextView) itemView.findViewById(R.id.title);
+            subtitleTextView = (TextView) itemView.findViewById(R.id.subtitle);
             typeLinearLayout = (LinearLayout) itemView.findViewById(R.id.type);
+            subtitleTextView.setVisibility(View.GONE);
             cardView1 = (CardView) itemView.findViewById(R.id.card1);
             cardView2 = (CardView) itemView.findViewById(R.id.card2);
             cardView3 = (CardView) itemView.findViewById(R.id.card3);

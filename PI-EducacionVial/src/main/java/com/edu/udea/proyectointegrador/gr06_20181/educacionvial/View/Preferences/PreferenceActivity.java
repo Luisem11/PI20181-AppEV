@@ -4,13 +4,14 @@ import android.app.AlarmManager;
 import android.app.Dialog;
 import android.app.PendingIntent;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,12 +19,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,17 +34,15 @@ import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.WeatherReciver;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
-public class PreferenceActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class PreferenceActivity extends AppCompatActivity implements AdapterView.OnItemClickListener,  PreferenceAdapter.OnItemClickListener {
 
-    private ListView preference1List, preference2List;
-    public PreferenceAdapter directoryAdapter;
-    public LinearLayout preferenceLinearLayout;
-    public TextView preferenceTitle, preferenceDescription;
-    public ImageButton preferenceAction;
+    private RecyclerView preference1List, preference2List;
     public CheckBox preferenceCheckBox;
     public Preference preference;
-    ArrayList<Preference> arrayOfPreferences, arrayOfPreferences2;
+    PreferenceAdapter preferenceAdapter1, preferenceAdapter2;
+    List<Preference> arrayOfPreferences, arrayOfPreferences2;
     SharedPreferences pref;
     SharedPreferences.Editor edit;
 
@@ -63,8 +60,23 @@ public class PreferenceActivity extends AppCompatActivity implements AdapterView
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         setTitle(R.string.preference);
 
+
+        preferenceAdapter1 = new PreferenceAdapter(null, this);
         preference1List = findViewById(R.id.list_preference);
         preference2List = findViewById(R.id.list_preference_2);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+
+        preference1List.setLayoutManager(linearLayoutManager);
+        preference1List.setAdapter(preferenceAdapter1);
+        preference1List.setHasFixedSize(true);
+
+
+        preferenceAdapter2 = new PreferenceAdapter(null, this);
+        linearLayoutManager = new LinearLayoutManager(this);
+        preference2List.setLayoutManager(linearLayoutManager);
+        preference2List.setAdapter(preferenceAdapter2);
+        preference2List.setHasFixedSize(true);
+
         loadPreference();
 
     }
@@ -73,20 +85,15 @@ public class PreferenceActivity extends AppCompatActivity implements AdapterView
     private void loadPreference() {
 
         arrayOfPreferences = new ArrayList<>();
-        arrayOfPreferences.add(new Preference("Pico y Placa", "Configurar notificaciones de pico y placa", "null", "check"));
-        arrayOfPreferences.add(new Preference("Clima", "Recibir notificaciones del clima todas la mañanas", "null", "check"));
-        arrayOfPreferences.add(new Preference("Tips de Cultura Vial", "Frecuencia de notificaciones a la semana", "null", "null"));
-        //arrayOfUsers.add(new Preference("","","",""));
-        PreferenceAdapter adapter = new PreferenceAdapter(this, arrayOfPreferences);
-        preference1List.setAdapter(adapter);
-        preference1List.setOnItemClickListener(this);
 
+        arrayOfPreferences.add(new Preference("Tips de Cultura Vial", "Frecuencia de notificaciones a la semana", "null", "null"));
+        arrayOfPreferences.add(new Preference("Pico y Placa", "Configurar notificaciones de pico y placa", "null", "null"));
+        arrayOfPreferences.add(new Preference("Clima", "Recibir notificaciones del clima todas la mañanas", "null", "check"));
+        preferenceAdapter1.swapCursor(arrayOfPreferences);
         arrayOfPreferences2 = new ArrayList<>();
         arrayOfPreferences2.add(new Preference("Ubicación", "Cambiar la ubicación", "null", "null"));
         arrayOfPreferences2.add(new Preference("Modo Tutorial", "Activa el tutorial para la proxima inicies", "null", "check"));
-        adapter = new PreferenceAdapter(this, arrayOfPreferences2);
-        preference2List.setAdapter(adapter);
-        preference2List.setOnItemClickListener(this);
+        preferenceAdapter2.swapCursor(arrayOfPreferences2);
 
     }
 
@@ -98,62 +105,6 @@ public class PreferenceActivity extends AppCompatActivity implements AdapterView
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-        pref = view.getContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-        edit = pref.edit();
-        View itemView = view;
-
-        // Lookup view for data population
-        preferenceTitle = (TextView) itemView.findViewById(R.id.pref_title);
-        preferenceDescription = (TextView) itemView.findViewById(R.id.pref_description);
-        preferenceCheckBox = (CheckBox) itemView.findViewById(R.id.pref_checkbox);
-        preferenceLinearLayout = itemView.findViewById(R.id.preference);
-
-        if (adapterView.getId() == R.id.list_preference) {
-            preference = arrayOfPreferences.get(i);
-        } else {
-            preference = arrayOfPreferences2.get(i);
-        }
-        preferenceCheckBox.setChecked(!preferenceCheckBox.isChecked());
-
-        switch (preference.getTitle()) {
-            case "Pico y Placa":
-
-                openPYPDialog(view.getContext());
-                edit.putBoolean("pyp", preferenceCheckBox.isChecked());
-                edit.commit();
-
-                break;
-
-            case "Clima":
-
-                notificateWeather(view.getContext(), preferenceCheckBox.isChecked());
-                edit.putBoolean("weather", preferenceCheckBox.isChecked());
-                edit.commit();
-
-                break;
-
-            case "Tips de Cultura Vial":
-
-
-                showDialogFrecuency();
-                edit.putBoolean("tips", !pref.getBoolean("tips", false));
-                edit.commit();
-
-                break;
-
-            case "Ubicación":
-                openLocationDialog(view.getContext());
-
-                break;
-
-            case "Modo Tutorial":
-
-                edit.putBoolean("showcase", preferenceCheckBox.isChecked());
-                edit.commit();
-
-                break;
-        }
 
 
     }
@@ -244,7 +195,33 @@ public class PreferenceActivity extends AppCompatActivity implements AdapterView
     private void openPYPDialog(Context context) {
         final Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.dialog_p_y_p);
-        ImageView close = dialog.findViewById(R.id.close_dialog_steps);
+        ImageView close = dialog.findViewById(R.id.close_dialog);
+        Button save = dialog.findViewById(R.id.action_dialog_pyp);
+        final Switch monday = dialog.findViewById(R.id.switch_pyp_m);
+        final Switch tuesday = dialog.findViewById(R.id.switch_pyp_t);
+        final Switch wednesday = dialog.findViewById(R.id.switch_pyp_w);
+        final Switch thursday = dialog.findViewById(R.id.switch_pyp_tu);
+        final Switch friday = dialog.findViewById(R.id.switch_pyp_f);
+
+        monday.setChecked(pref.getBoolean("monday", false));
+        tuesday.setChecked(pref.getBoolean("tuesday", false));
+        wednesday.setChecked(pref.getBoolean("wednesday", false));
+        thursday.setChecked(pref.getBoolean("thursday", false));
+        friday.setChecked(pref.getBoolean("friday", false));
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                edit.putBoolean("monday",monday.isChecked());
+                edit.putBoolean("tuesday",tuesday.isChecked());
+                edit.putBoolean("wednesday",wednesday.isChecked());
+                edit.putBoolean("thursday",thursday.isChecked());
+                edit.putBoolean("friday",friday.isChecked());
+                edit.commit();
+                dialog.dismiss();
+
+            }
+        });
+
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -342,6 +319,49 @@ public class PreferenceActivity extends AppCompatActivity implements AdapterView
 
             Toast.makeText(c, "Cancelado", Toast.LENGTH_SHORT).show();
 
+        }
+
+
+    }
+
+    @Override
+    public void onClick(PreferenceAdapter.PreferenceViewHolder holder, int id, View view, Preference prefer) {
+
+
+        pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        edit = pref.edit();
+        preferenceCheckBox = (CheckBox) view.findViewById(R.id.pref_checkbox);
+        preference = prefer;
+
+        preferenceCheckBox.setChecked(!preferenceCheckBox.isChecked());
+
+        switch (preference.getTitle()) {
+            case "Pico y Placa":
+                openPYPDialog(view.getContext());
+                edit.putBoolean("pyp", preferenceCheckBox.isChecked());
+                edit.commit();
+                break;
+
+            case "Clima":
+                notificateWeather(view.getContext(), preferenceCheckBox.isChecked());
+                edit.putBoolean("weather", preferenceCheckBox.isChecked());
+                edit.commit();
+                break;
+
+            case "Tips de Cultura Vial":
+                showDialogFrecuency();
+                edit.putBoolean("tips", !pref.getBoolean("tips", false));
+                edit.commit();
+                break;
+
+            case "Ubicación":
+                openLocationDialog(view.getContext());
+                break;
+
+            case "Modo Tutorial":
+                edit.putBoolean("showcase", preferenceCheckBox.isChecked());
+                edit.commit();
+                break;
         }
 
 

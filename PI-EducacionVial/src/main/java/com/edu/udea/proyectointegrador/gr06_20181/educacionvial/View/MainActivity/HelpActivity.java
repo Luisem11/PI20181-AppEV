@@ -61,6 +61,7 @@ public class HelpActivity extends AppCompatActivity implements BottomNavigationV
 
         }else{
 
+
             FragmentTransaction ft;
             ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.help_container, new HelpFragment());
@@ -157,7 +158,7 @@ public class HelpActivity extends AppCompatActivity implements BottomNavigationV
                                 .setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
-                                        mQueue.cancel(true);
+                                        mQueue2.cancel(true);
                                     }
                                 });
 
@@ -179,7 +180,7 @@ public class HelpActivity extends AppCompatActivity implements BottomNavigationV
                                 .setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
-                                        mQueue.cancel(true);
+                                        mQueue3.cancel(true);
                                     }
                                 });
 
@@ -229,6 +230,24 @@ public class HelpActivity extends AppCompatActivity implements BottomNavigationV
             }
         });
 
+
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("N", navigationView.getSelectedItemId() );
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        FragmentTransaction ft;
+        ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.help_container, new TrafficFineFragment());
+        ft.commit();
+        navigationView.setSelectedItemId(savedInstanceState.getInt("N"));
 
     }
 

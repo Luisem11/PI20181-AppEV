@@ -22,6 +22,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.AboutActivity;
 import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.Controller.WeatherRequest;
 import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.R;
 import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.View.Preferences.PreferenceActivity;
@@ -77,13 +78,20 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
+        Intent intent;
+
         switch (item.getItemId()){
 //            case R.id.weather:
 //
 //                new HttpGetTask().execute();
 //                break;
             case R.id.settings:
-                Intent intent = new Intent(MainActivity.this, PreferenceActivity.class);
+                intent = new Intent(MainActivity.this, PreferenceActivity.class);
+                startActivity(intent);
+                break;
+
+            case R.id.about:
+                intent = new Intent(MainActivity.this, AboutActivity.class);
                 startActivity(intent);
                 break;
 

@@ -3,8 +3,6 @@ package com.edu.udea.proyectointegrador.gr06_20181.educacionvial.View.MainActivi
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
@@ -14,41 +12,30 @@ import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.Model.DB.DbHelpe
 import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.Model.DB.Tip;
 import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.R;
 
-public class RCDetailsActivity extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener {
+public class RCDetailsActivity extends AppCompatActivity {
 
     private int TipId;
-    private CollapsingToolbarLayout collapsingToolbarLayout;
     private DbHelper mTipsDbHelper;
-    private AppBarLayout appBarLayout;
     private TextView titleTextView, body1TextView;
-
-    private String title;
-    boolean isShow = false;
-    int scrollRange = -1;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rcdetails);
-//
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
-        titleTextView = (TextView) findViewById(R.id.title1);
+
+       titleTextView = (TextView) findViewById(R.id.title1);
         body1TextView = (TextView) findViewById(R.id.body1);
         mTipsDbHelper = new DbHelper(this);
-        title = "";
 
 
 
         TipId = -1;
         if (getIntent().getExtras() != null) {
             TipId = getIntent().getExtras().getInt("ID");
+            loadTip();
         }
-//        appBarLayout = (AppBarLayout) findViewById(R.id.app_bar);
-//        appBarLayout.addOnOffsetChangedListener(this);
 
-        loadTip();
     }
 
     private void loadTip() {
@@ -56,12 +43,11 @@ public class RCDetailsActivity extends AppCompatActivity implements AppBarLayout
     }
 
     private void showTip(Tip tip) {
-        title = tip.getTitle();
         titleTextView.setText(tip.getTitle());
         body1TextView.setText(tip.getBody());
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.detail_container, new Details1Fragment(tip));
+        ft.replace(R.id.detail_container, new DetailsFragment(tip));
         ft.commit();
 
     }
@@ -71,29 +57,13 @@ public class RCDetailsActivity extends AppCompatActivity implements AppBarLayout
                 R.string.error, Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-
-        if (scrollRange == -1) {
-            scrollRange = appBarLayout.getTotalScrollRange();
-        }
-        if (scrollRange + verticalOffset == 0) {
-            //when collapsingToolbar at that time display actionbar title
-            collapsingToolbarLayout.setTitle(title);
-            isShow = true;
-        } else if (isShow) {
-            //carefull there must a space between double quote otherwise it dose't work
-            collapsingToolbarLayout.setTitle(" ");
-            isShow = false;
-        }
-
-
-    }
-
     private class GetTipByIdTask extends AsyncTask<Void, Void, Cursor> {
 
         @Override
         protected Cursor doInBackground(Void... voids) {
+            if(TipId==-1){
+                finish();
+            }
             return mTipsDbHelper.getTipById(TipId);
         }
 
@@ -114,4 +84,21 @@ public class RCDetailsActivity extends AppCompatActivity implements AppBarLayout
         onBackPressed();
         return true;
     }
+
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("N", TipId );
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        TipId = savedInstanceState.getInt("N");
+        if (TipId!=(-1)) {
+            loadTip();
+        }
+
+
+    }
+
 }

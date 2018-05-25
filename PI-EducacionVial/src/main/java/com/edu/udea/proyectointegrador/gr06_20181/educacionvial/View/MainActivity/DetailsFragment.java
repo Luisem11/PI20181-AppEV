@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,19 +21,20 @@ import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Details1Fragment extends Fragment {
+public class DetailsFragment extends Fragment {
 
     private TextView titleTextView, title2TextView, body1TextView, body2TextView;
     private Tip tip;
+    Button button;
 
 
 
-    public Details1Fragment() {
+    public DetailsFragment() {
         // Required empty public constructor
     }
 
     @SuppressLint("ValidFragment")
-    public Details1Fragment(Tip c) {
+    public DetailsFragment(Tip c) {
         tip = c;
     }
 
@@ -42,11 +44,19 @@ public class Details1Fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_details1, container, false);
-
         title2TextView = (TextView) view.findViewById(R.id.title2);
         body2TextView = (TextView) view.findViewById(R.id.body2);
-        Button button = view.findViewById(R.id.action);
+        button = view.findViewById(R.id.action);
 
+
+        if (tip == null){
+            return view;
+        }
+        load();
+        return view;
+    }
+
+    private void load() {
 
         title2TextView.setText(tip.getTitle2());
         body2TextView.setText(tip.getBody2());
@@ -55,7 +65,6 @@ public class Details1Fragment extends Fragment {
         String action = tip.getLink();
         if (action.equals("null")){
             button.setVisibility(View.GONE);
-            return  view;
         }else{
             Character a;
             Boolean b= true;
@@ -99,7 +108,21 @@ public class Details1Fragment extends Fragment {
             });
         }
 
-        return view;
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable("A", tip );
+    }
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        if(savedInstanceState!=null){
+
+            tip = savedInstanceState.getParcelable("A");
+            load();
+        }
+    }
 }

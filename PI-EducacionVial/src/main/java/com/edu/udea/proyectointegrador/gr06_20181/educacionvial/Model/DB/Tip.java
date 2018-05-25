@@ -2,8 +2,10 @@ package com.edu.udea.proyectointegrador.gr06_20181.educacionvial.Model.DB;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class Tip {
+public class Tip implements Parcelable {
     int id;
     private String  title;
     private String title2;
@@ -34,6 +36,29 @@ public class Tip {
         type = cursor.getString(cursor.getColumnIndex(StatusContract.Column_Tip.TYPE));
         link = cursor.getString(cursor.getColumnIndex(StatusContract.Column_Tip.LINK));
     }
+
+    protected Tip(Parcel in) {
+        id = in.readInt();
+        title = in.readString();
+        title2 = in.readString();
+        subtitle = in.readString();
+        body = in.readString();
+        body2 = in.readString();
+        type = in.readString();
+        link = in.readString();
+    }
+
+    public static final Creator<Tip> CREATOR = new Creator<Tip>() {
+        @Override
+        public Tip createFromParcel(Parcel in) {
+            return new Tip(in);
+        }
+
+        @Override
+        public Tip[] newArray(int size) {
+            return new Tip[size];
+        }
+    };
 
     public ContentValues toContentValues() {
         ContentValues values = new ContentValues();
@@ -112,4 +137,19 @@ public class Tip {
         this.link = link;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(id);
+        parcel.writeString(title);
+        parcel.writeString(title2);
+        parcel.writeString(subtitle);
+        parcel.writeString(body);
+        parcel.writeString(body2);
+        parcel.writeString(type);
+        parcel.writeString(link);
+    }
 }
