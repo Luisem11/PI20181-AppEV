@@ -400,7 +400,6 @@ public class MainActivity extends AppCompatActivity {
                 })
                 .focusOn(findViewById(R.id.settings))
                 .closeOnTouch(true)
-                .focusRectAtPosition(675, 105, 80, 80)
                 .roundRectRadius(60)
                 .build();
 

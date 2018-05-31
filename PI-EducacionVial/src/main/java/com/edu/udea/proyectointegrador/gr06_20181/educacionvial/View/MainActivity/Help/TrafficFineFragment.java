@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -20,7 +19,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.Controller.AnimationUtils;
+import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.Controller.AnimationU;
 import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.Model.DB.TrafficFine;
 import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.R;
 
@@ -89,14 +88,14 @@ public class TrafficFineFragment extends Fragment implements View.OnClickListene
                 ft = getFragmentManager().beginTransaction();
                 ft.replace(R.id.help_container, new GottenTrafficFineFragment()).addToBackStack(null);
                 ft.commit();
-                AnimationUtils.circularReveal(view1, stepsTrafficFine, 600);
+                AnimationU.circularReveal(view1, stepsTrafficFine, 600);
 
                 break;
             case R.id.action2:
                 ft = getFragmentManager().beginTransaction();
                 ft.replace(R.id.help_container, new FrecuentTrafficFineFragment()).addToBackStack(null);
                 ft.commit();
-                AnimationUtils.circularReveal(view1, knowTrafficFine, 600);
+                AnimationU.circularReveal(view1, knowTrafficFine, 600);
                 break;
             case R.id.action3:
 

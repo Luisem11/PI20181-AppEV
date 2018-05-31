@@ -14,33 +14,6 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/activity_horizontal_margin">
 
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentTop="true"
-            android:hint="Title"
-            android:textStyle="bold"
-            android:textColor="#263238"
-            android:textSize="30sp"
-            android:gravity="center"
-            android:shadowColor="@color/colorAccent"
-            android:shadowDx="3"
-            android:shadowDy="-3"
-            android:shadowRadius="1"/>
-
-        <TextView
-            android:id="@+id/subtitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/title"
-            android:hint="Subtitle"
-            android:gravity="center"
-            android:textColor="@android:color/darker_gray"/>
-
         <LinearLayout
             android:layout_below="@+id/subtitle"
             android:layout_width="wrap_content"
@@ -138,8 +111,35 @@
                     android:textColor="@color/graylight"/>
             </android.support.v7.widget.CardView>
 
-
         </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            android:hint="Title"
+            android:textStyle="bold"
+            android:textColor="#263238"
+            android:textSize="30sp"
+            android:gravity="center"
+            android:shadowColor="@color/colorAccent"
+            android:shadowDx="3"
+            android:shadowDy="-3"
+            android:shadowRadius="1"/>
+
+        <TextView
+            android:id="@+id/subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/title"
+            android:hint="Subtitle"
+            android:gravity="center"
+            android:textColor="@android:color/darker_gray"/>
+
 
     </RelativeLayout>
 

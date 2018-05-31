@@ -142,7 +142,7 @@ public class HelpActivity extends AppCompatActivity implements BottomNavigationV
 
                     }
                 })
-                .focusRectAtPosition(360, 320, 700, 400)
+                .focusRectAtPosition(320, 320, 2000, 400)
                 .roundRectRadius(60)
                 .closeOnTouch(true)
                 .build();
@@ -164,7 +164,7 @@ public class HelpActivity extends AppCompatActivity implements BottomNavigationV
 
                     }
                 })
-                .focusRectAtPosition(360, 350, 700, 450)
+                .focusRectAtPosition(320, 320, 2000, 400)
                 .roundRectRadius(60)
                 .closeOnTouch(true)
                 .build();

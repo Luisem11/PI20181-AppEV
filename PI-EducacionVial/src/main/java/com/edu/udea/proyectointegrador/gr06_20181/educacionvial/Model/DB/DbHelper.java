@@ -59,19 +59,20 @@ public class DbHelper extends SQLiteOpenHelper {
 
 
         Tip tip = new Tip("Cuidado con el Suelo Mojado!",
-                "Con el suelo mojado el riesgo de sufrir una caída aumenta bastante, por eso es importante mermar el ritmo y hacer todas las maniobras con gran delicadeza.",
+                "Con el suelo mojado el riesgo de sufrir una caída aumenta bastante, por eso es importante reducir el ritmo y hacer todas las maniobras con gran delicadeza.",
                 "Con el suelo mojado las condiciones cambian completamente y nuestro manejo debe adaptarse a ellas o de lo contrario tendremos sorpresas desagradables.",
                 "Indumentaria",
-                "Lo ideal es que siempre estemos preparados para cuando la lluvia aparezca. \n" +
+                "\"Lo ideal es que siempre estemos preparados para cuando la lluvia aparezca. \n" +
                         "Llevar constantemente el equipo adecuado hace parte de la seguridad en la vía, si vamos secos y confortables a pesar del aguacero, es una garantía de que nuestra atención estará puesta al 100% en la conducción. Asegurate de tener el equipo adecuado:\n" +
                         "\n" +
                         "Botas\n" +
                         "Chaqueta\n" +
                         "Pantalones \n" +
                         "Guantes\n" +
-                        "Casco Adecuado",
-                "Lista",
+                        "Casco Adecuado\"",
+                "L",
                 "¿Quieres saber más de Tecnicas de manejo en la lluvia?:https://www.pasionbiker.com/10-tips-de-manejo-en-lluvia/");
+
 
         long id =  db.insert(StatusContract.TABLE_TIP, null, tip.toContentValues());
         int int_id = (int) id;
@@ -85,8 +86,6 @@ public class DbHelper extends SQLiteOpenHelper {
         values.put(StatusContract.Column_Type_Tip.ID_TIP, int_id);
         values.put(StatusContract.Column_Type_Tip.ID_TYPE, 4);
         db.insert(StatusContract.TABLE_TYPE_TIP, null, values);
-
-
 
 
         tip = new Tip("Ante la señal de pare, ¡PARE!",
@@ -179,19 +178,6 @@ public class DbHelper extends SQLiteOpenHelper {
         values.put(StatusContract.Column_Type_Tip.ID_TYPE, 4);
         db.insert(StatusContract.TABLE_TYPE_TIP, null, values);
 
-//        tip = new Tip("¿Sabes cuánto debes esperar al tránsito?",
-//                "",
-//                "",
-//                "",
-//                "",
-//                "",
-//                "¿Quieres saber más?:https://www.medellin.gov.co/simm/preguntas-frecuentes-fotodeteccion");
-//
-//        id =  db.insert(StatusContract.TABLE_TIP, null, tip.toContentValues());
-//        int_id = (int) id;
-//        type = new Type(int_id,"N");
-//        db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
-//
         tip = new Tip("¡Cuidado donde parqueas!",
                 "¿Quieres evitar ser multado por dejar tu vehículo en una zona prohibidas?",
                 "El aparcar en una zona prohibida o que no cumple con los requisitos para esta función, puede no solo acarrear grandes multas, sino también ocasionar accidentes, Ten mucho cuidado donde dejas tu vehículo!",
@@ -216,16 +202,6 @@ public class DbHelper extends SQLiteOpenHelper {
 //                "",
 //                "");
 //
-//        id =  db.insert(StatusContract.TABLE_TIP, null, tip.toContentValues());
-//        int_id = (int) id;
-//        type = new Type(int_id,"TM");
-//        db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
-//        type = new Type(int_id,"IM");
-//        db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
-//        type = new Type(int_id,"IF");
-//        db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
-//        type = new Type(int_id,"N");
-//        db.insert(StatusContract.TABLE_TYPE, null, type.toContentValues());
 
 
 
@@ -241,7 +217,7 @@ public class DbHelper extends SQLiteOpenHelper {
                         null,
                         null,
                         null,
-                        null);
+                        " RANDOM() LIMIT 5");
     }
 
     public Cursor getTipById(int tipId) {

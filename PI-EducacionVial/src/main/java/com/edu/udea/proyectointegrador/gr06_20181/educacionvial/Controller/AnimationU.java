@@ -15,7 +15,7 @@ import android.view.ViewAnimationUtils;
  * Created by luisernesto on 24/04/18.
  */
 
-public final class AnimationUtils {
+public final class AnimationU {
 
     public static void slideDown(final View view) {
         view.animate()

@@ -6,7 +6,7 @@
     tools:context="com.edu.udea.proyectointegrador.gr06_20181.educacionvial.View.MainActivity.Help.HelpFragment">
 
     <android.support.v7.widget.CardView
-        android:id="@+id/cv_near_tutors"
+        android:id="@+id/cv_directories"
         android:layout_width="match_parent"
         android:layout_height="130dp"
         android:background="@android:color/white">

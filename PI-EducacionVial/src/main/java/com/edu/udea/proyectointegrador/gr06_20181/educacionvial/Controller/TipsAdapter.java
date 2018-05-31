@@ -1,6 +1,9 @@
 package com.edu.udea.proyectointegrador.gr06_20181.educacionvial.Controller;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,15 +16,37 @@ import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.Model.DB.DbHelpe
 import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.Model.DB.StatusContract;
 import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.R;
 
+import me.toptas.fancyshowcase.FancyShowCaseQueue;
+import me.toptas.fancyshowcase.FancyShowCaseView;
+import me.toptas.fancyshowcase.FocusShape;
+import me.toptas.fancyshowcase.OnCompleteListener;
+import me.toptas.fancyshowcase.OnViewInflateListener;
+
 
 public class TipsAdapter extends RecyclerView.Adapter<TipsAdapter.TipsViewHolder> {
     private Cursor items, types;
     private OnItemClickListener escucha;
     private DbHelper dbHelper;
+    private Activity activity;
+    private Boolean show;
+    private FancyShowCaseView mFancyView;
+    private FancyShowCaseQueue mQueue;
+    private View fab;
 
-    public TipsAdapter(Cursor items, OnItemClickListener escucha) {
+
+    public TipsAdapter(Cursor items, OnItemClickListener escucha, Activity activity1) {
         this.items = items;
         this.escucha = escucha;
+        this.activity = activity1;
+        show=false;
+    }
+
+    public TipsAdapter(Cursor cursor, OnItemClickListener listener, Activity activity, boolean b, View fab) {
+        this.fab = fab;
+        this.items = items;
+        this.escucha = escucha;
+        this.activity = activity;
+        this.show = b;
     }
 
     public interface OnItemClickListener {
@@ -69,6 +94,14 @@ public class TipsAdapter extends RecyclerView.Adapter<TipsAdapter.TipsViewHolder
             } while (cursor.moveToNext());
         }
 
+        if (position==0&&show){
+
+            Showcase(holder);
+
+
+        }
+
+
     }
 
     @Override
@@ -94,7 +127,8 @@ public class TipsAdapter extends RecyclerView.Adapter<TipsAdapter.TipsViewHolder
         public TextView titleTextView;
         public TextView subtitleTextView;
         public LinearLayout typeLinearLayout;
-        CardView cardView1, cardView2, cardView3, cardView4;
+        CardView cardView1, cardView2, cardView3, cardView4, cardView;
+        Activity activity;
 
         public TipsViewHolder(View itemView) {
             super(itemView);
@@ -103,10 +137,13 @@ public class TipsAdapter extends RecyclerView.Adapter<TipsAdapter.TipsViewHolder
             subtitleTextView = (TextView) itemView.findViewById(R.id.subtitle);
             typeLinearLayout = (LinearLayout) itemView.findViewById(R.id.type);
             subtitleTextView.setVisibility(View.GONE);
+            cardView = (CardView) itemView.findViewById(R.id.card_view);
             cardView1 = (CardView) itemView.findViewById(R.id.card1);
             cardView2 = (CardView) itemView.findViewById(R.id.card2);
             cardView3 = (CardView) itemView.findViewById(R.id.card3);
             cardView4 = (CardView) itemView.findViewById(R.id.card4);
+
+
 
         }
 
@@ -131,4 +168,84 @@ public class TipsAdapter extends RecyclerView.Adapter<TipsAdapter.TipsViewHolder
         }
     }
 
+    private void Showcase(TipsViewHolder holder) {
+
+        mQueue = new FancyShowCaseQueue();
+
+        mFancyView = new FancyShowCaseView.Builder(activity)
+                .customView(R.layout.showcase_3, new OnViewInflateListener() {
+                    @Override
+                    public void onViewInflated(View view) {
+                        view.findViewById(R.id.showcase_close)
+                                .setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        mQueue.cancel(true);
+                                    }
+                                });
+
+                    }
+                })
+                .delay(1000)
+                .focusOn(holder.cardView)
+                .focusShape(FocusShape.ROUNDED_RECTANGLE)
+                .roundRectRadius(90)
+                .closeOnTouch(true)
+                .build();
+        mQueue.add(mFancyView);
+
+        mFancyView = new FancyShowCaseView.Builder(activity)
+                .focusOn(fab)
+                .customView(R.layout.showcase_4, new OnViewInflateListener() {
+                    @Override
+                    public void onViewInflated(View view) {
+                        view.findViewById(R.id.showcase_close)
+                                .setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        mQueue.cancel(true);
+                                    }
+                                });
+
+                    }
+                })
+                .closeOnTouch(true)
+                .build();
+        mQueue.add(mFancyView);
+
+        mFancyView = new FancyShowCaseView.Builder(activity)
+                .focusOn(holder.typeLinearLayout)
+                .focusShape(FocusShape.ROUNDED_RECTANGLE)
+                .roundRectRadius(60)
+                .customView(R.layout.showcase_5, new OnViewInflateListener() {
+                    @Override
+                    public void onViewInflated(View view) {
+                        view.findViewById(R.id.showcase_close)
+                                .setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        mQueue.cancel(true);
+                                    }
+                                });
+
+                    }
+                })
+                .closeOnTouch(true)
+                .build();
+        mQueue.add(mFancyView);
+
+        mQueue.show();
+        mQueue.setCompleteListener(new OnCompleteListener() {
+            @Override
+            public void onComplete() {
+                Intent intent = new Intent();
+                intent.putExtra("SC_RCA", true);
+                activity.setResult(1001, intent);
+                activity.finish();
+            }
+        });
     }
+
+
+
+}

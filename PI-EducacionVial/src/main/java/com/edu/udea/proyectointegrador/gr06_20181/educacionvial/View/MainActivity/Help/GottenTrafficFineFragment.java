@@ -8,11 +8,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.LayoutAnimationController;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.Controller.AnimationUtils;
 import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.Controller.StepsAdapter;
 import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.Model.Step;
 import com.edu.udea.proyectointegrador.gr06_20181.educacionvial.R;
@@ -61,7 +59,7 @@ public class GottenTrafficFineFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if(count==8){
-                    Toast.makeText(view.getContext(),"Hola Lis :B", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(view.getContext(),"Hola Lis :B", Toast.LENGTH_LONG).show();
 
                     count=0;
                 }

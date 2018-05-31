@@ -50,6 +50,7 @@
     <string name="traffic_fine_case">¿Que hacer luego de ser multado?</string>
     <string name="general">General</string>
     <string name="about">Acerca de</string>
+    <string name="mesclar">Mezclar</string>
     <string-array name="location_array">
         <item />
         <item>Medellin</item>
